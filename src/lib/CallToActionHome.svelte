@@ -9,8 +9,10 @@
       Proven experience across diverse projects and industries, ensuring
       versatile solutions tailored to your specific business needs.
     </p>
-    <button class=" bg-black text-white px-4 py-2 rounded-xl mt-10"
-      >Talk with Me</button
+    <a href="/contact"
+      ><button class=" bg-black text-white px-4 py-2 rounded-xl mt-10"
+        >Talk with Me</button
+      ></a
     >
   </div>
   <!-- <div class="md:w-6/12 flex gap-10 justify-center items-center">
