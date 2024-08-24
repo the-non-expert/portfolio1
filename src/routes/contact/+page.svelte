@@ -11,7 +11,9 @@
     to hear from you
   </p>
 
-  <MySocialMediaDetails />
+  <div class="mt-5">
+    <MySocialMediaDetails />
+  </div>
 </div>
 
 <div
@@ -29,7 +31,7 @@
       <p class="font-semibold">Full Name</p>
       <input
         type="text"
-        placeholder="Virat Kohli"
+        placeholder="ayush jhunjhunwala"
         class="bg-[#F4F5F1] p-2 w-full rounded-xl"
       />
     </div>
@@ -37,7 +39,7 @@
       <p class="font-semibold">Email</p>
       <input
         type="email"
-        placeholder="viratkohli@gmail.com"
+        placeholder="ayushjhun13@gmail.com"
         class="bg-[#F4F5F1] p-2 w-full rounded-xl"
       />
     </div>
