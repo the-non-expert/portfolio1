@@ -50,6 +50,7 @@
 
 <div class="w-full bg-[#F5F5F1] md:p-10 md:px-32 p-4">
   <p class="text-3xl w-full text-center font-bold">My Recent Work</p>
+  <p class="text-xs w-full text-center">(Please Click on it)</p>
   <div class="mt-10 grid gap-10 md:grid-cols-3 grid-cols-1">
     <HoverableWorkShowcase data={myWorks} />
   </div>

@@ -11,6 +11,7 @@
   </div>
   <!-- header navigations  -->
   <div class="flex gap-8">
+    <a href="/"><p>home</p></a>
     <a href="/myworks"><p>my works</p></a>
     <a href="/contact"><p>contact</p></a>
   </div>
