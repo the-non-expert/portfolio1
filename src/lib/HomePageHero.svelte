@@ -56,8 +56,10 @@
           >Talk with Me</button
         ></a
       >
-      <button class="bg-white text-black border-2 px-4 py-2 rounded-xl mt-10"
-        >See My Work</button
+      <a href="/myworks"
+        ><button class="bg-white text-black border-2 px-4 py-2 rounded-xl mt-10"
+          >See My Work</button
+        ></a
       >
     </div>
   </div>
