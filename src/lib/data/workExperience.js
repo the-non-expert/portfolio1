@@ -10,7 +10,7 @@ import zicopsIcon from "$lib/Images/zicopsLogo.png";
 import aiesecIcon from "$lib/Images/aiesecIcon.png";
 import digizillaIcon from "$lib/Images/digizillaIcon.png";
 import reactIcon from "$lib/Images/reactIcon.png";
-import addyIcon from "$lib/Images/AddyFitnessLogo.png";
+import addyIcon from "$lib/Images/AddyFitnessLogo2.png";
 import omtxIcon from "$lib/Images/omLogo.png";
 import svelteIcon from "$lib/Images/SvelteLogo.png";
 const roxfordIcon = svelteIcon; // TODO: Replace with actual Roxford Healthcare logo
