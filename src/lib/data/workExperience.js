@@ -32,6 +32,7 @@ export const workExperience = [
     ],
     description:
       "Leading technical strategy and full-stack development for a comprehensive fitness platform. Built scalable Python FastAPI backend with PostgreSQL database, responsive SvelteKit frontend, and AWS deployment infrastructure. Currently serving as Interim COO while maintaining hands-on development responsibilities.",
+    url: "https://www.addyfitness.com"
   },
   {
     id: 2,
@@ -50,6 +51,7 @@ export const workExperience = [
     ],
     description:
       "Developed dynamic functionalities for a full-fledged web platform, ensuring seamless user experiences and JavaScript integrations. Tackled complex UI structures while delivering scalable, maintainable solutions. Participated in code reviews and gained valuable insights into UX design and cross-functional workflows.",
+    url: "https://www.omtx.ai"
   },
   {
     id: 3,
@@ -67,6 +69,7 @@ export const workExperience = [
     ],
     description:
       "Designed and developed a comprehensive web platform for showcasing pharmaceutical products online. Served as the sole developer managing end-to-end development from frontend UI/UX to backend integration and database management with Firestore.",
+    url: "https://www.roxfordhealthcare.com"
   },
   {
     id: 4,
@@ -84,6 +87,7 @@ export const workExperience = [
     ],
     description:
       "Part-time role developing the frontend foundation for the company's UI platform using SvelteKit. Led the company's first-ever Svelte project, delivering a seamless and intuitive user experience with robust and scalable architecture.",
+    url: "https://www.querent.xyz"
   },
   {
     id: 5,

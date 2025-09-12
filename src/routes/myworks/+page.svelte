@@ -2,7 +2,7 @@
   import myImage from "$lib/Images/MyImage.jpeg";
   import MySocialMediaDetails from "$lib/CommonComponents/MySocialMediaDetails.svelte";
   import ToolsUsed from "$lib/ToolsUsed.svelte";
-  import MyRecentWork from "$lib/MyRecentWork.svelte";
+  import WorkExperience from "$lib/WorkExperience.svelte";
   import CallToActionHome from "$lib/CallToActionHome.svelte";
   import SEO from "$lib/components/SEO.svelte";
   import { generatePortfolioSchema } from "$lib/utils/seo.js";
@@ -78,6 +78,6 @@
   </section>
 
   <ToolsUsed />
-  <MyRecentWork />
+  <WorkExperience />
   <CallToActionHome />
 </main>

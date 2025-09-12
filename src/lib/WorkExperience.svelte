@@ -45,9 +45,25 @@
             />
           </div>
           <div class="flex-1 min-w-0">
-            <h3 class="text-lg font-medium text-gray-900 leading-tight mb-1">
-              {experience.role}
-            </h3>
+            <div class="flex items-start justify-between mb-1">
+              <h3 class="text-lg font-medium text-gray-900 leading-tight">
+                {experience.role}
+              </h3>
+              {#if experience.url}
+                <a 
+                  href={experience.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="px-2 py-1 bg-blue-50 text-blue-700 rounded-md text-xs font-medium hover:bg-blue-100 transition-colors flex items-center gap-1 flex-shrink-0 ml-2"
+                  title="View live project"
+                >
+                  View Live
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              {/if}
+            </div>
             <div class="flex items-center gap-2 mb-2">
               <p class="text-base font-semibold text-gray-800">{experience.company}</p>
               <span class="text-lg" title={experience.location}>{experience.countryFlag}</span>

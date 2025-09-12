@@ -1,8 +1,7 @@
 <script>
   import CallToActionHome from "$lib/CallToActionHome.svelte";
-  import HelpWith from "$lib/HelpWith.svelte";
+  import TabbedServices from "$lib/TabbedServices.svelte";
   import HomePageHero from "$lib/HomePageHero.svelte";
-  import WorkExperience from "$lib/WorkExperience.svelte";
   import SEO from "$lib/components/SEO.svelte";
   import { generatePersonSchema, generateWebsiteSchema, generateProfessionalServiceSchema } from "$lib/utils/seo.js";
   
@@ -23,10 +22,7 @@
     <HomePageHero />
   </section>
   <section>
-    <WorkExperience />
-  </section>
-  <section>
-    <HelpWith />
+    <TabbedServices />
   </section>
   <section>
     <CallToActionHome />

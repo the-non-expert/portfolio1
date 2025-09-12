@@ -2,7 +2,7 @@
   import clover from "$lib/Images/clover.svg";
 </script>
 
-<div class="w-full bg-white md:p-20 md:px-32 md:flex p-4 pt-20">
+<div class="w-full bg-white md:p-20 md:px-32 md:flex p-4">
   <div class="w-full text-center">
     <p class="text-5xl">Experience with a variety of projects and industries</p>
     <p class="text-gray-500 mt-5">
