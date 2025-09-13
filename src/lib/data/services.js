@@ -52,10 +52,10 @@ export const serviceAreas = {
       }
     ],
     stats: {
-      experience: "7+ years",
+      experience: "4+ years",
       projects: "15+",
       frameworks: "5+",
-      performance: "90+ Lighthouse scores"
+      performance: ""
     },
     icon: computerIcon
   },
