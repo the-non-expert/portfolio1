@@ -1,27 +1,33 @@
 <script lang="ts">
-  import { blogs, getBlogsByCategory } from "$lib/content/blogs.js";
+  import { loadBlogPosts, getBlogsByCategory } from "$lib/utils/content.js";
   import SEO from "$lib/components/SEO.svelte";
-  import type { Blog, BlogCollection, BlogsByCategory } from "$lib/types.js";
-  
-  // Sort blogs by date (newest first)
-  $: sortedBlogs = blogs.sort((a: Blog, b: Blog) => new Date(b.date).getTime() - new Date(a.date).getTime());
-  $: blogsByCategory = getBlogsByCategory();
-  $: categories = Object.keys(blogsByCategory);
-  
+  import type { Blog, BlogCollection } from "$lib/types.js";
+  import { onMount } from 'svelte';
+
+  let blogs: BlogCollection = [];
+  let blogsByCategory: {[category: string]: Blog[]} = {};
+  let categories: string[] = [];
   let selectedCategory: string = 'All';
-  
+
+  // Load content on component mount
+  onMount(async () => {
+    blogs = await loadBlogPosts();
+    blogsByCategory = await getBlogsByCategory();
+    categories = Object.keys(blogsByCategory);
+  });
+
   // Filter blogs based on selected category
-  $: filteredBlogs = selectedCategory === 'All' 
-    ? sortedBlogs 
-    : sortedBlogs.filter((blog: Blog) => blog.category === selectedCategory);
-  
+  $: filteredBlogs = selectedCategory === 'All'
+    ? blogs
+    : blogs.filter((blog: Blog) => blog.category === selectedCategory);
+
   // Format date for display
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   }
 </script>

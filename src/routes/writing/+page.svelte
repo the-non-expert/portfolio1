@@ -1,16 +1,41 @@
 <script lang="ts">
-  import { getWritingsByYear } from "$lib/content/writings.js";
+  import { loadWritings } from "$lib/utils/content.js";
   import SEO from "$lib/components/SEO.svelte";
-  import type { WritingsByYear } from "$lib/types.js";
-  
-  const writingsByYear = getWritingsByYear();
-  
+  import type { WritingsByYear, WritingCollection } from "$lib/types.js";
+  import { onMount } from 'svelte';
+
+  let writingsByYear: WritingsByYear = {};
+  let totalWritings = 0;
+
+  // Load content on component mount
+  onMount(async () => {
+    const writings = await loadWritings();
+    totalWritings = writings.length;
+
+    // Group writings by year
+    writings.forEach(writing => {
+      const year = new Date(writing.date).getFullYear();
+      if (!writingsByYear[year]) {
+        writingsByYear[year] = [];
+      }
+      writingsByYear[year].push(writing);
+    });
+
+    // Sort years in descending order
+    writingsByYear = Object.keys(writingsByYear)
+      .sort((a, b) => parseInt(b) - parseInt(a))
+      .reduce((acc, year) => {
+        acc[parseInt(year)] = writingsByYear[parseInt(year)];
+        return acc;
+      }, {} as WritingsByYear);
+  });
+
   // Format date for display
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      month: 'short', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric'
     }).toUpperCase();
   }
 </script>
@@ -75,7 +100,7 @@
   <!-- Footer -->
   <footer class="mt-16 text-center border-t border-gray-200 pt-8">
     <p class="text-gray-600">
-      <strong>{Object.values(writingsByYear).flat().length}</strong> pieces written. 
+      <strong>{totalWritings}</strong> pieces written.
       More thoughts brewing...
     </p>
   </footer>

@@ -1,36 +1,27 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { writings } from "$lib/content/writings.js";
+  import { getWritingBySlug } from "$lib/utils/content.js";
   import SEO from "$lib/components/SEO.svelte";
-  import type { Writing, DateFormatter, ContentParser } from "$lib/types.js";
-  
-  // Find the writing by slug
-  $: writing = writings.find((w: Writing) => w.slug === $page.params.slug || '');
-  
+  import type { Writing, DateFormatter } from "$lib/types.js";
+  import { onMount } from 'svelte';
+
+  let writing: Writing | null = null;
+
+  // Load content on component mount
+  onMount(async () => {
+    const slug = $page.params.slug || '';
+    writing = await getWritingBySlug(slug);
+  });
+
   // Format date for display
   const formatDate: DateFormatter = (dateString: string): string => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   };
-  
-  // Convert content to HTML (basic markdown-like parsing)
-  const parseContent: ContentParser = (content: string): string => {
-    return content
-      .replace(/^# (.*$)/gm, '<h1 class="text-3xl md:text-4xl font-light mb-6 mt-8">$1</h1>')
-      .replace(/^## (.*$)/gm, '<h2 class="text-2xl md:text-3xl font-medium mb-4 mt-8">$1</h2>')
-      .replace(/^### (.*$)/gm, '<h3 class="text-xl md:text-2xl font-medium mb-3 mt-6">$1</h3>')
-      .replace(/^\- (.*$)/gm, '<li class="mb-2">$1</li>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-      .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-sm font-mono">$1</code>')
-      .replace(/\n\n/g, '</p><p class="mb-4">')
-      .replace(/^(?!<[h|l])/gm, '<p class="mb-4">')
-      .replace(/<p class="mb-4">(<[h|l])/g, '$1')
-      .replace(/(<\/[h|l][^>]*>)<\/p>/g, '$1');
-  }
 </script>
 
 {#if writing}
@@ -66,7 +57,11 @@
     <!-- Content -->
     <article class="prose prose-lg max-w-none">
       <div class="text-gray-700 leading-relaxed">
-        {@html parseContent(writing.content)}
+        {#if typeof writing.content === 'string'}
+          {@html writing.content}
+        {:else}
+          <svelte:component this={writing.content} />
+        {/if}
       </div>
     </article>
 

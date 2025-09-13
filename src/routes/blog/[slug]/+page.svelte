@@ -1,42 +1,34 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { blogs, getBlogBySlug } from "$lib/content/blogs.js";
+  import { getBlogBySlug, loadBlogPosts } from "$lib/utils/content.js";
   import SEO from "$lib/components/SEO.svelte";
-  import type { Blog, BlogCollection, DateFormatter, ContentParser } from "$lib/types.js";
-  
-  // Find the blog post by slug
-  $: blog = getBlogBySlug($page.params.slug || '');
-  
-  // Get other recent posts for "More Articles" section
-  $: otherPosts = blogs
-    .filter((b: Blog) => b.slug !== $page.params.slug)
-    .sort((a: Blog, b: Blog) => new Date(b.date).getTime() - new Date(a.date).getTime())
-    .slice(0, 3);
-  
+  import type { Blog, BlogCollection, DateFormatter } from "$lib/types.js";
+  import { onMount } from 'svelte';
+
+  let blog: Blog | null = null;
+  let otherPosts: BlogCollection = [];
+
+  // Load content on component mount
+  onMount(async () => {
+    const slug = $page.params.slug || '';
+    blog = await getBlogBySlug(slug);
+
+    // Get other recent posts for "More Articles" section
+    const allBlogs = await loadBlogPosts();
+    otherPosts = allBlogs
+      .filter((b: Blog) => b.slug !== slug)
+      .slice(0, 3);
+  });
+
   // Format date for display
   const formatDate: DateFormatter = (dateString: string): string => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', { 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
     });
   };
-  
-  // Convert content to HTML (enhanced markdown-like parsing for blog posts)
-  const parseContent: ContentParser = (content: string): string => {
-    return content
-      .replace(/^# (.*$)/gm, '<h1 class="text-3xl md:text-4xl font-bold mb-6 mt-8">$1</h1>')
-      .replace(/^## (.*$)/gm, '<h2 class="text-2xl md:text-3xl font-semibold mb-4 mt-8">$1</h2>')
-      .replace(/^### (.*$)/gm, '<h3 class="text-xl md:text-2xl font-semibold mb-3 mt-6">$1</h3>')
-      .replace(/^\- (.*$)/gm, '<li class="mb-2">$1</li>')
-      .replace(/\*\*(.*?)\*\*/g, '<strong class="font-semibold">$1</strong>')
-      .replace(/`(.*?)`/g, '<code class="bg-gray-100 px-2 py-1 rounded text-sm font-mono">$1</code>')
-      .replace(/\n\n/g, '</p><p class="mb-6">')
-      .replace(/^(?!<[h|l])/gm, '<p class="mb-6">')
-      .replace(/<p class="mb-6">(<[h|l])/g, '$1')
-      .replace(/(<\/[h|l][^>]*>)<\/p>/g, '$1');
-  }
 </script>
 
 {#if blog}
@@ -89,7 +81,11 @@
     <!-- Content -->
     <article class="prose prose-lg max-w-none">
       <div class="text-gray-800 leading-relaxed text-lg">
-        {@html parseContent(blog.content)}
+        {#if typeof blog.content === 'string'}
+          {@html blog.content}
+        {:else}
+          <svelte:component this={blog.content} />
+        {/if}
       </div>
     </article>
 
