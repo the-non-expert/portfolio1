@@ -95,16 +95,16 @@
       <div class="mb-8">
         <h3 class="font-semibold mb-4">Share this article</h3>
         <div class="flex gap-3">
-          <a 
-            href="https://twitter.com/intent/tweet?text={encodeURIComponent(blog.title)}&url={encodeURIComponent(window?.location?.href || '')}" 
+          <a
+            href="https://twitter.com/intent/tweet?text={encodeURIComponent(blog.title)}&url={encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}"
             target="_blank"
             rel="noopener noreferrer"
             class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors text-sm font-medium"
           >
             Share on Twitter
           </a>
-          <a 
-            href="https://www.linkedin.com/sharing/share-offsite/?url={encodeURIComponent(window?.location?.href || '')}" 
+          <a
+            href="https://www.linkedin.com/sharing/share-offsite/?url={encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}"
             target="_blank"
             rel="noopener noreferrer"
             class="px-4 py-2 bg-blue-700 text-white rounded-lg hover:bg-blue-800 transition-colors text-sm font-medium"

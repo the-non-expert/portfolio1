@@ -33,7 +33,7 @@ export async function loadBlogPosts(): Promise<BlogCollection> {
       const slug = module.metadata.slug || filename.replace('.md', '');
 
       return {
-        id: Math.random(), // Generate temporary ID for now
+        id: slug.split('-').reduce((acc, part) => acc + part.charCodeAt(0), 0),
         title: module.metadata.title,
         slug: slug,
         excerpt: module.metadata.excerpt,
@@ -72,7 +72,7 @@ export async function loadWritings(): Promise<WritingCollection> {
       const slug = module.metadata.slug || filename.replace('.md', '');
 
       return {
-        id: Math.random(), // Generate temporary ID for now
+        id: slug.split('-').reduce((acc, part) => acc + part.charCodeAt(0), 0),
         title: module.metadata.title,
         slug: slug,
         date: module.metadata.date,
@@ -104,7 +104,7 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
 
       if (fileSlug === slug) {
         return {
-          id: Math.random(),
+          id: slug.split('-').reduce((acc, part) => acc + part.charCodeAt(0), 0),
           title: module.metadata.title,
           slug: slug,
           excerpt: module.metadata.excerpt,
@@ -136,7 +136,7 @@ export async function getWritingBySlug(slug: string): Promise<Writing | null> {
 
       if (fileSlug === slug) {
         return {
-          id: Math.random(),
+          id: slug.split('-').reduce((acc, part) => acc + part.charCodeAt(0), 0),
           title: module.metadata.title,
           slug: slug,
           date: module.metadata.date,

@@ -10,7 +10,7 @@ Allow: /myworks
 Allow: /contact
 
 # Sitemap location
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://ayushportfolio123.netlify.app/sitemap.xml
 
 # Block unnecessary paths (if any in the future)
 Disallow: /admin/
