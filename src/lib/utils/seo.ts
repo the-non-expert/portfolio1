@@ -12,7 +12,7 @@ export const siteConfig: SiteConfig = {
   description: "Experienced full-stack developer and interim COO specializing in Python FastAPI backends, SvelteKit frontends, and AWS deployments. Proven track record building scalable systems with 30-40% codebase contributions.",
   url: "https://ayushportfolio123.netlify.app",
   author: "Ayush Jhunjhunwala",
-  image: "/lib/Images/MyImage.jpeg",
+  image: "/images/Ayushjhunjhunwala.png",
   twitterHandle: "@ayush_jhunjhunwala",
   keywords: [
     "Full Stack Developer Python FastAPI",
@@ -138,7 +138,7 @@ export function generatePersonSchema(): Record<string, any> {
     "jobTitle": "Full-Stack Developer & Tech Enthusiast",
     "description": "Full-stack developer and interim COO specializing in Python FastAPI backends, SvelteKit frontends, and AWS deployments with proven leadership experience",
     "url": siteConfig.url,
-    "image": `${siteConfig.url}/lib/Images/MyImage.jpeg`,
+    "image": `${siteConfig.url}/images/Ayushjhunjhunwala.png`,
     "address": {
       "@type": "PostalAddress",
       "addressLocality": "Cuttack",
