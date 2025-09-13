@@ -159,7 +159,7 @@ export const serviceAreas = {
 };
 
 export const overallStats = {
-  totalExperience: "7+",
+  totalExperience: "5+",
   companiesWorked: "12+",
   avgCodebaseContribution: "30-40%",
   systemUptime: "99.9%",
