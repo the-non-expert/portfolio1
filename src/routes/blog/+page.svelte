@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { loadBlogPosts, getBlogsByCategory } from "$lib/utils/content.js";
+  import { loadBlogPosts, getBlogsByCategory } from "$lib/utils/content";
   import SEO from "$lib/components/SEO.svelte";
-  import type { Blog, BlogCollection } from "$lib/types.js";
+  import type { Blog, BlogCollection } from "$lib/types";
   import { onMount } from 'svelte';
 
   let blogs: BlogCollection = [];

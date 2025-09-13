@@ -3,7 +3,7 @@
  * Central place for all SEO-related data and helper functions
  */
 
-import type { SiteConfig, PageConfig, SEOConfig } from '../types.js';
+import type { SiteConfig, PageConfig, SEOConfig } from '../types';
 
 // Site-wide SEO configuration
 export const siteConfig: SiteConfig = {

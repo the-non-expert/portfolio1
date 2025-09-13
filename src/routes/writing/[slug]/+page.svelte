@@ -1,8 +1,8 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { getWritingBySlug } from "$lib/utils/content.js";
+  import { getWritingBySlug } from "$lib/utils/content";
   import SEO from "$lib/components/SEO.svelte";
-  import type { Writing, DateFormatter } from "$lib/types.js";
+  import type { Writing, DateFormatter } from "$lib/types";
   import { onMount } from 'svelte';
 
   let writing: Writing | null = null;

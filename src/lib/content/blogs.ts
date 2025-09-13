@@ -1,4 +1,4 @@
-import type { Blog, BlogCollection, BlogsByCategory } from '../types.js';
+import type { Blog, BlogCollection, BlogsByCategory } from '../types';
 
 export const blogs: BlogCollection = [
   {

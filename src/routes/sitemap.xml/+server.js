@@ -1,4 +1,4 @@
-import { siteConfig } from '$lib/utils/seo.js';
+import { siteConfig } from '$lib/utils/seo';
 
 /**
  * Dynamic sitemap.xml generation for SEO

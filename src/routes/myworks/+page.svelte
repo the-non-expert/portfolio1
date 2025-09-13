@@ -5,7 +5,7 @@
   import WorkExperience from "$lib/WorkExperience.svelte";
   import CallToActionHome from "$lib/CallToActionHome.svelte";
   import SEO from "$lib/components/SEO.svelte";
-  import { generatePortfolioSchema } from "$lib/utils/seo.js";
+  import { generatePortfolioSchema } from "$lib/utils/seo";
   
   interface Project {
     name: string;

@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { books } from "$lib/content/books.js";
+  import { books } from "$lib/content/books";
   import SEO from "$lib/components/SEO.svelte";
-  import type { RatingDisplay, DateFormatter } from "$lib/types.js";
+  import type { RatingDisplay, DateFormatter } from "$lib/types";
   
   // Display rating as is (already formatted as "4/5", "4.5/5", etc.)
   const displayRating: RatingDisplay = (rating: string): string => {

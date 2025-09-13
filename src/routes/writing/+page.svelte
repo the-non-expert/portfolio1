@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { loadWritings } from "$lib/utils/content.js";
+  import { loadWritings } from "$lib/utils/content";
   import SEO from "$lib/components/SEO.svelte";
-  import type { WritingsByYear, WritingCollection } from "$lib/types.js";
+  import type { WritingsByYear, WritingCollection } from "$lib/types";
   import { onMount } from 'svelte';
 
   let writingsByYear: WritingsByYear = {};

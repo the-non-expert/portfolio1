@@ -1,4 +1,4 @@
-import type { Writing, WritingCollection, WritingsByYear } from '../types.js';
+import type { Writing, WritingCollection, WritingsByYear } from '../types';
 
 export const writings: WritingCollection = [
   {

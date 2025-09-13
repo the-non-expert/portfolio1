@@ -1,8 +1,8 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { getBlogBySlug, loadBlogPosts } from "$lib/utils/content.js";
+  import { getBlogBySlug, loadBlogPosts } from "$lib/utils/content";
   import SEO from "$lib/components/SEO.svelte";
-  import type { Blog, BlogCollection, DateFormatter } from "$lib/types.js";
+  import type { Blog, BlogCollection, DateFormatter } from "$lib/types";
   import { onMount } from 'svelte';
 
   let blog: Blog | null = null;

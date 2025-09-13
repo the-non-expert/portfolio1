@@ -1,4 +1,4 @@
-import type { Book, BookCollection } from '../types.js';
+import type { Book, BookCollection } from '../types';
 
 export const books: BookCollection = [
   {

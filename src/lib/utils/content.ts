@@ -1,4 +1,4 @@
-import type { Blog, Writing, BlogCollection, WritingCollection } from '../types.js';
+import type { Blog, Writing, BlogCollection, WritingCollection } from '../types';
 
 // Interface for markdown module structure
 interface MarkdownModule {

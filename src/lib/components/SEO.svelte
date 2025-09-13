@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from '$app/stores';
-  import { mergeSeoConfig, generateMetaTags } from '$lib/utils/seo.js';
-  import type { SEOConfig } from '$lib/types.js';
+  import { mergeSeoConfig, generateMetaTags } from '$lib/utils/seo';
+  import type { SEOConfig } from '$lib/types';
   
   // Props for dynamic SEO configuration
   export let pageKey: string = 'home';
