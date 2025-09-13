@@ -1,5 +1,5 @@
 ---
-title: Good Optiics
+title: Good Optics
 slug: good-optics
 date: 2025-08-25T19:30:00.000+05:30
 excerpt: "Trapped in a traffic jam on a rainy day, I believed he was in a race
