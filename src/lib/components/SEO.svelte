@@ -1,16 +1,12 @@
-<script>
+<script lang="ts">
   import { page } from '$app/stores';
   import { mergeSeoConfig, generateMetaTags } from '$lib/utils/seo.js';
+  import type { SEOConfig } from '$lib/types.js';
   
-  /**
-   * Props for dynamic SEO configuration
-   * @type {string} pageKey - Key from pageConfigs (home, works, contact)
-   * @type {Object} overrides - Any specific overrides for this page
-   * @type {string} structuredData - JSON-LD structured data as string
-   */
-  export let pageKey = 'home';
-  export let overrides = {};
-  export let structuredData = null;
+  // Props for dynamic SEO configuration
+  export let pageKey: string = 'home';
+  export let overrides: Partial<SEOConfig> = {};
+  export let structuredData: string | null = null;
   
   // Generate the SEO configuration
   $: seoConfig = mergeSeoConfig(pageKey, {

@@ -1,23 +1,24 @@
-<script>
+<script lang="ts">
   import { page } from '$app/stores';
   import { writings } from "$lib/content/writings.js";
   import SEO from "$lib/components/SEO.svelte";
+  import type { Writing, DateFormatter, ContentParser } from "$lib/types.js";
   
   // Find the writing by slug
-  $: writing = writings.find(w => w.slug === $page.params.slug);
+  $: writing = writings.find((w: Writing) => w.slug === $page.params.slug || '');
   
   // Format date for display
-  function formatDate(dateString) {
+  const formatDate: DateFormatter = (dateString: string): string => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { 
       year: 'numeric', 
       month: 'long', 
       day: 'numeric' 
     });
-  }
+  };
   
   // Convert content to HTML (basic markdown-like parsing)
-  function parseContent(content) {
+  const parseContent: ContentParser = (content: string): string => {
     return content
       .replace(/^# (.*$)/gm, '<h1 class="text-3xl md:text-4xl font-light mb-6 mt-8">$1</h1>')
       .replace(/^## (.*$)/gm, '<h2 class="text-2xl md:text-3xl font-medium mb-4 mt-8">$1</h2>')

@@ -1,4 +1,6 @@
-export const writings = [
+import type { Writing, WritingCollection, WritingsByYear } from '../types.js';
+
+export const writings: WritingCollection = [
   {
     id: 1,
     title: "Building scalable FastAPI backends with PostgreSQL",
@@ -34,10 +36,10 @@ export const writings = [
 ];
 
 // Group writings by year for timeline display
-export function getWritingsByYear() {
-  const groupedWritings = {};
+export function getWritingsByYear(): WritingsByYear {
+  const groupedWritings: WritingsByYear = {};
   
-  writings.forEach(writing => {
+  writings.forEach((writing: Writing) => {
     const year = new Date(writing.date).getFullYear();
     if (!groupedWritings[year]) {
       groupedWritings[year] = [];
@@ -47,13 +49,15 @@ export function getWritingsByYear() {
   
   // Sort years in descending order
   const sortedYears = Object.keys(groupedWritings)
-    .map(year => parseInt(year))
-    .sort((a, b) => b - a);
+    .map((year: string) => parseInt(year))
+    .sort((a: number, b: number) => b - a);
   
-  const result = {};
-  sortedYears.forEach(year => {
+  const result: WritingsByYear = {};
+  sortedYears.forEach((year: number) => {
     // Sort writings within each year by date (newest first)
-    result[year] = groupedWritings[year].sort((a, b) => new Date(b.date) - new Date(a.date));
+    result[year] = groupedWritings[year].sort((a: Writing, b: Writing) => 
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
   });
   
   return result;

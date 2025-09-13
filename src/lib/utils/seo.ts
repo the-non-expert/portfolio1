@@ -3,8 +3,10 @@
  * Central place for all SEO-related data and helper functions
  */
 
+import type { SiteConfig, PageConfig, SEOConfig } from '../types.js';
+
 // Site-wide SEO configuration
-export const siteConfig = {
+export const siteConfig: SiteConfig = {
   name: "Ayush Jhunjhunwala Portfolio",
   title: "Ayush Jhunjhunwala - Full-Stack Developer & Tech Leader | Python, SvelteKit, AWS",
   description: "Experienced full-stack developer and interim COO specializing in Python FastAPI backends, SvelteKit frontends, and AWS deployments. Proven track record building scalable systems with 30-40% codebase contributions.",
@@ -28,7 +30,7 @@ export const siteConfig = {
 };
 
 // Page-specific SEO configurations
-export const pageConfigs = {
+export const pageConfigs: Record<string, PageConfig> = {
   home: {
     title: "About - Ayush Jhunjhunwala, Full-Stack Developer",
     description: "Tech leader and full-stack developer building scalable Python FastAPI backends, responsive SvelteKit frontends, and AWS-deployed systems. Currently serving as Full-Stack Developer & Interim COO at Addy Fitness.",
@@ -128,7 +130,7 @@ export const pageConfigs = {
 /**
  * Generate structured data for different content types
  */
-export function generatePersonSchema() {
+export function generatePersonSchema(): Record<string, any> {
   return {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -185,7 +187,7 @@ export function generatePersonSchema() {
   };
 }
 
-export function generateWebsiteSchema() {
+export function generateWebsiteSchema(): Record<string, any> {
   return {
     "@context": "https://schema.org",
     "@type": "WebSite",
@@ -200,7 +202,7 @@ export function generateWebsiteSchema() {
   };
 }
 
-export function generateProfessionalServiceSchema() {
+export function generateProfessionalServiceSchema(): Record<string, any> {
   return {
     "@context": "https://schema.org",
     "@type": "ProfessionalService",
@@ -238,7 +240,14 @@ export function generateProfessionalServiceSchema() {
   };
 }
 
-export function generatePortfolioSchema(projects) {
+interface Project {
+  name: string;
+  description: string;
+  websiteLink: string;
+  image: string;
+}
+
+export function generatePortfolioSchema(projects: Project[]): Record<string, any> {
   return {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
@@ -248,7 +257,7 @@ export function generatePortfolioSchema(projects) {
       "@type": "Person",
       "name": "Ayush Jhunjhunwala"
     },
-    "workExample": projects.map(project => ({
+    "workExample": projects.map((project: Project) => ({
       "@type": "CreativeWork",
       "name": project.name,
       "description": project.description,
@@ -261,7 +270,7 @@ export function generatePortfolioSchema(projects) {
 /**
  * Helper function to merge page-specific config with site defaults
  */
-export function mergeSeoConfig(pageKey, overrides = {}) {
+export function mergeSeoConfig(pageKey: string, overrides: Partial<SEOConfig> = {}): SEOConfig {
   const pageConfig = pageConfigs[pageKey] || {};
   const canonical = `${siteConfig.url}${pageConfig.canonical || ''}`;
   
@@ -273,13 +282,13 @@ export function mergeSeoConfig(pageKey, overrides = {}) {
     keywords: [...(pageConfig.keywords || []), ...siteConfig.keywords].join(', '),
     ogImage: overrides.ogImage || `${siteConfig.url}${siteConfig.image}`,
     ogUrl: canonical
-  };
+  } as SEOConfig;
 }
 
 /**
  * Generate meta tags for server-side rendering
  */
-export function generateMetaTags(config) {
+export function generateMetaTags(config: SEOConfig): Record<string, any> {
   return {
     title: config.title,
     description: config.description,

@@ -1,4 +1,6 @@
-export const books = [
+import type { Book, BookCollection } from '../types.js';
+
+export const books: BookCollection = [
   {
     id: 1,
     title: "MoonWalk",

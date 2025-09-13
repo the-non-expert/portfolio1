@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import myImage from "$lib/Images/MyImage.jpeg";
   import MySocialMediaDetails from "$lib/CommonComponents/MySocialMediaDetails.svelte";
   import ToolsUsed from "$lib/ToolsUsed.svelte";
@@ -7,8 +7,16 @@
   import SEO from "$lib/components/SEO.svelte";
   import { generatePortfolioSchema } from "$lib/utils/seo.js";
   
+  interface Project {
+    name: string;
+    description: string;
+    websiteLink: string;
+    image: string;
+    technologies: string[];
+  }
+  
   // Projects data with updated descriptions highlighting full-stack expertise
-  const projects = [
+  const projects: Project[] = [
     {
       name: "Addy Fitness Platform",
       description: "Full-stack fitness platform built with Python FastAPI backend, PostgreSQL database, and SvelteKit frontend. Deployed using CI/CD pipelines via GitHub Actions to AWS EC2 with Nginx configuration.",
@@ -46,7 +54,7 @@
     }
   ];
   
-  const portfolioSchema = JSON.stringify(generatePortfolioSchema(projects));
+  const portfolioSchema: string = JSON.stringify(generatePortfolioSchema(projects));
 </script>
 
 <SEO 

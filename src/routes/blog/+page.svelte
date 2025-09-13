@@ -1,21 +1,22 @@
-<script>
+<script lang="ts">
   import { blogs, getBlogsByCategory } from "$lib/content/blogs.js";
   import SEO from "$lib/components/SEO.svelte";
+  import type { Blog, BlogCollection, BlogsByCategory } from "$lib/types.js";
   
   // Sort blogs by date (newest first)
-  $: sortedBlogs = blogs.sort((a, b) => new Date(b.date) - new Date(a.date));
+  $: sortedBlogs = blogs.sort((a: Blog, b: Blog) => new Date(b.date).getTime() - new Date(a.date).getTime());
   $: blogsByCategory = getBlogsByCategory();
   $: categories = Object.keys(blogsByCategory);
   
-  let selectedCategory = 'All';
+  let selectedCategory: string = 'All';
   
   // Filter blogs based on selected category
   $: filteredBlogs = selectedCategory === 'All' 
     ? sortedBlogs 
-    : sortedBlogs.filter(blog => blog.category === selectedCategory);
+    : sortedBlogs.filter((blog: Blog) => blog.category === selectedCategory);
   
   // Format date for display
-  function formatDate(dateString) {
+  function formatDate(dateString: string): string {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { 
       year: 'numeric', 

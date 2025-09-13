@@ -1,29 +1,30 @@
-<script>
+<script lang="ts">
   import { page } from '$app/stores';
   import { blogs, getBlogBySlug } from "$lib/content/blogs.js";
   import SEO from "$lib/components/SEO.svelte";
+  import type { Blog, BlogCollection, DateFormatter, ContentParser } from "$lib/types.js";
   
   // Find the blog post by slug
-  $: blog = getBlogBySlug($page.params.slug);
+  $: blog = getBlogBySlug($page.params.slug || '');
   
   // Get other recent posts for "More Articles" section
   $: otherPosts = blogs
-    .filter(b => b.slug !== $page.params.slug)
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .filter((b: Blog) => b.slug !== $page.params.slug)
+    .sort((a: Blog, b: Blog) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 3);
   
   // Format date for display
-  function formatDate(dateString) {
+  const formatDate: DateFormatter = (dateString: string): string => {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { 
       year: 'numeric', 
       month: 'long', 
       day: 'numeric' 
     });
-  }
+  };
   
   // Convert content to HTML (enhanced markdown-like parsing for blog posts)
-  function parseContent(content) {
+  const parseContent: ContentParser = (content: string): string => {
     return content
       .replace(/^# (.*$)/gm, '<h1 class="text-3xl md:text-4xl font-bold mb-6 mt-8">$1</h1>')
       .replace(/^## (.*$)/gm, '<h2 class="text-2xl md:text-3xl font-semibold mb-4 mt-8">$1</h2>')

@@ -1,4 +1,6 @@
-export const blogs = [
+import type { Blog, BlogCollection, BlogsByCategory } from '../types.js';
+
+export const blogs: BlogCollection = [
   {
     id: 1,
     title: "The hidden costs of microservices: lessons from the trenches",
@@ -45,10 +47,10 @@ export const blogs = [
   }
 ];
 
-// Utility functions
-export function getBlogsByCategory() {
-  const categories = {};
-  blogs.forEach(blog => {
+// Utility functions with proper typing
+export function getBlogsByCategory(): BlogsByCategory {
+  const categories: BlogsByCategory = {};
+  blogs.forEach((blog: Blog) => {
     if (!categories[blog.category]) {
       categories[blog.category] = [];
     }
@@ -57,12 +59,12 @@ export function getBlogsByCategory() {
   return categories;
 }
 
-export function getBlogBySlug(slug) {
-  return blogs.find(blog => blog.slug === slug);
+export function getBlogBySlug(slug: string): Blog | undefined {
+  return blogs.find((blog: Blog) => blog.slug === slug);
 }
 
-export function getRecentBlogs(count = 3) {
+export function getRecentBlogs(count: number = 3): BlogCollection {
   return blogs
-    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .sort((a: Blog, b: Blog) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, count);
 }

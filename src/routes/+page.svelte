@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   import CallToActionHome from "$lib/CallToActionHome.svelte";
   import TabbedServices from "$lib/TabbedServices.svelte";
   import HomePageHero from "$lib/HomePageHero.svelte";
@@ -6,10 +6,10 @@
   import { generatePersonSchema, generateWebsiteSchema, generateProfessionalServiceSchema } from "$lib/utils/seo.js";
   
   // Generate structured data for homepage
-  const personSchema = generatePersonSchema();
-  const websiteSchema = generateWebsiteSchema();
-  const serviceSchema = generateProfessionalServiceSchema();
-  const combinedSchema = JSON.stringify([personSchema, websiteSchema, serviceSchema]);
+  const personSchema: Record<string, any> = generatePersonSchema();
+  const websiteSchema: Record<string, any> = generateWebsiteSchema();
+  const serviceSchema: Record<string, any> = generateProfessionalServiceSchema();
+  const combinedSchema: string = JSON.stringify([personSchema, websiteSchema, serviceSchema]);
 </script>
 
 <SEO 

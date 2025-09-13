@@ -1,16 +1,17 @@
-<script>
+<script lang="ts">
   import { books } from "$lib/content/books.js";
   import SEO from "$lib/components/SEO.svelte";
+  import type { RatingDisplay, DateFormatter } from "$lib/types.js";
   
   // Display rating as is (already formatted as "4/5", "4.5/5", etc.)
-  function displayRating(rating) {
+  const displayRating: RatingDisplay = (rating: string): string => {
     return rating;
-  }
+  };
   
   // Format date for display (already in dd.mm.yyyy format)
-  function formatDate(dateString) {
+  const formatDate: DateFormatter = (dateString: string): string => {
     return dateString;
-  }
+  };
 </script>
 
 <SEO 

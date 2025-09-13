@@ -1,11 +1,12 @@
-<script>
+<script lang="ts">
   import { getWritingsByYear } from "$lib/content/writings.js";
   import SEO from "$lib/components/SEO.svelte";
+  import type { WritingsByYear } from "$lib/types.js";
   
   const writingsByYear = getWritingsByYear();
   
   // Format date for display
-  function formatDate(dateString) {
+  function formatDate(dateString: string): string {
     const date = new Date(dateString);
     return date.toLocaleDateString('en-US', { 
       month: 'short', 
@@ -17,7 +18,7 @@
 <SEO 
   pageKey="writing" 
   overrides={{
-    title: "Writing - Ayush Jhunjhunwala",
+    title: "Writings - Ayush Jhunjhunwala",
     description: "My thoughts on technology, leadership, and building things. Notes, observations, and lessons from the trenches."
   }}
 />

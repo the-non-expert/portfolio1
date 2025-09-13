@@ -1,9 +1,9 @@
-<script>
+<script lang="ts">
   import MySocialMediaDetails from "$lib/CommonComponents/MySocialMediaDetails.svelte";
   import SEO from "$lib/components/SEO.svelte";
   
   // Contact-specific structured data
-  const contactSchema = JSON.stringify({
+  const contactSchema: string = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ContactPage",
     "name": "Hire Ayush Jhunjhunwala - Full-Stack Tech Leader",
