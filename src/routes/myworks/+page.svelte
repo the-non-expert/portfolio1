@@ -75,7 +75,7 @@
       <h1 class="md:text-5xl text-4xl font-light">Ayush Jhunjhunwala</h1>
       <div>
         <p class="text-xl mt-3">
-          Full-Stack Developer & Tech Leader based out of Cuttack, India
+          Full-Stack Developer & Tech Enthusiast based out of Cuttack, India
         </p>
         <p class="mt-2 text-gray-500">Building scalable systems with Python FastAPI, SvelteKit & AWS</p>
       </div>

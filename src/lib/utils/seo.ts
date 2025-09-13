@@ -8,7 +8,7 @@ import type { SiteConfig, PageConfig, SEOConfig } from '../types';
 // Site-wide SEO configuration
 export const siteConfig: SiteConfig = {
   name: "Ayush Jhunjhunwala Portfolio",
-  title: "Ayush Jhunjhunwala - Full-Stack Developer & Tech Leader | Python, SvelteKit, AWS",
+  title: "Ayush Jhunjhunwala - Full-Stack Developer & Tech Enthusiast | Python, SvelteKit, AWS",
   description: "Experienced full-stack developer and interim COO specializing in Python FastAPI backends, SvelteKit frontends, and AWS deployments. Proven track record building scalable systems with 30-40% codebase contributions.",
   url: "https://ayushportfolio123.netlify.app",
   author: "Ayush Jhunjhunwala",
@@ -23,7 +23,7 @@ export const siteConfig: SiteConfig = {
     "Full Stack Developer Leadership Experience",
     "Python FastAPI SvelteKit Expert",
     "Interim COO Developer",
-    "Full Stack Tech Leader",
+    "Full Stack Tech Enthusiast",
     "Python AWS Developer Cuttack",
     "Ayush Jhunjhunwala"
   ]
@@ -40,7 +40,7 @@ export const pageConfigs: Record<string, PageConfig> = {
       "Python FastAPI SvelteKit Developer",
       "AWS CI CD Python Developer",
       "Interim COO Developer",
-      "Full Stack Tech Leader India",
+      "Full Stack Tech Enthusiast India",
       "Python PostgreSQL Developer Cuttack"
     ],
     ogType: "profile",
@@ -65,7 +65,7 @@ export const pageConfigs: Record<string, PageConfig> = {
     title: "Hire Me - Ayush Jhunjhunwala",
     description: "Available for technical leadership and full-stack development. Expert in Python FastAPI backends, SvelteKit frontends, AWS deployments, and team leadership. Current Interim COO experience.",
     keywords: [
-      "Hire Full Stack Tech Leader",
+      "Hire Full Stack Tech Enthusiast",
       "Python FastAPI Developer for Hire",
       "SvelteKit Backend Developer",
       "AWS CI CD Developer",
@@ -135,7 +135,7 @@ export function generatePersonSchema(): Record<string, any> {
     "@context": "https://schema.org",
     "@type": "Person",
     "name": "Ayush Jhunjhunwala",
-    "jobTitle": "Full-Stack Developer & Tech Leader",
+    "jobTitle": "Full-Stack Developer & Tech Enthusiast",
     "description": "Full-stack developer and interim COO specializing in Python FastAPI backends, SvelteKit frontends, and AWS deployments with proven leadership experience",
     "url": siteConfig.url,
     "image": `${siteConfig.url}/lib/Images/MyImage.jpeg`,
@@ -211,7 +211,7 @@ export function generateProfessionalServiceSchema(): Record<string, any> {
     "provider": {
       "@type": "Person",
       "name": "Ayush Jhunjhunwala",
-      "jobTitle": "Full-Stack Developer & Tech Leader"
+      "jobTitle": "Full-Stack Developer & Tech Enthusiast"
     },
     "serviceType": [
       "Full-Stack Web Development",

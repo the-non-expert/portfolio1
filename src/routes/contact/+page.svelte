@@ -6,12 +6,12 @@
   const contactSchema: string = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ContactPage",
-    "name": "Hire Ayush Jhunjhunwala - Full-Stack Tech Leader",
+    "name": "Hire Ayush Jhunjhunwala - Full-Stack Tech Enthusiast",
     "description": "Contact Ayush Jhunjhunwala for technical leadership and full-stack development. Expert in Python FastAPI backends, SvelteKit frontends, AWS deployments, and team management.",
     "mainEntity": {
       "@type": "Person",
       "name": "Ayush Jhunjhunwala",
-      "jobTitle": "Full-Stack Developer & Tech Leader",
+      "jobTitle": "Full-Stack Developer & Tech Enthusiast",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Cuttack",

@@ -46,7 +46,7 @@
   </div>
   <div class="md:w-6/12">
     <h2 class="md:text-4xl text-xl mt-5 md:m-0">
-      Full-Stack Developer & Tech Leader
+      Full-Stack Developer & Tech Enthusiast
     </h2>
     <p class="mt-4 text-gray-500">
       Specializing in Python FastAPI backends, SvelteKit frontends & AWS deployments. 

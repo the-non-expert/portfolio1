@@ -10,7 +10,7 @@
     <a href="/"> <img src={logo} alt="logo" class="w-24" /></a>
   </div>
   <!-- header navigations  -->
-  <div class="flex gap-8">
+  <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 px-10">
     <a href="/"><p>home</p></a>
     <a href="/myworks"><p>my works</p></a>
     <a href="/reading"><p>reading</p></a>
