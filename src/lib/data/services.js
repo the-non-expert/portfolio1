@@ -55,7 +55,7 @@ export const serviceAreas = {
       experience: "4+ years",
       projects: "15+",
       frameworks: "5+",
-      performance: ""
+      performance: "90+ Lighthouse scores"
     },
     icon: computerIcon
   },
