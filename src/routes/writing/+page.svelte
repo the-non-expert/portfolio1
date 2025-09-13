@@ -5,6 +5,7 @@
   import { onMount } from 'svelte';
 
   let writingsByYear: WritingsByYear = {};
+  let sortedYearEntries: [string, any[]][] = [];
   let totalWritings = 0;
 
   // Load content on component mount
@@ -21,13 +22,14 @@
       writingsByYear[year].push(writing);
     });
 
-    // Sort years in descending order
-    writingsByYear = Object.keys(writingsByYear)
-      .sort((a, b) => parseInt(b) - parseInt(a))
-      .reduce((acc, year) => {
-        acc[parseInt(year)] = writingsByYear[parseInt(year)];
-        return acc;
-      }, {} as WritingsByYear);
+    // Create sorted array of [year, writings] entries
+    sortedYearEntries = Object.keys(writingsByYear)
+      .sort((a, b) => parseInt(b) - parseInt(a)) // Sort years descending
+      .map(year => [
+        year,
+        writingsByYear[parseInt(year)]
+          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()) // Sort writings within year
+      ]);
   });
 
   // Format date for display
@@ -58,7 +60,7 @@
   </header>
 
   <div class="space-y-12">
-    {#each Object.entries(writingsByYear) as [year, writings]}
+    {#each sortedYearEntries as [year, writings]}
       <section>
         <!-- Year Header -->
         <div class="mb-8">
