@@ -13,6 +13,9 @@
   <div class="flex gap-8">
     <a href="/"><p>home</p></a>
     <a href="/myworks"><p>my works</p></a>
+    <a href="/reading"><p>reading</p></a>
+    <a href="/writing"><p>writing</p></a>
+    <a href="/blog"><p>blog</p></a>
     <a href="/contact"><p>contact</p></a>
   </div>
 </div>

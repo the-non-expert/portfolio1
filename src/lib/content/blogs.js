@@ -1,0 +1,68 @@
+export const blogs = [
+  {
+    id: 1,
+    title: "The hidden costs of microservices: lessons from the trenches",
+    slug: "hidden-costs-microservices",
+    excerpt: "Everyone talks about the benefits of microservices, but what about the operational overhead, debugging complexity, and team coordination challenges?",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    date: "2024-09-10",
+    readingTime: "8 min read",
+    category: "Architecture",
+    featuredImage: "/blog-images/microservices-costs.jpg"
+  },
+  {
+    id: 2,
+    title: "Building a culture of ownership in engineering teams",
+    slug: "engineering-ownership-culture",
+    excerpt: "How we transformed our team from a group of individual contributors to owners who think beyond their immediate tasks.",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.",
+    date: "2024-08-25",
+    readingTime: "7 min read",
+    category: "Leadership",
+    featuredImage: "/blog-images/ownership-culture.jpg"
+  },
+  {
+    id: 3,
+    title: "Python FastAPI vs Django: choosing the right framework in 2024",
+    slug: "fastapi-vs-django-2024",
+    excerpt: "A comprehensive comparison based on building production applications with both frameworks. Performance, ecosystem, and developer experience analyzed.",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris pellentesque eget lorem malesuada wisi. Donec imperdiet tempor mauris. In hac habitasse platea dictumst. Nullam sit amet magna in magna gravida vehicula. Mauris tincidunt sem sed arcu. Nullam eu ante vel est convallis dignissim.",
+    date: "2024-07-30",
+    readingTime: "9 min read",
+    category: "Technology",
+    featuredImage: "/blog-images/fastapi-vs-django.jpg"
+  },
+  {
+    id: 4,
+    title: "Lessons from mentoring junior developers",
+    slug: "mentoring-junior-developers",
+    excerpt: "What I've learned from mentoring 12+ junior developers over the past three years. The mistakes, breakthroughs, and frameworks that actually work.",
+    content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor.",
+    date: "2024-06-15",
+    readingTime: "6 min read",
+    category: "Career",
+    featuredImage: "/blog-images/mentoring-juniors.jpg"
+  }
+];
+
+// Utility functions
+export function getBlogsByCategory() {
+  const categories = {};
+  blogs.forEach(blog => {
+    if (!categories[blog.category]) {
+      categories[blog.category] = [];
+    }
+    categories[blog.category].push(blog);
+  });
+  return categories;
+}
+
+export function getBlogBySlug(slug) {
+  return blogs.find(blog => blog.slug === slug);
+}
+
+export function getRecentBlogs(count = 3) {
+  return blogs
+    .sort((a, b) => new Date(b.date) - new Date(a.date))
+    .slice(0, count);
+}

@@ -73,6 +73,55 @@ export const pageConfigs = {
     ],
     ogType: "website",
     canonical: "/contact"
+  },
+  reading: {
+    title: "Reading List - Books by Ayush Jhunjhunwala",
+    description: "Books I've read and recommend on technology, leadership, and personal development. Technical books, management guides, and growth resources with ratings and honest reviews.",
+    keywords: [
+      "Tech Books Recommendations",
+      "Leadership Books Developer",
+      "Software Engineering Book Reviews",
+      "Technical Leadership Reading List",
+      "Full Stack Developer Book Recommendations",
+      "System Design Books",
+      "Management Books for Engineers",
+      "Ayush Jhunjhunwala Reading List"
+    ],
+    ogType: "website",
+    canonical: "/reading"
+  },
+  writing: {
+    title: "Writing - Technical Notes by Ayush Jhunjhunwala", 
+    description: "Technical thoughts, lessons learned, and observations from building software and leading teams. Notes on development practices, leadership insights, and industry reflections.",
+    keywords: [
+      "Technical Writing Full Stack Developer",
+      "Software Engineering Insights",
+      "Tech Leadership Articles",
+      "Python FastAPI Development Notes",
+      "SvelteKit Technical Writing",
+      "Engineering Management Insights",
+      "Full Stack Developer Blog",
+      "Technical Leadership Thoughts"
+    ],
+    ogType: "website",
+    canonical: "/writing"
+  },
+  blog: {
+    title: "Blog - In-depth Articles by Ayush Jhunjhunwala",
+    description: "In-depth articles on software engineering, technical leadership, and building scalable systems. Learn from real-world experiences, practical insights, and production lessons.",
+    keywords: [
+      "Software Engineering Blog",
+      "Technical Leadership Articles", 
+      "Full Stack Development Blog",
+      "System Architecture Articles",
+      "Python FastAPI Tutorials",
+      "SvelteKit Development Guide",
+      "Engineering Management Blog",
+      "Production Systems Articles",
+      "Tech Lead Insights"
+    ],
+    ogType: "website",
+    canonical: "/blog"
   }
 };
 
