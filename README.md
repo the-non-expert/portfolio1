@@ -1,38 +1,56 @@
-# create-svelte
+# Ayush Jhunjhunwala — Portfolio
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Personal portfolio website for **Ayush Jhunjhunwala**, a full-stack developer specializing in Python FastAPI backends, SvelteKit frontends, and AWS deployments.
 
-## Creating a project
+**Live site:** [ayushportfolio123.netlify.app](https://ayushportfolio123.netlify.app)
 
-If you're seeing this, you've probably already done this step. Congrats!
+---
+
+## About
+
+Engineer. Leader. Builder.
+
+5+ years of experience delivering production-ready products — not prototypes — used by pharmaceutical, biotech, and AI startup teams. Experience spans individual contributor work and technical leadership (80+ people led, 12+ companies).
+
+---
+
+## Tech Stack
+
+- **Framework:** SvelteKit
+- **Styling:** Tailwind CSS
+- **Deployment:** Netlify
+
+---
+
+## Sections
+
+- **Home** — Hero, services, tools, work experience, testimonials
+- **Works** — Project portfolio
+- **Writing** — Long-form articles and essays
+- **Blog** — Short posts
+- **Reading** — Book notes and reading list
+- **Contact** — Get in touch
+
+---
+
+## Local Development
 
 ```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
+npm install
 npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
 ```
 
-## Building
-
-To create a production version of your app:
+Open [http://localhost:5173](http://localhost:5173).
 
 ```bash
-npm run build
+npm run build      # production build
+npm run preview    # preview production build
 ```
 
-You can preview the production build with `npm run preview`.
+---
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Contact
+
+- **GitHub:** [the-non-expert](https://github.com/the-non-expert)
+- **LinkedIn:** [ayush-jhunjhunwala](https://linkedin.com/in/ayush-jhunjhunwala)
+- **Instagram:** [@ayush_jhunjhunwala](https://www.instagram.com/ayush_jhunjhunwala/)
