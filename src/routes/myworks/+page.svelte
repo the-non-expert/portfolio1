@@ -6,7 +6,7 @@
   import CallToActionHome from "$lib/CallToActionHome.svelte";
   import SEO from "$lib/components/SEO.svelte";
   import { generatePortfolioSchema } from "$lib/utils/seo";
-  
+
   interface Project {
     name: string;
     description: string;
@@ -14,16 +14,8 @@
     image: string;
     technologies: string[];
   }
-  
-  // Projects data with updated descriptions highlighting full-stack expertise
+
   const projects: Project[] = [
-    {
-      name: "Addy Fitness Platform",
-      description: "Full-stack fitness platform built with Python FastAPI backend, PostgreSQL database, and SvelteKit frontend. Deployed using CI/CD pipelines via GitHub Actions to AWS EC2 with Nginx configuration.",
-      websiteLink: "https://www.addyfitness.com/",
-      image: "/project-images/addy-fitness.png",
-      technologies: ["Python FastAPI", "PostgreSQL", "SvelteKit", "AWS EC2", "GitHub Actions", "Nginx"]
-    },
     {
       name: "OM Therapeutics",
       description: "Production-grade web application with 40% codebase contribution. Built scalable SvelteKit architecture with optimized SSR performance and comprehensive SEO implementation.",
@@ -53,33 +45,29 @@
       technologies: ["JavaScript", "NPM", "Svelte", "Package Development"]
     }
   ];
-  
+
   const portfolioSchema: string = JSON.stringify(generatePortfolioSchema(projects));
 </script>
 
-<SEO 
-  pageKey="works" 
+<SEO
+  pageKey="works"
   structuredData={portfolioSchema}
 />
 
 <main>
-  <section class="md:w-full md:flex md:justify-center md:gap-32 md:p-10 p-5">
-    <div class="">
+  <section class="max-w-5xl mx-auto px-4 md:px-6 py-10 flex flex-col items-center text-center">
+    <div class="shrink-0">
       <img
         src={myImage}
-        alt="Ayush Jhunjhunwala - Professional headshot"
-        class="md:w-64 md:h-64 w-44 h-44 object-cover rounded-full"
+        alt="Ayush Jhunjhunwala"
+        class="w-32 h-32 md:w-44 md:h-44 object-cover rounded-full border border-stroke"
       />
     </div>
-    <div class="md:flex md:flex-col md:m-0 justify-evenly mt-5">
-      <h1 class="md:text-5xl text-4xl font-light">Ayush Jhunjhunwala</h1>
-      <div>
-        <p class="text-xl mt-3">
-          Full-Stack Developer & Tech Enthusiast based out of Cuttack, India
-        </p>
-        <p class="mt-2 text-gray-500">Building scalable systems with Python FastAPI, SvelteKit & AWS</p>
-      </div>
-      <div class="mt-5">
+    <div class="mt-6">
+      <h1 class="font-display text-4xl font-bold text-ink">Ayush Jhunjhunwala</h1>
+      <p class="text-base text-ink mt-2">Engineer. Leader. Builder.</p>
+      <p class="text-sm text-muted mt-1">Cuttack, India — Python FastAPI, SvelteKit, Shopify & AWS</p>
+      <div class="mt-5 flex justify-center">
         <MySocialMediaDetails />
       </div>
     </div>
