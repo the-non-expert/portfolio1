@@ -1,6 +1,7 @@
 <script lang="ts">
   import CallToActionHome from "$lib/CallToActionHome.svelte";
-  import TabbedServices from "$lib/TabbedServices.svelte";
+  import Testimonials from "$lib/Testimonials.svelte";
+  import WhatIBring from "$lib/WhatIBring.svelte";
   import HomePageHero from "$lib/HomePageHero.svelte";
   import SEO from "$lib/components/SEO.svelte";
   import { generatePersonSchema, generateWebsiteSchema, generateProfessionalServiceSchema } from "$lib/utils/seo";
@@ -22,7 +23,10 @@
     <HomePageHero />
   </section>
   <section>
-    <TabbedServices />
+    <WhatIBring />
+  </section>
+  <section>
+    <Testimonials />
   </section>
   <section>
     <CallToActionHome />
