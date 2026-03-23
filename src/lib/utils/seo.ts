@@ -33,7 +33,7 @@ export const siteConfig: SiteConfig = {
 export const pageConfigs: Record<string, PageConfig> = {
   home: {
     title: "About - Ayush Jhunjhunwala, Full-Stack Developer",
-    description: "Tech leader and full-stack developer building scalable Python FastAPI backends, responsive SvelteKit frontends, and AWS-deployed systems. Currently serving as Full-Stack Developer & Interim COO at Addy Fitness.",
+    description: "Tech leader and full-stack developer building scalable Python FastAPI backends, responsive SvelteKit frontends, and AWS-deployed systems.", // "Currently serving as Full-Stack Developer & Interim COO at Addy Fitness."
     keywords: [
       "Full Stack Developer Python FastAPI",
       "Tech Lead Full Stack Developer",
@@ -179,11 +179,11 @@ export function generatePersonSchema(): Record<string, any> {
         "name": "Cuttack, India"
       }
     },
-    "worksFor": {
-      "@type": "Organization",
-      "name": "Addy Fitness",
-      "url": "https://www.addyfitness.com"
-    }
+    // "worksFor": {
+    //   "@type": "Organization",
+    //   "name": "Addy Fitness",
+    //   "url": "https://www.addyfitness.com"
+    // }
   };
 }
 
