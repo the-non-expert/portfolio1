@@ -10,7 +10,7 @@ export const blogs: BlogCollection = [
     date: "2024-09-10",
     readingTime: "8 min read",
     category: "Architecture",
-    featuredImage: "/blog-images/microservices-costs.jpg"
+    featuredImage: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=450&fit=crop&auto=format"
   },
   {
     id: 2,
@@ -21,7 +21,7 @@ export const blogs: BlogCollection = [
     date: "2024-08-25",
     readingTime: "7 min read",
     category: "Leadership",
-    featuredImage: "/blog-images/ownership-culture.jpg"
+    featuredImage: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=450&fit=crop&auto=format"
   },
   {
     id: 3,
@@ -32,7 +32,7 @@ export const blogs: BlogCollection = [
     date: "2024-07-30",
     readingTime: "9 min read",
     category: "Technology",
-    featuredImage: "/blog-images/fastapi-vs-django.jpg"
+    featuredImage: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=450&fit=crop&auto=format"
   },
   {
     id: 4,
@@ -43,17 +43,14 @@ export const blogs: BlogCollection = [
     date: "2024-06-15",
     readingTime: "6 min read",
     category: "Career",
-    featuredImage: "/blog-images/mentoring-juniors.jpg"
+    featuredImage: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=450&fit=crop&auto=format"
   }
 ];
 
-// Utility functions with proper typing
 export function getBlogsByCategory(): BlogsByCategory {
   const categories: BlogsByCategory = {};
   blogs.forEach((blog: Blog) => {
-    if (!categories[blog.category]) {
-      categories[blog.category] = [];
-    }
+    if (!categories[blog.category]) categories[blog.category] = [];
     categories[blog.category].push(blog);
   });
   return categories;
