@@ -1,49 +1,39 @@
 <script>
-  import svelteImage from "$lib/ToolsLogo/svelte.png";
-  import tailwindImage from "$lib/ToolsLogo/tailwind.png";
-  import nodeImage from "$lib/ToolsLogo/nodeJs.png";
-  import canva from "$lib/ToolsLogo/Canva.png";
-  import adobe from "$lib/ToolsLogo/adobe.png";
-  import figma from "$lib/ToolsLogo/Figma.png";
-  import golangImage from "$lib/ToolsLogo/goImage.png";
-  import vscode from "$lib/ToolsLogo/vscode.png";
-  import netlify from "$lib/ToolsLogo/netlify.png";
-  import github from "$lib/ToolsLogo/githubLogo.png";
+  const tools = [
+    { name: "SvelteKit",  slug: "svelte" },
+    { name: "Python",     slug: "python" },
+    { name: "Go",         slug: "go" },
+    { name: "Node.js",    slug: "nodedotjs" },
+    { name: "Tailwind",   slug: "tailwindcss" },
+    { name: "TypeScript", slug: "typescript" },
+    { name: "Shopify",    slug: "shopify" },
+    { name: "PostgreSQL", slug: "postgresql" },
+    { name: "GitHub",     slug: "github" },
+    { name: "Netlify",    slug: "netlify" },
+    { name: "Claude",     slug: "claude" },
+    { name: "Gemini",     slug: "googlegemini" },
+    { name: "FastAPI",    slug: "fastapi" },
+  ];
 </script>
 
-<div class="w-full bg-[#F5F5F1] md:p-10 md:px-32 p-4">
-  <p class="text-3xl w-full text-center font-bold">Dev Tools I Use</p>
+<div class="w-full bg-surface border-t border-stroke py-12">
+  <div class="max-w-5xl mx-auto px-4 md:px-6">
 
-  <div class="flex flex-wrap gap-12 justify-center mt-8">
-    <img
-      src={svelteImage}
-      alt="sveltekitStack"
-      class="w-36 h-auto object-contain"
-    />
-    <img
-      src={golangImage}
-      alt="sveltekitStack"
-      class="w-28 h-auto object-contain"
-    />
-    <img src={vscode} alt="sveltekitStack" class="w-16 h-auto object-contain" />
-    <img
-      src={tailwindImage}
-      alt="sveltekitStack"
-      class="w-36 h-auto object-contain"
-    />
-    <img
-      src={netlify}
-      alt="sveltekitStack"
-      class="w-36 h-auto object-contain"
-    />
-    <img
-      src={nodeImage}
-      alt="sveltekitStack"
-      class="w-28 h-auto object-contain"
-    />
-    <img src={github} alt="sveltekitStack" class="w-20 h-auto object-contain" />
-    <!-- <img src={adobe} alt="sveltekitStack" class="w-36 h-auto object-contain" />
-    <img src={canva} alt="sveltekitStack" class="w-36 h-auto object-contain" />
-    <img src={figma} alt="sveltekitStack" class="w-28 h-auto object-contain" /> -->
+    <h2 class="font-display text-2xl font-bold text-ink mb-8 text-center">Dev tools I use</h2>
+
+    <div class="flex flex-wrap gap-3 justify-center">
+      {#each tools as tool}
+        <div class="flex items-center gap-2 px-3 py-2 bg-bg border border-stroke rounded-lg hover:border-ink/20 transition-colors">
+          <img
+            src="https://cdn.simpleicons.org/{tool.slug}"
+            alt={tool.name}
+            class="w-4 h-4 object-contain dark:invert"
+            loading="lazy"
+          />
+          <span class="text-sm text-muted">{tool.name}</span>
+        </div>
+      {/each}
+    </div>
+
   </div>
 </div>

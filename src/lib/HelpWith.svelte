@@ -2,7 +2,7 @@
   import pixel1 from "$lib/projectImages/pixel1.png";
   import primeTech1 from "$lib/projectImages/primeTech1.png";
   import aspireImage from "$lib/projectImages/aspireSample1.png";
-  import addy from "$lib/projectImages/addyfitness.png";
+  // import addy from "$lib/projectImages/addyfitness.png";
   import roxford1 from "$lib/projectImages/roxford1.png";
   import roxford2 from "$lib/projectImages/roxford2.png";
 
@@ -67,7 +67,7 @@
       <img src={aspireImage} alt="pixelSample" class="p-3 rounded-xl" />
     </div>
     <div class="md:w-6/12 bg-[#D8DFF7] rounded-xl">
-      <img src={addy} alt="primeTech1" class="p-3 rounded-xl" />
+      <!-- <img src={addy} alt="primeTech1" class="p-3 rounded-xl" /> -->
     </div>
   </div>
 

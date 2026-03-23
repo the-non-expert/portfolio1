@@ -1,7 +1,7 @@
 <script>
   import pixelLogo from "$lib/MyRecentWorkImages/PixelLogo.png";
   import roxfordLogo from "$lib/MyRecentWorkImages/roxfordLogo2.png";
-  import addyFitness from "$lib/MyRecentWorkImages/addyFitness.png";
+  // import addyFitness from "$lib/MyRecentWorkImages/addyFitness.png";
   import PrimeTechnology from "$lib/MyRecentWorkImages/PrimeTechnology.png";
   import alphabetList from "$lib/MyRecentWorkImages/AlphabetList.png";
   import HoverableWorkShowcase from "./CommonComponents/HoverableWorkShowcase.svelte";
@@ -22,14 +22,14 @@
         "A leading global pharmaceutical company,committed to innovation & patient-centricity",
       websiteLink: "https://roxfordhealthcare.com/",
     },
-    {
-      id: 3,
-      name: "Addy Fitness",
-      image: addyFitness,
-      description:
-        "Achieve your ideal body through tailored nutrition plans & expert guidance",
-      websiteLink: "https://neon-maamoul-a504e5.netlify.app/",
-    },
+    // {
+    //   id: 3,
+    //   name: "Addy Fitness",
+    //   image: addyFitness,
+    //   description:
+    //     "Achieve your ideal body through tailored nutrition plans & expert guidance",
+    //   websiteLink: "https://neon-maamoul-a504e5.netlify.app/",
+    // },
     {
       id: 4,
       name: "Prime Technologies",
