@@ -2,6 +2,13 @@ import type { Book, BookCollection } from '../types';
 
 export const books: BookCollection = [
   {
+    id: 0,
+    title: "The Art of Batting",
+    author: "Jarrod Kimber",
+    finishedOn: "26.12.2025",
+    rating: "5/5"
+  },
+  {
     id: 1,
     title: "MoonWalk",
     author: "Michael Jackson",

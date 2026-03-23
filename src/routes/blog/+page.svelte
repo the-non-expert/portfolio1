@@ -9,56 +9,50 @@
   let categories: string[] = [];
   let selectedCategory: string = 'All';
 
-  // Load content on component mount
   onMount(async () => {
     blogs = await loadBlogPosts();
     blogsByCategory = await getBlogsByCategory();
     categories = Object.keys(blogsByCategory);
   });
 
-  // Filter blogs based on selected category
   $: filteredBlogs = selectedCategory === 'All'
     ? blogs
     : blogs.filter((blog: Blog) => blog.category === selectedCategory);
 
-  // Format date for display
   function formatDate(dateString: string): string {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    });
+    return date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   }
 </script>
 
-<SEO 
-  pageKey="blog" 
+<SEO
+  pageKey="blog"
   overrides={{
     title: "Blog - Ayush Jhunjhunwala",
-    description: "In-depth articles on software engineering, technical leadership, and building scalable systems. Learn from real-world experiences and practical insights."
+    description: "In-depth articles on software engineering, technical leadership, and building scalable systems."
   }}
 />
 
-<main class="container mx-auto px-4 py-8 max-w-6xl">
-  <header class="mb-12 text-center">
-    <h1 class="text-4xl md:text-5xl font-light mb-4">Blog</h1>
-    <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+<main class="max-w-5xl mx-auto px-4 md:px-6 py-12">
+
+  <header class="mb-10 border-b border-stroke pb-10">
+    <h1 class="font-display text-4xl font-bold text-ink mb-3">Blog</h1>
+    <p class="text-base text-muted max-w-xl">
       In-depth articles on software engineering, technical leadership, and lessons learned from building production systems.
     </p>
   </header>
 
   <!-- Category Filter -->
-  <div class="mb-8 flex flex-wrap justify-center gap-2">
-    <button 
-      class="px-4 py-2 rounded-full text-sm font-medium transition-colors {selectedCategory === 'All' ? 'bg-black text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}"
+  <div class="mb-8 flex flex-wrap gap-2">
+    <button
+      class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors {selectedCategory === 'All' ? 'bg-ink text-bg' : 'bg-surface text-muted border border-stroke hover:border-ink/30'}"
       on:click={() => selectedCategory = 'All'}
     >
       All ({blogs.length})
     </button>
     {#each categories as category}
-      <button 
-        class="px-4 py-2 rounded-full text-sm font-medium transition-colors {selectedCategory === category ? 'bg-black text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}"
+      <button
+        class="px-4 py-1.5 rounded-full text-sm font-medium transition-colors {selectedCategory === category ? 'bg-ink text-bg' : 'bg-surface text-muted border border-stroke hover:border-ink/30'}"
         on:click={() => selectedCategory = category}
       >
         {category} ({blogsByCategory[category].length})
@@ -66,43 +60,32 @@
     {/each}
   </div>
 
-  <!-- Blog Posts Grid -->
-  <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+  <!-- Blog Grid -->
+  <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
     {#each filteredBlogs as blog}
-      <article class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow group">
+      <article class="bg-surface rounded-xl border border-stroke overflow-hidden hover:border-ink/20 transition-colors group">
         <a href="/blog/{blog.slug}" class="block">
-          <!-- Featured Image -->
-          <div class="aspect-video bg-gray-200 flex items-center justify-center">
-            <div class="text-gray-400 text-center">
-              <div class="text-3xl mb-2">📝</div>
-              <div class="text-xs">Featured Image</div>
-            </div>
+          <div class="aspect-video bg-bg border-b border-stroke overflow-hidden">
+            {#if blog.featuredImage}
+              <img src={blog.featuredImage} alt={blog.title} class="w-full h-full object-cover" loading="lazy" />
+            {:else}
+              <div class="w-full h-full flex items-center justify-center">
+                <span class="text-xs text-muted uppercase tracking-widest">No image</span>
+              </div>
+            {/if}
           </div>
-          
-          <!-- Content -->
-          <div class="p-6">
-            <!-- Category and Reading Time -->
+          <div class="p-5">
             <div class="flex items-center justify-between mb-3">
-              <span class="inline-block px-3 py-1 bg-gray-100 text-gray-700 text-xs font-medium rounded-full">
+              <span class="px-2 py-0.5 bg-bg text-muted border border-stroke text-xs rounded">
                 {blog.category}
               </span>
-              <span class="text-xs text-gray-500">{blog.readingTime}</span>
+              <span class="text-xs text-muted">{blog.readingTime}</span>
             </div>
-            
-            <!-- Title -->
-            <h2 class="font-semibold text-xl mb-3 group-hover:text-gray-700 transition-colors line-clamp-2">
+            <h2 class="font-display text-lg font-semibold text-ink mb-2 group-hover:text-accent transition-colors line-clamp-2">
               {blog.title}
             </h2>
-            
-            <!-- Excerpt -->
-            <p class="text-gray-600 text-sm leading-relaxed mb-4 line-clamp-3">
-              {blog.excerpt}
-            </p>
-            
-            <!-- Date -->
-            <time class="text-xs text-gray-500">
-              {formatDate(blog.date)}
-            </time>
+            <p class="text-sm text-muted leading-relaxed mb-4 line-clamp-3">{blog.excerpt}</p>
+            <time class="text-xs text-muted">{formatDate(blog.date)}</time>
           </div>
         </a>
       </article>
@@ -112,9 +95,9 @@
   <!-- Empty State -->
   {#if filteredBlogs.length === 0}
     <div class="text-center py-16">
-      <p class="text-gray-500 text-lg">No blog posts found in this category.</p>
-      <button 
-        class="mt-4 text-blue-600 hover:text-blue-800 transition-colors"
+      <p class="text-muted text-base">No posts in this category.</p>
+      <button
+        class="mt-4 text-accent hover:text-accent-hover transition-colors text-sm"
         on:click={() => selectedCategory = 'All'}
       >
         View all posts
@@ -122,30 +105,12 @@
     </div>
   {/if}
 
-  <!-- Newsletter Signup Section -->
-  <section class="mt-16 bg-gray-50 rounded-lg p-8 text-center">
-    <h3 class="text-2xl font-semibold mb-4">Stay Updated</h3>
-    <p class="text-gray-600 mb-6 max-w-md mx-auto">
-      Get notified when I publish new articles about technology, leadership, and building great software.
-    </p>
-    <div class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-      <input 
-        type="email" 
-        placeholder="your@email.com" 
-        class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent"
-      >
-      <button class="px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition-colors font-medium">
-        Subscribe
-      </button>
-    </div>
-  </section>
-
-  <!-- Footer Stats -->
-  <footer class="mt-16 text-center border-t border-gray-200 pt-8">
-    <p class="text-gray-600">
-      <strong>{blogs.length}</strong> articles published across <strong>{categories.length}</strong> categories
+  <footer class="mt-12 pt-8 border-t border-stroke">
+    <p class="text-sm text-muted">
+      <strong class="text-ink">{blogs.length}</strong> articles across <strong class="text-ink">{categories.length}</strong> categories
     </p>
   </footer>
+
 </main>
 
 <style>
@@ -155,7 +120,6 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
   .line-clamp-3 {
     display: -webkit-box;
     -webkit-line-clamp: 3;

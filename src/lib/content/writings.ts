@@ -6,7 +6,7 @@ export const writings: WritingCollection = [
     title: "Building scalable FastAPI backends with PostgreSQL",
     slug: "scalable-fastapi-postgresql",
     date: "2024-09-05",
-    excerpt: "My learnings from building production-grade APIs at Addy Fitness and optimizing database queries for better performance.",
+    excerpt: "My learnings from building production-grade APIs and optimizing database queries for better performance.", // "at Addy Fitness"
     content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur."
   },
   {

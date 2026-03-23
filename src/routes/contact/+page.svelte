@@ -1,8 +1,7 @@
 <script lang="ts">
   import MySocialMediaDetails from "$lib/CommonComponents/MySocialMediaDetails.svelte";
   import SEO from "$lib/components/SEO.svelte";
-  
-  // Contact-specific structured data
+
   const contactSchema: string = JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ContactPage",
@@ -11,7 +10,7 @@
     "mainEntity": {
       "@type": "Person",
       "name": "Ayush Jhunjhunwala",
-      "jobTitle": "Full-Stack Developer & Tech Enthusiast",
+      "jobTitle": "Engineer. Leader. Builder.",
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Cuttack",
@@ -29,85 +28,107 @@
   });
 </script>
 
-<SEO 
-  pageKey="contact" 
+<SEO
+  pageKey="contact"
   structuredData={contactSchema}
 />
 
 <main>
-  <section class="w-full md:p-20 py-10 md:px-40 p-4">
-    <h1 class="text-6xl">
-      Ready for technical leadership or full-stack development? Let's build something amazing together
+  <!-- Hero -->
+  <section class="max-w-5xl mx-auto px-4 md:px-6 py-12 border-b border-stroke">
+    <h1 class="font-display text-4xl md:text-5xl font-bold text-ink leading-tight">
+      Let's build something that ships.
     </h1>
-    <p class="text-gray-400 mt-5">
-      Available for technical leadership roles, full-stack development projects, or consulting. 
-      Expert in Python FastAPI, SvelteKit, AWS deployments & team management.
+    <p class="text-sm text-muted mt-4">
+      Available for contracts, technical leadership roles, and architecture consulting.
     </p>
-
-    <div class="mt-5">
+    <div class="mt-6">
       <MySocialMediaDetails />
     </div>
   </section>
 
-  <section
-    class="bg-[#F4F5F1] md:p-20 p-4 w-full flex md:flex-row flex-col justify-center gap-10"
-  >
-    <article class="bg-white p-5 md:w-4/12 md:h-fit w-full rounded-xl">
-      <h2 class="text-3xl font-semibold">Technical Leadership & Development</h2>
-      <p class="mt-5">
-        Looking for a tech leader or full-stack developer? I specialize in building scalable 
-        Python FastAPI backends, responsive SvelteKit frontends, and managing technical teams. 
-        Currently serving as Interim COO while leading development at Addy Fitness.
+  <!-- Content -->
+  <section class="max-w-5xl mx-auto px-4 md:px-6 py-12 md:flex md:gap-12">
+
+    <!-- Left: what I'm open to -->
+    <article class="md:w-5/12 mb-10 md:mb-0">
+      <h2 class="font-display text-2xl font-semibold text-ink mb-4">What I'm open to</h2>
+      <p class="text-sm text-muted leading-relaxed">
+        Looking for a tech leader or full-stack developer? I specialize in building scalable
+        Python FastAPI backends, responsive SvelteKit frontends, Shopify systems, and managing technical teams.
       </p>
+      <ul class="mt-6 space-y-2">
+        {#each ['Technical leadership roles', 'Full-stack contracts', 'Python FastAPI backends', 'SvelteKit frontends', 'Architecture consulting', 'Team management & mentoring'] as item}
+          <li class="text-sm text-muted flex items-center gap-2">
+            <span class="w-1 h-1 rounded-full bg-accent shrink-0"></span>
+            {item}
+          </li>
+        {/each}
+      </ul>
     </article>
-    <form class="bg-white p-5 md:w-4/12 w-full rounded-xl">
-      <div class="flex flex-col gap-2">
-        <label for="fullname" class="font-semibold">Full Name</label>
+
+    <!-- Right: form -->
+    <form class="md:w-7/12 space-y-5">
+      <div class="flex flex-col gap-1.5">
+        <label for="fullname" class="text-sm font-medium text-ink">Full name</label>
         <input
           id="fullname"
           name="fullname"
           type="text"
-          placeholder="ayush jhunjhunwala"
-          class="bg-[#F4F5F1] p-2 w-full rounded-xl"
+          placeholder="Your name"
+          class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
           required
         />
       </div>
-      <div class="flex flex-col gap-2 mt-5">
-        <label for="email" class="font-semibold">Email</label>
+
+      <div class="flex flex-col gap-1.5">
+        <label for="email" class="text-sm font-medium text-ink">Email</label>
         <input
           id="email"
           name="email"
           type="email"
-          placeholder="ayushjhun13@gmail.com"
-          class="bg-[#F4F5F1] p-2 w-full rounded-xl"
+          placeholder="you@company.com"
+          class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
           required
         />
       </div>
-      <div class="flex flex-col gap-2 mt-5">
-        <label for="project-type" class="font-semibold">Project Type</label>
-        <select id="project-type" name="project-type" class="bg-[#F4F5F1] p-2 w-full rounded-xl">
-          <option value="technical-leadership">Technical Leadership Role</option>
-          <option value="full-stack-development">Full-Stack Development Project</option>
-          <option value="backend-development">Python FastAPI Backend</option>
-          <option value="frontend-development">SvelteKit Frontend</option>
-          <option value="system-architecture">System Architecture Consulting</option>
-          <option value="team-management">Team Management & Mentoring</option>
+
+      <div class="flex flex-col gap-1.5">
+        <label for="project-type" class="text-sm font-medium text-ink">Project type</label>
+        <select
+          id="project-type"
+          name="project-type"
+          class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-accent transition-colors"
+        >
+          <option value="technical-leadership">Technical leadership role</option>
+          <option value="full-stack-development">Full-stack development</option>
+          <option value="backend-development">Python FastAPI backend</option>
+          <option value="frontend-development">SvelteKit frontend</option>
+          <option value="shopify">Shopify system</option>
+          <option value="system-architecture">Architecture consulting</option>
+          <option value="team-management">Team management & mentoring</option>
         </select>
       </div>
-      <div class="flex flex-col gap-2 mt-5">
-        <label for="description" class="font-semibold">Project Description</label>
+
+      <div class="flex flex-col gap-1.5">
+        <label for="description" class="text-sm font-medium text-ink">Project description</label>
         <textarea
           id="description"
           name="description"
-          placeholder="Describe your technical requirements, team size, timeline, or leadership needs..."
-          class="bg-[#F4F5F1] p-2 w-full rounded-xl"
+          placeholder="Describe your requirements, team size, timeline..."
+          class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors resize-none"
           rows="4"
           required
-        />
+        ></textarea>
       </div>
-      <button type="submit" class="bg-black text-white px-4 py-2 rounded-xl mt-10"
-        >Get In Touch</button
+
+      <button
+        type="submit"
+        class="bg-ink text-bg px-6 py-3 rounded-full text-sm font-medium hover:bg-accent transition-colors duration-300"
       >
+        Get in touch
+      </button>
     </form>
+
   </section>
 </main>

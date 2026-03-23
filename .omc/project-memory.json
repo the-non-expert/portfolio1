@@ -1,0 +1,135 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1774251226504,
+  "projectRoot": "/Users/ayushj/My-Github/portfolio1",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      },
+      {
+        "name": "TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "tsconfig.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "@sveltejs/kit",
+        "version": "2.39.1",
+        "category": "fullstack"
+      },
+      {
+        "name": "svelte",
+        "version": "4.2.7",
+        "category": "frontend"
+      },
+      {
+        "name": "vite",
+        "version": "5.0.3",
+        "category": "build"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": "npm run build",
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": "npm run dev",
+    "scripts": {
+      "dev": "vite dev",
+      "build": "vite build",
+      "preview": "vite preview",
+      "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+      "check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch"
+    }
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "docs",
+      "src",
+      "static"
+    ],
+    "gitBranches": {
+      "defaultBranch": "main",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 3,
+      "lastAccessed": 1774251226487,
+      "keyFiles": [
+        "color-philosophy.md",
+        "font-philosophy.md",
+        "spacing-philosophy.md"
+      ]
+    },
+    "src": {
+      "path": "src",
+      "purpose": "Source code",
+      "fileCount": 3,
+      "lastAccessed": 1774251226487,
+      "keyFiles": [
+        "app.css",
+        "app.d.ts",
+        "app.html"
+      ]
+    },
+    "static": {
+      "path": "static",
+      "purpose": "Static files",
+      "fileCount": 4,
+      "lastAccessed": 1774251226491,
+      "keyFiles": [
+        "favicon.png",
+        "reading.svg",
+        "robots.txt"
+      ]
+    },
+    "src/lib": {
+      "path": "src/lib",
+      "purpose": "Library code",
+      "fileCount": 13,
+      "lastAccessed": 1774251226492,
+      "keyFiles": [
+        "CallToActionHome.svelte",
+        "Footer.svelte",
+        "Header.svelte"
+      ]
+    },
+    "src/routes": {
+      "path": "src/routes",
+      "purpose": "Route handlers",
+      "fileCount": 2,
+      "lastAccessed": 1774251226492,
+      "keyFiles": [
+        "+layout.svelte",
+        "+page.svelte"
+      ]
+    }
+  },
+  "hotPaths": [],
+  "userDirectives": []
+}

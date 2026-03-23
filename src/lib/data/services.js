@@ -76,14 +76,14 @@ export const serviceAreas = {
     ],
     technologies: ["Python FastAPI", "PostgreSQL", "MongoDB", "GraphQL", "Docker", "AWS EC2"],
     projects: [
-      { 
-        name: "Addy Fitness Backend", 
-        impact: "Complete system architecture",
-        description: "Scalable fitness platform handling user data and workouts",
-        technologies: ["Python FastAPI", "PostgreSQL", "AWS"],
-        emphasis: "primary",
-        url: "https://www.addyfitness.com"
-      },
+      // {
+      //   name: "Addy Fitness Backend",
+      //   impact: "Complete system architecture",
+      //   description: "Scalable fitness platform handling user data and workouts",
+      //   technologies: ["Python FastAPI", "PostgreSQL", "AWS"],
+      //   emphasis: "primary",
+      //   url: "https://www.addyfitness.com"
+      // },
       { 
         name: "E-commerce Platform", 
         impact: "35% business growth achieved",
@@ -124,14 +124,14 @@ export const serviceAreas = {
     ],
     technologies: ["Leadership", "Architecture", "DevOps", "Strategy", "Mentoring", "Agile"],
     projects: [
-      { 
-        name: "Addy Fitness COO Role", 
-        impact: "Technical strategy & team leadership",
-        description: "Leading 12+ cross-functional team while architecting systems",
-        technologies: ["Leadership", "Strategy", "Architecture"],
-        emphasis: "primary",
-        url: "https://www.addyfitness.com"
-      },
+      // {
+      //   name: "Addy Fitness COO Role",
+      //   impact: "Technical strategy & team leadership",
+      //   description: "Leading 12+ cross-functional team while architecting systems",
+      //   technologies: ["Leadership", "Strategy", "Architecture"],
+      //   emphasis: "primary",
+      //   url: "https://www.addyfitness.com"
+      // },
       { 
         name: "Querent AI Management", 
         impact: "Established dev standards & KPIs",

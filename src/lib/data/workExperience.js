@@ -10,30 +10,30 @@ import zicopsIcon from "$lib/Images/zicopsLogo.png";
 import aiesecIcon from "$lib/Images/aiesecIcon.png";
 import digizillaIcon from "$lib/Images/digizillaIcon.png";
 import reactIcon from "$lib/Images/reactIcon.png";
-import addyIcon from "$lib/Images/AddyFitnessLogo2.png";
+// import addyIcon from "$lib/Images/AddyFitnessLogo2.png";
 import omtxIcon from "$lib/Images/omLogo.png";
 import svelteIcon from "$lib/Images/SvelteLogo.png";
 const roxfordIcon = svelteIcon; // TODO: Replace with actual Roxford Healthcare logo
 
 export const workExperience = [
-  {
-    id: 1,
-    role: "Full-Stack Developer & Interim COO",
-    company: "Addy Fitness",
-    duration: "January 2025 - Present",
-    location: "India",
-    countryFlag: "🇮🇳",
-    logo: addyIcon,
-    technologies: ["Python FastAPI", "PostgreSQL", "SvelteKit", "AWS EC2", "GitHub Actions"],
-    achievements: [
-      "Led entire backend system development",
-      "Implemented CI/CD pipeline with 99.9% uptime",
-      "Managing cross-functional team of 12+"
-    ],
-    description:
-      "Leading technical strategy and full-stack development for a comprehensive fitness platform. Built scalable Python FastAPI backend with PostgreSQL database, responsive SvelteKit frontend, and AWS deployment infrastructure. Currently serving as Interim COO while maintaining hands-on development responsibilities.",
-    url: "https://www.addyfitness.com"
-  },
+  // {
+  //   id: 1,
+  //   role: "Full-Stack Developer & Interim COO",
+  //   company: "Addy Fitness",
+  //   duration: "January 2025 - Present",
+  //   location: "India",
+  //   countryFlag: "🇮🇳",
+  //   logo: addyIcon,
+  //   technologies: ["Python FastAPI", "PostgreSQL", "SvelteKit", "AWS EC2", "GitHub Actions"],
+  //   achievements: [
+  //     "Led entire backend system development",
+  //     "Implemented CI/CD pipeline with 99.9% uptime",
+  //     "Managing cross-functional team of 12+"
+  //   ],
+  //   description:
+  //     "Leading technical strategy and full-stack development for a comprehensive fitness platform. Built scalable Python FastAPI backend with PostgreSQL database, responsive SvelteKit frontend, and AWS deployment infrastructure. Currently serving as Interim COO while maintaining hands-on development responsibilities.",
+  //   url: "https://www.addyfitness.com"
+  // },
   {
     id: 2,
     role: "SvelteKit Developer",
