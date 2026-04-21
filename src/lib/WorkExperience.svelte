@@ -63,7 +63,7 @@
           >
             <div class="flex items-start gap-4 mb-4">
               <div class="shrink-0">
-                <img src={experience.logo} alt="{experience.company} logo" class="w-12 h-12 object-contain p-2 bg-bg rounded-lg" />
+                <img src={experience.logo} alt="{experience.company} logo" class="w-12 h-12 object-contain p-2 rounded-lg {experience.darkBg ? 'bg-zinc-900' : 'bg-bg'}" />
               </div>
               <div class="flex-1 min-w-0">
                 <div class="flex items-start justify-between mb-1">
@@ -144,7 +144,7 @@
             aria-expanded={selectedId === experience.id}
           >
             <div class="flex items-center gap-4">
-              <img src={experience.logo} alt="{experience.company} logo" class="w-10 h-10 object-contain p-1.5 bg-surface rounded-lg shrink-0 border border-stroke" />
+              <img src={experience.logo} alt="{experience.company} logo" class="w-10 h-10 object-contain p-1.5 rounded-lg shrink-0 border border-stroke {experience.darkBg ? 'bg-zinc-900 border-zinc-700' : 'bg-surface'}" />
 
               <div class="flex-1 min-w-0 md:flex md:items-center md:gap-6">
                 <div class="min-w-0 md:w-56 shrink-0">
