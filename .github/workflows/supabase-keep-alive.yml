@@ -13,9 +13,9 @@ jobs:
       - name: Ping Supabase REST API
         run: |
           STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-            "${{ secrets.SUPABASE_URL }}/rest/v1/" \
-            -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}")
+            "https://ivyzanmdxjpoxohmatml.supabase.co/rest/v1/" \
+            -H "apikey: sb_publishable_l7r7Sqw60x0mUOyjsDIoag_He47pOju" \
+            -H "Authorization: Bearer sb_publishable_l7r7Sqw60x0mUOyjsDIoag_He47pOju")
           echo "Supabase ping status: $STATUS"
           if [ "$STATUS" -lt 200 ] || [ "$STATUS" -ge 500 ]; then
             echo "Ping failed with status $STATUS"
