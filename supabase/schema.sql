@@ -14,3 +14,13 @@ grant insert on contacts to anon;
 
 -- Prevent anon from reading other people's submissions
 revoke select on contacts from anon;
+
+-- RLS policy: allow anon to insert, nothing else
+-- (RLS blocks all operations by default when enabled — this re-opens insert only)
+alter table contacts enable row level security;
+
+create policy "allow anon insert"
+  on contacts
+  for insert
+  to anon
+  with check (true);
