@@ -5,6 +5,8 @@ export interface Testimonial {
   company: string;
   testimonial: string;
   image: string;
+  isLogo?: boolean;
+  darkBg?: boolean;
 }
 
 export const testimonials: Testimonial[] = [
@@ -30,7 +32,8 @@ export const testimonials: Testimonial[] = [
     title: "CTO",
     company: "Querent AI",
     testimonial: "We were taking a risk going with SvelteKit — nobody on the team had done it before. Ayush not only figured it out, he built something we're still shipping features on two years later. He's the kind of developer who makes everyone around him look good.",
-    image: "https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?w=128&h=128&fit=crop&crop=face&auto=format"
+    image: "/images/querentIconNew.png",
+    isLogo: true
   },
   {
     id: 4,
@@ -47,5 +50,41 @@ export const testimonials: Testimonial[] = [
     company: "Digizilla",
     testimonial: "I was skeptical — most interns need babysitting for the first month. Ayush scoped the problem himself, got to work, and launched a live website before I expected a first draft. If he's grown as much since then as I think he has, he must be remarkable.",
     image: "https://images.unsplash.com/photo-1566492031773-4f4e44671857?w=128&h=128&fit=crop&crop=face&auto=format"
+  },
+  {
+    id: 6,
+    name: "Raunak Singh",
+    title: "Founder",
+    company: "SikhAid NGO",
+    testimonial: "We needed someone who could build something real, not just a website — a system that would help us serve people better. Ayush understood that immediately. The payment tracking he built changed how we think about our marketing, and the admin portal meant our team could actually use it without calling him every week.",
+    image: "/images/sikhaidLogo.png",
+    isLogo: true
+  },
+  {
+    id: 7,
+    name: "Neal Jha",
+    title: "Founder",
+    company: "Humanaissance",
+    testimonial: "I came in with a very specific vision — animations that felt handcrafted, a CMS that gave us total control, a site that told a story. Most developers would have pushed back or simplified it. Ayush leaned in. What he delivered is genuinely one of the most thoughtful digital products I've seen, and the AI systems he built underneath it will keep paying dividends for years.",
+    image: "/images/NealJha.png"
+  },
+  {
+    id: 8,
+    name: "Siddharth Modi",
+    title: "Founder",
+    company: "Toondemy Preschool",
+    testimonial: "For a preschool, the website has to feel warm and trustworthy the moment a parent lands on it. Ayush got that without me having to explain it twice. Clean, fast, and parents actually stay on it — which is exactly what we needed. The SEO work has already started showing results.",
+    image: "/images/ToondemyLogo.png",
+    isLogo: true
+  },
+  {
+    id: 9,
+    name: "Praveen Yadav",
+    title: "Owner",
+    company: "Aarti Jewellers",
+    testimonial: "Our customers needed to trust the prices they were seeing — live rates, no delays, in Hindi so everyone could read it. Ayush built exactly that. It looks professional, our customers understand it, and it's already made a difference in how people walk through the door.",
+    image: "/images/AartiJewellersLogo.png",
+    isLogo: true,
+    darkBg: true
   }
 ];

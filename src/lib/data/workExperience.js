@@ -13,9 +13,89 @@ import reactIcon from "$lib/Images/reactIcon.png";
 // import addyIcon from "$lib/Images/AddyFitnessLogo2.png";
 import omtxIcon from "$lib/Images/omLogo.png";
 import svelteIcon from "$lib/Images/SvelteLogo.png";
+import sikhaidIcon from "$lib/Images/sikhaidLogo.png";
+import humanaisssanceIcon from "$lib/Images/Humanaisance.png";
+import toondemyIcon from "$lib/Images/ToondemyLogo.png";
+import aartiIcon from "$lib/Images/AartiJewellersLogo.png";
 const roxfordIcon = svelteIcon; // TODO: Replace with actual Roxford Healthcare logo
 
 export const workExperience = [
+  {
+    id: 13,
+    role: "Full Stack Developer & Context Engineer",
+    company: "Humanaissance (Contract)",
+    duration: "September 2025 - April 2026",
+    location: "Remote",
+    countryFlag: "🇸🇬",
+    logo: humanaisssanceIcon,
+    technologies: ["SvelteKit", "TypeScript", "Tailwind CSS", "Canvas API", "CSS Animations", "Claude API", "SEO", "GEO"],
+    achievements: [
+      "Custom CMS with full admin control over all customer-facing content",
+      "Complex animations built entirely through code, Canvas, and CSS",
+      "Custom appointment booking flow with 100% admin control",
+      "Multiple Claude agents and skills for animations and web design",
+      "Full SEO and Generative Engine Optimisation package implemented"
+    ],
+    description:
+      "Delivered a complete, bespoke web platform for a Singapore-based client — from a custom Content Management System to intricate code-driven animations using Canvas and CSS. Built a custom appointment booking flow with full admin control, a proper admin portal with handover documentation, and multiple Claude AI agents and knowledge graphs for long-term context management. Implemented a full SEO and Generative Engine Optimisation strategy for organic and targeted discovery.",
+    url: "https://www.humanaissance.com"
+  },
+  {
+    id: 14,
+    role: "Full Stack Developer & Web Designer",
+    company: "Toondemy Preschool (Contract)",
+    duration: "April 2026 - April 2026",
+    location: "India",
+    countryFlag: "🇮🇳",
+    logo: toondemyIcon,
+    technologies: ["SvelteKit", "Tailwind CSS", "TypeScript", "SEO", "GEO", "Web Design"],
+    achievements: [
+      "Complete website delivered end-to-end",
+      "Full SEO package for organic discovery",
+      "Generative Engine Optimisation strategies implemented",
+      "Minimalistic design to maximise user dwell time"
+    ],
+    description:
+      "Designed and developed a complete website for Toondemy Preschool with a focus on minimalistic, engagement-driven design to maximise time-on-site. Implemented a full SEO package alongside Generative Engine Optimisation strategies to drive organic discovery and support business growth.",
+    url: "https://www.toondemypreschool.com"
+  },
+  {
+    id: 15,
+    role: "Frontend Developer",
+    company: "Aarti Jewellers (Contract)",
+    duration: "May 2025 - June 2025",
+    location: "India",
+    countryFlag: "🇮🇳",
+    logo: aartiIcon,
+    darkBg: true,
+    technologies: ["SvelteKit", "Tailwind CSS", "TypeScript", "REST APIs", "Web Design"],
+    achievements: [
+      "Custom API integration for live gold and silver prices",
+      "Bilingual design in Hindi and English for local reach",
+      "Informative, trust-building design for local customers"
+    ],
+    description:
+      "Built a frontend for Aarti Jewellers featuring a custom API integration to display live gold and silver prices in the Cuttack market. Designed the interface bilingually in Hindi and English to connect with local customers, with an informative layout focused on building trust and driving footfall.",
+    url: "https://www.sriaartijewellers.com/"
+  },
+  {
+    id: 16,
+    role: "Full Stack Developer",
+    company: "SikhAid NGO (Contract)",
+    duration: "February 2025 - May 2025",
+    location: "India",
+    countryFlag: "🇮🇳",
+    logo: sikhaidIcon,
+    technologies: ["SvelteKit", "TypeScript", "Tailwind CSS", "Firebase", "Razorpay Webhooks"],
+    achievements: [
+      "Full-stack SvelteKit application with admin portal",
+      "Custom payment source-tracking algorithm for smarter marketing budget allocation",
+      "Razorpay webhook integration for real-time payment processing"
+    ],
+    description:
+      "Implemented a full-stack SvelteKit application for SikhAid NGO, including a complete admin portal for content updates. Built a custom payment tracking algorithm using Razorpay webhooks to identify the marketing source of each donation, enabling the team to distribute their marketing budget more intelligently.",
+    url: "https://www.sikhaid.ngo"
+  },
   // {
   //   id: 1,
   //   role: "Full-Stack Developer & Interim COO",

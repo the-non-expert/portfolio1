@@ -91,7 +91,7 @@
           <img
             src={item.image}
             alt={item.name}
-            class="w-24 h-24 rounded-full ring-1 ring-stroke object-cover"
+            class="ring-1 ring-stroke {item.isLogo ? `w-28 h-16 rounded-lg object-contain p-1 ${item.darkBg ? 'bg-black' : 'bg-white'}` : 'w-24 h-24 rounded-full object-cover'}"
             loading="lazy"
           />
         </div>
