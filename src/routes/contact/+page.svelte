@@ -1,6 +1,10 @@
 <script lang="ts">
   import MySocialMediaDetails from "$lib/CommonComponents/MySocialMediaDetails.svelte";
   import SEO from "$lib/components/SEO.svelte";
+  import { enhance } from "$app/forms";
+  import type { ActionData } from "./$types";
+
+  export let form: ActionData;
 
   const contactSchema: string = JSON.stringify({
     "@context": "https://schema.org",
@@ -68,67 +72,87 @@
     </article>
 
     <!-- Right: form -->
-    <form class="md:w-7/12 space-y-5">
-      <div class="flex flex-col gap-1.5">
-        <label for="fullname" class="text-sm font-medium text-ink">Full name</label>
-        <input
-          id="fullname"
-          name="fullname"
-          type="text"
-          placeholder="Your name"
-          class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
-          required
-        />
-      </div>
+    <div class="md:w-7/12">
+      {#if form?.success}
+        <div class="flex flex-col items-start gap-4 py-12">
+          <div class="w-10 h-10 rounded-full bg-accent/10 flex items-center justify-center">
+            <svg class="w-5 h-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </div>
+          <h2 class="font-display text-2xl font-semibold text-ink">Message received.</h2>
+          <p class="text-sm text-muted">I'll get back to you within 24 hours. Talk soon.</p>
+        </div>
+      {:else}
+        {#if form?.error}
+          <div class="mb-5 px-4 py-3 rounded-xl border border-red-200 bg-red-50 text-sm text-red-700">
+            {form.error}
+          </div>
+        {/if}
 
-      <div class="flex flex-col gap-1.5">
-        <label for="email" class="text-sm font-medium text-ink">Email</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          placeholder="you@company.com"
-          class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
-          required
-        />
-      </div>
+        <form method="POST" use:enhance class="space-y-5">
+          <div class="flex flex-col gap-1.5">
+            <label for="fullname" class="text-sm font-medium text-ink">Full name</label>
+            <input
+              id="fullname"
+              name="fullname"
+              type="text"
+              placeholder="Your name"
+              class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
+              required
+            />
+          </div>
 
-      <div class="flex flex-col gap-1.5">
-        <label for="project-type" class="text-sm font-medium text-ink">Project type</label>
-        <select
-          id="project-type"
-          name="project-type"
-          class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-accent transition-colors"
-        >
-          <option value="technical-leadership">Technical leadership role</option>
-          <option value="full-stack-development">Full-stack development</option>
-          <option value="backend-development">Python FastAPI backend</option>
-          <option value="frontend-development">SvelteKit frontend</option>
-          <option value="shopify">Shopify system</option>
-          <option value="system-architecture">Architecture consulting</option>
-          <option value="team-management">Team management & mentoring</option>
-        </select>
-      </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="email" class="text-sm font-medium text-ink">Email</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="you@company.com"
+              class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
+              required
+            />
+          </div>
 
-      <div class="flex flex-col gap-1.5">
-        <label for="description" class="text-sm font-medium text-ink">Project description</label>
-        <textarea
-          id="description"
-          name="description"
-          placeholder="Describe your requirements, team size, timeline..."
-          class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors resize-none"
-          rows="4"
-          required
-        ></textarea>
-      </div>
+          <div class="flex flex-col gap-1.5">
+            <label for="project-type" class="text-sm font-medium text-ink">Project type</label>
+            <select
+              id="project-type"
+              name="project-type"
+              class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-accent transition-colors"
+            >
+              <option value="technical-leadership">Technical leadership role</option>
+              <option value="full-stack-development">Full-stack development</option>
+              <option value="backend-development">Python FastAPI backend</option>
+              <option value="frontend-development">SvelteKit frontend</option>
+              <option value="shopify">Shopify system</option>
+              <option value="system-architecture">Architecture consulting</option>
+              <option value="team-management">Team management & mentoring</option>
+            </select>
+          </div>
 
-      <button
-        type="submit"
-        class="bg-ink text-bg px-6 py-3 rounded-full text-sm font-medium hover:bg-accent transition-colors duration-300"
-      >
-        Get in touch
-      </button>
-    </form>
+          <div class="flex flex-col gap-1.5">
+            <label for="description" class="text-sm font-medium text-ink">Project description</label>
+            <textarea
+              id="description"
+              name="description"
+              placeholder="Describe your requirements, team size, timeline..."
+              class="bg-surface border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors resize-none"
+              rows="4"
+              required
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="bg-ink text-bg px-6 py-3 rounded-full text-sm font-medium hover:bg-accent transition-colors duration-300"
+          >
+            Get in touch
+          </button>
+        </form>
+      {/if}
+    </div>
 
   </section>
 </main>
