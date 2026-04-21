@@ -27,7 +27,7 @@ export async function GET() {
   const staticRoutes = [
     { path: '',           priority: '1.0', changefreq: 'monthly',  lastmod: '2026-04-21' },
     { path: '/myworks',   priority: '0.9', changefreq: 'monthly',  lastmod: '2026-04-21' },
-    { path: '/contact',   priority: '0.8', changefreq: 'yearly',   lastmod: '2025-09-01' },
+    { path: '/contact',   priority: '0.8', changefreq: 'monthly',  lastmod: '2026-04-21' },
     { path: '/blog',      priority: '0.8', changefreq: 'weekly',   lastmod: '2025-09-13' },
     { path: '/writing',   priority: '0.7', changefreq: 'weekly',   lastmod: '2025-09-25' },
     { path: '/reading',   priority: '0.5', changefreq: 'monthly',  lastmod: '2026-01-01' },

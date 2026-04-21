@@ -267,6 +267,26 @@ export function generatePortfolioSchema(projects: Project[]): Record<string, any
   };
 }
 
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+export function generateFAQSchema(items: FAQItem[]): Record<string, any> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": items.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  };
+}
+
 interface BlogPost {
   title: string;
   slug: string;
