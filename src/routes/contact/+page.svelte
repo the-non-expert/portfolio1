@@ -23,7 +23,7 @@
       },
       "contactPoint": {
         "@type": "ContactPoint",
-        "contactType": "professional",
+        "contactType": "hiring",
         "availableLanguage": ["English", "Hindi"],
         "serviceType": ["Technical Leadership", "Full-Stack Development", "System Architecture", "Team Management"]
       },

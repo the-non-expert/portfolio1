@@ -10,7 +10,7 @@ export const siteConfig: SiteConfig = {
   name: "Ayush Jhunjhunwala Portfolio",
   title: "Ayush Jhunjhunwala - Full-Stack Developer & Tech Enthusiast | Python, SvelteKit, AWS",
   description: "Experienced full-stack developer and interim COO specializing in Python FastAPI backends, SvelteKit frontends, and AWS deployments. Proven track record building scalable systems with 30-40% codebase contributions.",
-  url: "https://ayushportfolio123.netlify.app",
+  url: "https://ayushjhunjhunwala.com",
   author: "Ayush Jhunjhunwala",
   image: "/images/Ayushjhunjhunwala.png",
   twitterHandle: "@ayush_jhunjhunwala",
@@ -32,8 +32,8 @@ export const siteConfig: SiteConfig = {
 // Page-specific SEO configurations
 export const pageConfigs: Record<string, PageConfig> = {
   home: {
-    title: "About - Ayush Jhunjhunwala, Full-Stack Developer",
-    description: "Tech leader and full-stack developer building scalable Python FastAPI backends, responsive SvelteKit frontends, and AWS-deployed systems.", // "Currently serving as Full-Stack Developer & Interim COO at Addy Fitness."
+    title: "Ayush Jhunjhunwala — Full-Stack Developer | SvelteKit · FastAPI · AWS",
+    description: "Tech leader and full-stack developer building scalable Python FastAPI backends, responsive SvelteKit frontends, and AWS-deployed systems.",
     keywords: [
       "Full Stack Developer Python FastAPI",
       "Tech Lead Full Stack Developer",
@@ -43,7 +43,7 @@ export const pageConfigs: Record<string, PageConfig> = {
       "Full Stack Tech Enthusiast India",
       "Python PostgreSQL Developer Cuttack"
     ],
-    ogType: "profile",
+    ogType: "website",
     canonical: "/"
   },
   works: {
@@ -147,9 +147,9 @@ export function generatePersonSchema(): Record<string, any> {
     },
     "sameAs": [
       "https://github.com/the-non-expert",
-      "https://www.npmjs.com/settings/ayushjhunjhunwala/packages",
+      "https://www.npmjs.com/~ayushjhunjhunwala",
       "https://www.instagram.com/ayush_jhunjhunwala/",
-      "https://linkedin.com/in/ayush-jhunjhunwala"
+      "https://www.linkedin.com/in/ayush-jhunjhunwala"
     ],
     "knowsAbout": [
       "Python FastAPI",
@@ -179,11 +179,14 @@ export function generatePersonSchema(): Record<string, any> {
         "name": "Cuttack, India"
       }
     },
-    // "worksFor": {
-    //   "@type": "Organization",
-    //   "name": "Addy Fitness",
-    //   "url": "https://www.addyfitness.com"
-    // }
+    "worksFor": {
+      "@type": "Organization",
+      "name": "Self-employed"
+    },
+    "seeks": {
+      "@type": "Demand",
+      "name": "Full-Stack Development Contracts & Technical Leadership Roles"
+    }
   };
 }
 
@@ -231,10 +234,7 @@ export function generateProfessionalServiceSchema(): Record<string, any> {
       "Technical Team Leadership",
       "System Architecture Design"
     ],
-    "areaServed": {
-      "@type": "Place",
-      "name": "India"
-    },
+    "areaServed": "Worldwide",
     "availableLanguage": ["English", "Hindi"],
     "expertise": ["Python", "FastAPI", "SvelteKit", "PostgreSQL", "AWS", "Technical Leadership"]
   };
@@ -267,13 +267,52 @@ export function generatePortfolioSchema(projects: Project[]): Record<string, any
   };
 }
 
+interface BlogPost {
+  title: string;
+  slug: string;
+  excerpt: string;
+  date: string;
+  readingTime?: string;
+  featuredImage?: string;
+}
+
+export function generateBlogPostingSchema(post: BlogPost): Record<string, any> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": post.title,
+    "description": post.excerpt,
+    "datePublished": new Date(post.date).toISOString(),
+    "dateModified": new Date(post.date).toISOString(),
+    "url": `${siteConfig.url}/blog/${post.slug}`,
+    "image": post.featuredImage ? `${siteConfig.url}${post.featuredImage}` : `${siteConfig.url}${siteConfig.image}`,
+    "author": {
+      "@type": "Person",
+      "name": siteConfig.author,
+      "url": siteConfig.url
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": siteConfig.author,
+      "url": siteConfig.url
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${siteConfig.url}/blog/${post.slug}`
+    }
+  };
+}
+
 /**
  * Helper function to merge page-specific config with site defaults
  */
 export function mergeSeoConfig(pageKey: string, overrides: Partial<SEOConfig> = {}): SEOConfig {
   const pageConfig = pageConfigs[pageKey] || {};
-  const canonical = `${siteConfig.url}${pageConfig.canonical || ''}`;
-  
+  const canonicalPath = overrides.canonical || pageConfig.canonical || '';
+  const canonical = canonicalPath.startsWith('http')
+    ? canonicalPath
+    : `${siteConfig.url}${canonicalPath}`;
+
   return {
     ...siteConfig,
     ...pageConfig,

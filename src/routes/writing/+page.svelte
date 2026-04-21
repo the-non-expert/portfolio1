@@ -1,31 +1,26 @@
 <script lang="ts">
-  import { loadWritings } from "$lib/utils/content";
   import SEO from "$lib/components/SEO.svelte";
-  import type { WritingsByYear } from "$lib/types";
-  import { onMount } from 'svelte';
+  import type { Writing, WritingsByYear } from "$lib/types";
+  import type { PageData } from "./$types";
 
-  let writingsByYear: WritingsByYear = {};
-  let sortedYearEntries: [string, any[]][] = [];
-  let totalWritings = 0;
+  export let data: PageData;
 
-  onMount(async () => {
-    const writings = await loadWritings();
-    totalWritings = writings.length;
+  $: writings = (data.writings ?? []) as Writing[];
+  $: totalWritings = writings.length;
 
-    writings.forEach(writing => {
-      const year = new Date(writing.date).getFullYear();
-      if (!writingsByYear[year]) writingsByYear[year] = [];
-      writingsByYear[year].push(writing);
-    });
+  $: writingsByYear = writings.reduce((acc: WritingsByYear, writing: Writing) => {
+    const year = new Date(writing.date).getFullYear();
+    if (!acc[year]) acc[year] = [];
+    acc[year].push(writing);
+    return acc;
+  }, {} as WritingsByYear);
 
-    sortedYearEntries = Object.keys(writingsByYear)
-      .sort((a, b) => parseInt(b) - parseInt(a))
-      .map(year => [
-        year,
-        writingsByYear[parseInt(year)]
-          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-      ]);
-  });
+  $: sortedYearEntries = (Object.keys(writingsByYear) as unknown as number[])
+    .sort((a, b) => b - a)
+    .map(year => [
+      String(year),
+      writingsByYear[year].sort((a: Writing, b: Writing) => new Date(b.date).getTime() - new Date(a.date).getTime())
+    ]) as [string, Writing[]][];
 
   function formatDate(dateString: string): string {
     const date = new Date(dateString);

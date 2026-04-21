@@ -1,19 +1,14 @@
 <script lang="ts">
-  import { loadBlogPosts, getBlogsByCategory } from "$lib/utils/content";
   import SEO from "$lib/components/SEO.svelte";
   import type { Blog, BlogCollection } from "$lib/types";
-  import { onMount } from 'svelte';
+  import type { PageData } from "./$types";
 
-  let blogs: BlogCollection = [];
-  let blogsByCategory: {[category: string]: Blog[]} = {};
-  let categories: string[] = [];
+  export let data: PageData;
+
+  $: blogs = (data.blogs ?? []) as BlogCollection;
+  $: blogsByCategory = (data.blogsByCategory ?? {}) as {[category: string]: Blog[]};
+  $: categories = Object.keys(blogsByCategory);
   let selectedCategory: string = 'All';
-
-  onMount(async () => {
-    blogs = await loadBlogPosts();
-    blogsByCategory = await getBlogsByCategory();
-    categories = Object.keys(blogsByCategory);
-  });
 
   $: filteredBlogs = selectedCategory === 'All'
     ? blogs
