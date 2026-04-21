@@ -1,19 +1,14 @@
 <script lang="ts">
-  import { page } from '$app/stores';
-  import { getBlogBySlug, loadBlogPosts } from "$lib/utils/content";
   import SEO from "$lib/components/SEO.svelte";
+  import { generateBlogPostingSchema } from "$lib/utils/seo";
   import type { Blog, BlogCollection, DateFormatter } from "$lib/types";
-  import { onMount } from 'svelte';
+  import type { PageData } from "./$types";
 
-  let blog: Blog | null = null;
-  let otherPosts: BlogCollection = [];
+  export let data: PageData;
 
-  onMount(async () => {
-    const slug = $page.params.slug || '';
-    blog = await getBlogBySlug(slug);
-    const allBlogs = await loadBlogPosts();
-    otherPosts = allBlogs.filter((b: Blog) => b.slug !== slug).slice(0, 3);
-  });
+  $: blog = data.blog as Blog;
+  $: otherPosts = (data.otherPosts ?? []) as BlogCollection;
+  $: blogSchema = JSON.stringify(generateBlogPostingSchema(blog));
 
   const formatDate: DateFormatter = (dateString: string): string => {
     const date = new Date(dateString);
@@ -21,16 +16,16 @@
   };
 </script>
 
-{#if blog}
-  <SEO
-    pageKey="blog"
-    overrides={{
-      title: `${blog.title} - Ayush Jhunjhunwala`,
-      description: blog.excerpt
-    }}
-  />
+<SEO
+  pageKey="blog"
+  structuredData={blogSchema}
+  overrides={{
+    title: `${blog.title} - Ayush Jhunjhunwala`,
+    description: blog.excerpt
+  }}
+/>
 
-  <main class="max-w-5xl mx-auto px-4 md:px-6 py-12">
+<main class="max-w-5xl mx-auto px-4 md:px-6 py-12">
     <header class="mb-12">
       <nav class="mb-8">
         <a href="/blog" class="text-sm text-muted hover:text-ink transition-colors">← Back to blog</a>
@@ -121,23 +116,6 @@
       </section>
     {/if}
   </main>
-
-{:else}
-  <SEO
-    pageKey="blog"
-    overrides={{
-      title: "Article not found - Ayush Jhunjhunwala",
-      description: "The blog post you're looking for doesn't exist."
-    }}
-  />
-  <main class="max-w-5xl mx-auto px-4 md:px-6 py-12 text-center">
-    <h1 class="font-display text-4xl font-bold text-ink mb-4">Article not found</h1>
-    <p class="text-muted mb-8">The blog post you're looking for doesn't exist.</p>
-    <a href="/blog" class="inline-block bg-ink text-bg px-6 py-3 rounded-full text-sm font-medium hover:bg-accent transition-colors">
-      Browse all articles
-    </a>
-  </main>
-{/if}
 
 <style>
   :global(.prose h1) { @apply font-display text-3xl md:text-4xl font-bold text-ink mb-6 mt-8; }

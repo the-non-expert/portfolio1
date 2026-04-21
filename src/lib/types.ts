@@ -20,6 +20,7 @@ export interface Writing {
   date: string; // ISO date string
   excerpt: string;
   content: string;
+  published?: boolean;
 }
 
 // Blog interface - for blog posts
@@ -33,6 +34,7 @@ export interface Blog {
   readingTime: string; // Format: "5 min read"
   category: string;
   featuredImage: string; // Image path
+  published?: boolean;
 }
 
 // SEO configuration interfaces

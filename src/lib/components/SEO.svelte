@@ -31,6 +31,9 @@
   <meta property="og:title" content={metaTags.openGraph.title} />
   <meta property="og:description" content={metaTags.openGraph.description} />
   <meta property="og:image" content={metaTags.openGraph.image} />
+  <meta property="og:image:alt" content={metaTags.openGraph.title} />
+  <meta property="og:image:width" content="407" />
+  <meta property="og:image:height" content="110" />
   <meta property="og:url" content={metaTags.openGraph.url} />
   <meta property="og:site_name" content={metaTags.openGraph.siteName} />
   

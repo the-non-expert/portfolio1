@@ -1,35 +1,41 @@
 <script lang="ts">
   import MySocialMediaDetails from "$lib/CommonComponents/MySocialMediaDetails.svelte";
   import SEO from "$lib/components/SEO.svelte";
+  import FAQ from "$lib/FAQ.svelte";
   import { enhance } from "$app/forms";
   import type { ActionData } from "./$types";
+  import { generateFAQSchema } from "$lib/utils/seo";
+  import { contactFAQItems } from "$lib/data/faq";
 
   export let form: ActionData;
 
-  const contactSchema: string = JSON.stringify({
-    "@context": "https://schema.org",
-    "@type": "ContactPage",
-    "name": "Hire Ayush Jhunjhunwala - Full-Stack Tech Enthusiast",
-    "description": "Contact Ayush Jhunjhunwala for technical leadership and full-stack development. Expert in Python FastAPI backends, SvelteKit frontends, AWS deployments, and team management.",
-    "mainEntity": {
-      "@type": "Person",
-      "name": "Ayush Jhunjhunwala",
-      "jobTitle": "Engineer. Leader. Builder.",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Cuttack",
-        "addressRegion": "Odisha",
-        "addressCountry": "India"
-      },
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "contactType": "professional",
-        "availableLanguage": ["English", "Hindi"],
-        "serviceType": ["Technical Leadership", "Full-Stack Development", "System Architecture", "Team Management"]
-      },
-      "knowsAbout": ["Python FastAPI", "SvelteKit", "AWS", "PostgreSQL", "CI/CD", "Technical Leadership"]
-    }
-  });
+  const contactSchema: string = JSON.stringify([
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Hire Ayush Jhunjhunwala - Full-Stack Developer",
+      "description": "Contact Ayush Jhunjhunwala for technical leadership and full-stack development. Expert in Python FastAPI backends, SvelteKit frontends, AWS deployments, and team management.",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Ayush Jhunjhunwala",
+        "jobTitle": "Full-Stack Developer & Technical Leader",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Cuttack",
+          "addressRegion": "Odisha",
+          "addressCountry": "India"
+        },
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "contactType": "hiring",
+          "availableLanguage": ["English", "Hindi"],
+          "serviceType": ["Technical Leadership", "Full-Stack Development", "System Architecture", "Team Management"]
+        },
+        "knowsAbout": ["Python FastAPI", "SvelteKit", "AWS", "PostgreSQL", "CI/CD", "Technical Leadership"]
+      }
+    },
+    generateFAQSchema(contactFAQItems)
+  ]);
 </script>
 
 <SEO
@@ -155,4 +161,12 @@
     </div>
 
   </section>
+
+  <FAQ
+    items={contactFAQItems}
+    heading="Before you reach out"
+    label="FAQ"
+    id="faq"
+  />
+
 </main>
