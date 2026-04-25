@@ -9,7 +9,7 @@ import type { SiteConfig, PageConfig, SEOConfig } from '../types';
 export const siteConfig: SiteConfig = {
   name: "Ayush Jhunjhunwala Portfolio",
   title: "Ayush Jhunjhunwala - Full-Stack Developer & Tech Enthusiast | Python, SvelteKit, AWS",
-  description: "Experienced full-stack developer and interim COO specializing in Python FastAPI backends, SvelteKit frontends, and AWS deployments. Proven track record building scalable systems with 30-40% codebase contributions.",
+  description: "Full-stack developer and interim COO specializing in Python FastAPI, SvelteKit, and AWS. Building scalable systems with proven team leadership.",
   url: "https://ayushjhunjhunwala.com",
   author: "Ayush Jhunjhunwala",
   image: "/images/Ayushjhunjhunwala.png",
@@ -48,7 +48,7 @@ export const pageConfigs: Record<string, PageConfig> = {
   },
   works: {
     title: "Works - Ayush Jhunjhunwala",
-    description: "Explore production-grade projects featuring Python FastAPI APIs, SvelteKit frontends, PostgreSQL databases, and AWS CI/CD deployments. Led development teams with 30-40% codebase contributions.",
+    description: "Production-grade projects featuring Python FastAPI APIs, SvelteKit frontends, PostgreSQL, and AWS CI/CD deployments with team leadership.",
     keywords: [
       "Python FastAPI Projects",
       "SvelteKit Full Stack Projects", 
@@ -63,7 +63,7 @@ export const pageConfigs: Record<string, PageConfig> = {
   },
   contact: {
     title: "Hire Me - Ayush Jhunjhunwala",
-    description: "Available for technical leadership and full-stack development. Expert in Python FastAPI backends, SvelteKit frontends, AWS deployments, and team leadership. Current Interim COO experience.",
+    description: "Available for full-stack development and technical leadership. Expert in Python FastAPI, SvelteKit, AWS, and team management. Interim COO experience.",
     keywords: [
       "Hire Full Stack Tech Enthusiast",
       "Python FastAPI Developer for Hire",
@@ -78,7 +78,7 @@ export const pageConfigs: Record<string, PageConfig> = {
   },
   reading: {
     title: "Reading List - Books by Ayush Jhunjhunwala",
-    description: "Books I've read and recommend on technology, leadership, and personal development. Technical books, management guides, and growth resources with ratings and honest reviews.",
+    description: "Books I've read on technology, leadership, and personal development — with ratings and honest reviews.",
     keywords: [
       "Tech Books Recommendations",
       "Leadership Books Developer",
@@ -94,7 +94,7 @@ export const pageConfigs: Record<string, PageConfig> = {
   },
   writing: {
     title: "Writing - Technical Notes by Ayush Jhunjhunwala", 
-    description: "Technical thoughts, lessons learned, and observations from building software and leading teams. Notes on development practices, leadership insights, and industry reflections.",
+    description: "Thoughts and lessons from building software and leading teams. Notes on development practices, leadership insights, and industry reflections.",
     keywords: [
       "Technical Writing Full Stack Developer",
       "Software Engineering Insights",
@@ -110,7 +110,7 @@ export const pageConfigs: Record<string, PageConfig> = {
   },
   blog: {
     title: "Blog - In-depth Articles by Ayush Jhunjhunwala",
-    description: "In-depth articles on software engineering, technical leadership, and building scalable systems. Learn from real-world experiences, practical insights, and production lessons.",
+    description: "In-depth articles on software engineering, technical leadership, and scalable systems. Real-world experiences, practical insights, and production lessons.",
     keywords: [
       "Software Engineering Blog",
       "Technical Leadership Articles", 
