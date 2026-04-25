@@ -1,28 +1,18 @@
 # robots.txt for Ayush Jhunjhunwala Portfolio
-# Generated for optimal SEO crawling
 
 User-agent: *
-Allow: /
-
-# Important pages for crawling
 Allow: /
 Allow: /myworks
 Allow: /contact
-
-# Sitemap location
-Sitemap: https://ayushjhunjhunwala.com/sitemap.xml
-
-# Block unnecessary paths (if any in the future)
-Disallow: /admin/
-Disallow: /_app/
-Disallow: /api/
-
-# Crawl delay (optional - remove if not needed)
-# Crawl-delay: 1
-
-# Allow search engines to index images
-User-agent: *
+Allow: /blog
+Allow: /writing
+Allow: /reading
 Allow: /images/
 Allow: /lib/Images/
 Allow: /lib/ToolsLogo/
 Allow: /lib/MyRecentWorkImages/
+Disallow: /admin/
+Disallow: /_app/
+Disallow: /api/
+
+Sitemap: https://ayushjhunjhunwala.com/sitemap.xml
