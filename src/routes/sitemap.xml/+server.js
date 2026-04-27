@@ -25,7 +25,7 @@ export async function GET() {
 
   // Static routes with known last-modified dates
   const staticRoutes = [
-    { path: '',           priority: '1.0', changefreq: 'monthly',  lastmod: '2026-04-21' },
+    { path: '/',          priority: '1.0', changefreq: 'monthly',  lastmod: '2026-04-21' },
     { path: '/myworks',   priority: '0.9', changefreq: 'monthly',  lastmod: '2026-04-21' },
     { path: '/contact',   priority: '0.8', changefreq: 'monthly',  lastmod: '2026-04-21' },
     { path: '/blog',      priority: '0.8', changefreq: 'weekly',   lastmod: '2025-09-13' },
