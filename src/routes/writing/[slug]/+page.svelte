@@ -17,7 +17,8 @@
   pageKey="writing"
   overrides={{
     title: `${writing.title} - Writing by Ayush Jhunjhunwala`,
-    description: writing.excerpt
+    description: writing.excerpt,
+    canonical: `/writing/${writing.slug}`
   }}
 />
 

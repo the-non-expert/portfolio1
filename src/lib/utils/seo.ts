@@ -347,16 +347,22 @@ export function mergeSeoConfig(pageKey: string, overrides: Partial<SEOConfig> = 
 /**
  * Generate meta tags for server-side rendering
  */
+function capDescription(text: string): string {
+  if (text.length <= 160) return text;
+  return text.slice(0, 157).trimEnd() + '…';
+}
+
 export function generateMetaTags(config: SEOConfig): Record<string, any> {
+  const description = capDescription(config.description);
   return {
     title: config.title,
-    description: config.description,
+    description,
     keywords: config.keywords,
     canonical: config.canonical,
     openGraph: {
       type: config.ogType || 'website',
       title: config.title,
-      description: config.description,
+      description,
       image: config.ogImage,
       url: config.ogUrl,
       siteName: siteConfig.name
@@ -364,7 +370,7 @@ export function generateMetaTags(config: SEOConfig): Record<string, any> {
     twitter: {
       card: 'summary_large_image',
       title: config.title,
-      description: config.description,
+      description,
       image: config.ogImage,
       creator: siteConfig.twitterHandle
     }

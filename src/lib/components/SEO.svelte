@@ -2,21 +2,22 @@
   import { page } from '$app/stores';
   import { mergeSeoConfig, generateMetaTags } from '$lib/utils/seo';
   import type { SEOConfig } from '$lib/types';
-  
+
   // Props for dynamic SEO configuration
   export let pageKey: string = 'home';
   export let overrides: Partial<SEOConfig> = {};
   export let structuredData: string | null = null;
-  
-  // Generate the SEO configuration
-  $: seoConfig = mergeSeoConfig(pageKey, {
+
+  // Compute once at component init — NOT reactive.
+  // Using $: here would cause Svelte to re-add <svelte:head> tags during
+  // client-side hydration of prerendered pages, creating duplicate meta/canonical
+  // tags that confuse Bing and Google.
+  const seoConfig = mergeSeoConfig(pageKey, {
     ...overrides,
-    // Use current page URL if available
     canonical: overrides.canonical || $page.url.pathname
   });
-  
-  // Generate meta tags
-  $: metaTags = generateMetaTags(seoConfig);
+
+  const metaTags = generateMetaTags(seoConfig);
 </script>
 
 <svelte:head>
