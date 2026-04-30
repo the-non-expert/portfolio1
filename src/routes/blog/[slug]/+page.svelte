@@ -21,7 +21,8 @@
   structuredData={blogSchema}
   overrides={{
     title: `${blog.title} - Ayush Jhunjhunwala`,
-    description: blog.excerpt
+    description: blog.excerpt,
+    canonical: `/blog/${blog.slug}`
   }}
 />
 
