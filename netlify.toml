@@ -1,14 +1,5 @@
-[build]
-  publish = "build"
-
-# Force all traffic from the Netlify subdomain to the custom domain.
-# This is the canonical way in Netlify to do cross-domain redirects;
-# the _redirects file format does not reliably support full-URL "from" fields.
-[[redirects]]
-  from   = "https://ayushportfolio123.netlify.app/*"
-  to     = "https://ayushjhunjhunwala.com/:splat"
-  status = 301
-  force  = true
+# No [build] block — Netlify auto-detects the SvelteKit build command and
+# publish directory correctly. Overriding it breaks the deploy.
 
 # www → non-www (belt-and-suspenders alongside _redirects)
 [[redirects]]
@@ -16,6 +7,11 @@
   to     = "https://ayushjhunjhunwala.com/:splat"
   status = 301
   force  = true
+
+# Note: the ayushportfolio123.netlify.app → ayushjhunjhunwala.com redirect is
+# handled via Netlify Dashboard > Domain Management > Primary domain setting.
+# Do NOT add it here — Netlify rejects redirects that point away from the
+# site's own Netlify subdomain, which also breaks PR deploy previews.
 
 [[headers]]
   for = "/*"
