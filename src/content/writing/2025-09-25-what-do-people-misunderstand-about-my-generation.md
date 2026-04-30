@@ -2,9 +2,7 @@
 title: What do people misunderstand about MY generation?
 slug: what-do-people-misunderstand-about-my-generation
 date: 2025-09-25T19:12:00.000+05:30
-excerpt: Gen Z isn't fickle; we're fighting for authenticity. Our values are
-  misunderstood as flaws, but we're just searching for deeper meaning. What if
-  our "easy" world is actually a paralyzing paradox?
+excerpt: Gen Z isn't fickle — we're fighting for authenticity. Our values are misunderstood as flaws when we're just searching for deeper meaning.
 published: true
 ---
 It is important to talk about some of the myths about me and my peers (Gen Z) with more context and empathy. It's a desert of information, and we're parched for genuine understanding. Empathy is the water we need—it's the only thing that can quench the thirst for a real conversation and wash away the layers of **disappointment and worry** that older generations have about us. 
