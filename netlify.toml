@@ -1,0 +1,25 @@
+[build]
+  publish = "build"
+
+# Force all traffic from the Netlify subdomain to the custom domain.
+# This is the canonical way in Netlify to do cross-domain redirects;
+# the _redirects file format does not reliably support full-URL "from" fields.
+[[redirects]]
+  from   = "https://ayushportfolio123.netlify.app/*"
+  to     = "https://ayushjhunjhunwala.com/:splat"
+  status = 301
+  force  = true
+
+# www → non-www (belt-and-suspenders alongside _redirects)
+[[redirects]]
+  from   = "https://www.ayushjhunjhunwala.com/*"
+  to     = "https://ayushjhunjhunwala.com/:splat"
+  status = 301
+  force  = true
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options        = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy        = "strict-origin-when-cross-origin"

@@ -1,3 +1,5 @@
+export const prerender = true;
+
 import { siteConfig } from '$lib/utils/seo';
 
 /**
