@@ -65,7 +65,7 @@ export const testimonials: Testimonial[] = [
     name: "Neal Jha",
     title: "Founder",
     company: "Humanaissance",
-    testimonial: "I came in with a very specific vision — animations that felt handcrafted, a CMS that gave us total control, a site that told a story. Most developers would have pushed back or simplified it. Ayush leaned in. What he delivered is genuinely one of the most thoughtful digital products I've seen, and the AI systems he built underneath it will keep paying dividends for years.",
+    testimonial: "I have absolutely enjoyed working with Ayush on developing my website. I am a difficult client in that I have constantly evolving needs, lots of ideas and moonshot aspirations. Ayush has worked through all of that diligently, is eager to learn and is able to pushback on ideas that would not serve me well. I continue to work with him and you will not regret working with him on your website.",
     image: "/images/NealJha.png"
   },
   {
