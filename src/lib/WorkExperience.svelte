@@ -68,11 +68,20 @@
               <div class="flex-1 min-w-0">
                 <div class="flex items-start justify-between mb-1">
                   <h3 class="text-base font-medium text-ink leading-tight">{experience.role}</h3>
-                  {#if experience.url}
+                  {#if experience.url && !experience.caseStudy?.slug}
                     <a href={experience.url} target="_blank" rel="noopener noreferrer"
                       class="px-2 py-1 bg-bg text-accent border border-stroke rounded text-xs hover:border-accent transition-colors shrink-0 ml-2"
                       on:click|stopPropagation>
                       View ↗
+                    </a>
+                  {/if}
+                  {#if experience.caseStudy?.slug}
+                    <a
+                      href="/work/{experience.caseStudy.slug}"
+                      class="px-2 py-1 bg-accent text-bg rounded text-xs hover:bg-accent-hover transition-colors shrink-0 ml-1 font-sans"
+                      on:click|stopPropagation
+                    >
+                      Case study →
                     </a>
                   {/if}
                 </div>
@@ -163,11 +172,20 @@
               </div>
 
               <div class="flex items-center gap-3 shrink-0">
-                {#if experience.url}
+                {#if experience.url && !experience.caseStudy?.slug}
                   <a href={experience.url} target="_blank" rel="noopener noreferrer"
                     class="text-xs text-accent hover:text-accent-hover transition-colors hidden md:block"
                     on:click|stopPropagation>
                     View ↗
+                  </a>
+                {/if}
+                {#if experience.caseStudy?.slug}
+                  <a
+                    href="/work/{experience.caseStudy.slug}"
+                    class="text-xs font-sans font-semibold text-accent hover:text-accent-hover transition-colors hidden md:block"
+                    on:click|stopPropagation
+                  >
+                    Case study →
                   </a>
                 {/if}
                 <span class="text-xs text-muted">{selectedId === experience.id ? '↑' : '↓'}</span>

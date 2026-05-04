@@ -108,6 +108,85 @@ export const pageConfigs: Record<string, PageConfig> = {
     ogType: "website",
     canonical: "/writing"
   },
+  'work/toondemy-preschool': {
+    title: 'Preschool Website with SEO & GEO for Toondemy — SvelteKit Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala built a trust-first preschool website with a full SEO and Generative Engine Optimisation strategy for Toondemy Preschool, India.',
+    keywords: [
+      'preschool website developer India',
+      'local business website SEO GEO',
+      'SvelteKit web designer India',
+      'Generative Engine Optimisation local business',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/toondemy-preschool'
+  },
+  'work/om-therapeutics': {
+    title: 'SvelteKit Development for OM Therapeutics — Contract Developer Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala contributed 40% of the codebase on a full-stack SvelteKit platform for a US-based therapeutics company as a contract developer.',
+    keywords: [
+      'SvelteKit contract developer USA',
+      'SvelteKit FastAPI developer',
+      'contract frontend developer SvelteKit',
+      'SvelteKit TypeScript developer',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/om-therapeutics'
+  },
+  'work/aarti-jewellers': {
+    title: 'Live Gold Price Website for Aarti Jewellers — SvelteKit Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala built a bilingual Hindi-English frontend with a live gold and silver price API for a jewellery shop in Cuttack — a 2-month SvelteKit contract.',
+    keywords: [
+      'jewellery website developer India',
+      'bilingual website developer Hindi English',
+      'live gold price API SvelteKit',
+      'SvelteKit frontend developer Cuttack',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/aarti-jewellers'
+  },
+  'work/sikhaid-ngo': {
+    title: 'Donation Tracking Platform for SikhAid NGO — SvelteKit + Razorpay Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala built a full-stack SvelteKit platform with a custom Razorpay webhook payment-tracking algorithm for an Indian NGO — a 3-month contract.',
+    keywords: [
+      'NGO website developer India',
+      'Razorpay webhook integration developer',
+      'SvelteKit Firebase full-stack developer',
+      'donation tracking system developer',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/sikhaid-ngo'
+  },
+  'work/roxford-healthcare': {
+    title: 'Pharmaceutical Web Platform for Roxford Healthcare — SvelteKit Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala designed and developed a complete pharmaceutical web platform as sole developer on a 6-month remote contract for a UK client.',
+    keywords: [
+      'freelance SvelteKit developer UK',
+      'pharmaceutical website developer',
+      'sole developer web contract',
+      'SvelteKit Firestore developer',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/roxford-healthcare'
+  },
+  'work/humanaissance': {
+    title: 'Bespoke Web Platform for Humanaissance — SvelteKit + Claude AI Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala built a custom CMS, Canvas API animations, Claude AI agents, and a full GEO strategy for a Singapore-based client over a 7-month contract.',
+    keywords: [
+      'SvelteKit developer for hire Singapore',
+      'Claude API developer web platform',
+      'custom CMS SvelteKit developer',
+      'Generative Engine Optimisation developer',
+      'Canvas API animation developer',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/humanaissance'
+  },
   blog: {
     title: "Blog - In-depth Articles by Ayush Jhunjhunwala",
     description: "In-depth articles on software engineering, technical leadership, and scalable systems. Real-world experiences, practical insights, and production lessons.",
@@ -167,7 +246,13 @@ export function generatePersonSchema(): Record<string, any> {
       "Uvicorn",
       "Cassandra",
       "MongoDB",
-      "GraphQL"
+      "GraphQL",
+      "SvelteKit Contract Development",
+      "Razorpay Webhook Integration",
+      "Claude API Development",
+      "Generative Engine Optimisation",
+      "Bilingual Website Development",
+      "NGO Website Development"
     ],
     "hasOccupation": {
       "@type": "Occupation",
@@ -320,6 +405,52 @@ export function generateBlogPostingSchema(post: BlogPost): Record<string, any> {
       "@type": "WebPage",
       "@id": `${siteConfig.url}/blog/${post.slug}`
     }
+  };
+}
+
+export function generateCaseStudySchema(entry: any): Record<string, any> {
+  const published = new Date(entry.caseStudy.publishedDate ?? '2026-05-04').toISOString();
+  const pageUrl = `${siteConfig.url}/work/${entry.caseStudy.slug}`;
+  return {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": `${entry.company}: ${entry.caseStudy.technicalHighlight.title}`,
+    "description": entry.caseStudy.brief,
+    "datePublished": published,
+    "dateModified": published,
+    "url": pageUrl,
+    "author": {
+      "@type": "Person",
+      "name": "Ayush Jhunjhunwala",
+      "url": siteConfig.url
+    },
+    "publisher": {
+      "@type": "Person",
+      "name": "Ayush Jhunjhunwala",
+      "url": siteConfig.url
+    },
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": pageUrl
+    },
+    "about": {
+      "@type": "Organization",
+      "name": entry.company
+    },
+    "keywords": entry.technologies.join(', ')
+  };
+}
+
+export function generateBreadcrumbSchema(items: { name: string; url: string }[]): Record<string, any> {
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": items.map((item, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "name": item.name,
+      "item": item.url
+    }))
   };
 }
 

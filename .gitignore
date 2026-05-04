@@ -27,3 +27,6 @@ vite.config.ts.timestamp-*
 
 # OMC tooling
 .omc/
+
+# Superpowers brainstorming session files
+.superpowers/
