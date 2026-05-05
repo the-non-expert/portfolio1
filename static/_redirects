@@ -2,4 +2,4 @@
 https://www.ayushjhunjhunwala.com/* https://ayushjhunjhunwala.com/:splat 301!
 
 # Redirect Netlify subdomain to custom domain (fixes canonical conflict)
-https://ayushportfolio123.netlify.app/* https://ayushjhunjhunwala.com/:splat 301!
+https://ayush-staging.netlify.app/* https://ayushjhunjhunwala.com/:splat 301!

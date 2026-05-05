@@ -8,7 +8,7 @@
   status = 301
   force  = true
 
-# Note: the ayushportfolio123.netlify.app → ayushjhunjhunwala.com redirect is
+# Note: the ayush-staging.netlify.app → ayushjhunjhunwala.com redirect is
 # handled via Netlify Dashboard > Domain Management > Primary domain setting.
 # Do NOT add it here — Netlify rejects redirects that point away from the
 # site's own Netlify subdomain, which also breaks PR deploy previews.
