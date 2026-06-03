@@ -10,6 +10,18 @@ export const actions: Actions = {
   default: async ({ request }) => {
     const data = await request.formData();
 
+    // Honeypot: real users never fill this in — bots do
+    const honeypot = (data.get('website') as string) ?? '';
+    if (honeypot) {
+      return { success: true };
+    }
+
+    // Time gate: reject submissions faster than a human can type (< 3 s)
+    const loadTime = parseInt((data.get('_t') as string) ?? '0', 10);
+    if (loadTime && Date.now() - loadTime < 3000) {
+      return fail(400, { error: 'Please take a moment to fill in your details.' });
+    }
+
     const fullname = (data.get('fullname') as string)?.trim();
     const email = (data.get('email') as string)?.trim();
     const project_type = (data.get('project-type') as string)?.trim() || null;
@@ -17,6 +29,16 @@ export const actions: Actions = {
 
     if (!fullname || !email || !description) {
       return fail(400, { error: 'Please fill in all required fields.' });
+    }
+
+    if (fullname.length > 100) {
+      return fail(400, { error: 'Name is too long.' });
+    }
+    if (email.length > 254) {
+      return fail(400, { error: 'Please enter a valid email address.' });
+    }
+    if (description.length > 5000) {
+      return fail(400, { error: 'Message is too long (max 5000 characters).' });
     }
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

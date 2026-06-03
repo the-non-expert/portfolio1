@@ -3,11 +3,16 @@
   import SEO from "$lib/components/SEO.svelte";
   import FAQ from "$lib/FAQ.svelte";
   import { enhance } from "$app/forms";
+  import { onMount } from "svelte";
   import type { ActionData } from "./$types";
   import { generateFAQSchema } from "$lib/utils/seo";
   import { contactFAQItems } from "$lib/data/faq";
 
+  let loadTime = '';
+
   export let form: ActionData;
+
+  onMount(() => { loadTime = String(Date.now()); });
 
   const contactSchema: string = JSON.stringify([
     {
@@ -97,6 +102,14 @@
         {/if}
 
         <form method="POST" use:enhance class="space-y-5">
+          <!-- Honeypot: hidden from humans, bots fill it in -->
+          <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+            <label for="website">Website</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <!-- Time gate: timestamp set on mount, checked server-side -->
+          <input type="hidden" name="_t" value={loadTime} />
+
           <div class="flex flex-col gap-1.5">
             <label for="fullname" class="text-sm font-medium text-ink">Full name</label>
             <input
