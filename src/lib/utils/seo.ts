@@ -12,7 +12,7 @@ export const siteConfig: SiteConfig = {
   description: "Custom websites, Android apps, and software for small businesses. Upfront pricing, one-time payment, no subscriptions or hidden charges — you own the code.",
   url: "https://ayushjhunjhunwala.com",
   author: "Ayush Jhunjhunwala",
-  image: "/images/Ayushjhunjhunwala.png",
+  image: "/images/og-card.png",
   twitterHandle: "@ayush_jhunjhunwala",
   keywords: [
     "custom website development for small business",
