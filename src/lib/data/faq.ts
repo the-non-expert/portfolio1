@@ -11,7 +11,19 @@ export const homeFAQItems: FAQItem[] = [
   },
   {
     question: "What does Ayush Jhunjhunwala build?",
-    answer: "Production-grade web applications across the full stack — Python FastAPI APIs, SvelteKit and React frontends, PostgreSQL and MongoDB databases, Shopify systems, and AWS-deployed platforms with GitHub Actions CI/CD pipelines. Projects span e-commerce, healthcare, NGO, and AI sectors. Every system is built to be maintained, not just launched."
+    answer: "Custom websites, Android apps, and software for small businesses — Python FastAPI APIs, SvelteKit and React frontends, Flutter Android apps, QR code loyalty systems, PostgreSQL and MongoDB databases, Shopify systems, and AWS-deployed platforms with GitHub Actions CI/CD pipelines. Projects span e-commerce, healthcare, NGO, pharma, and AI sectors. Every system is built to be maintained, not just launched."
+  },
+  {
+    question: "Do I pay monthly fees or a subscription for a custom website?",
+    answer: "No. Every project is a one-time build with a one-time payment — there is no platform subscription, no per-month builder fee, and no lock-in. The only recurring costs are third-party essentials like your domain name and hosting, which are registered in your name and disclosed upfront. You own the code, the design, and every account involved."
+  },
+  {
+    question: "How much does a custom website or app cost in India?",
+    answer: "It depends on scope: a focused business website costs far less than a full application with payments, dashboards, or a mobile app. The price is discussed and agreed upfront before any work begins — a fixed quote with no hidden charges, no surprise add-ons, and no recurring platform fees. Contact Ayush with your idea for a clear scope and price."
+  },
+  {
+    question: "Who owns the code and the website after the project?",
+    answer: "The client does — 100%. Code is handed over in the client's own repository, hosting and domain accounts are in the client's name, and handover documentation is included so any developer can maintain the system later. There is no dependency on Ayush or any proprietary platform to keep the site running."
   },
   {
     question: "Is Ayush Jhunjhunwala available for new projects?",
@@ -35,7 +47,15 @@ export const contactFAQItems: FAQItem[] = [
   },
   {
     question: "What kind of projects do you take on?",
-    answer: "Full-stack web development contracts, technical leadership roles, Shopify system builds, and architecture consulting. On the technical side: Python FastAPI backends, SvelteKit or React frontends, PostgreSQL databases, AWS deployments, and CI/CD pipelines. I also implement SEO and Generative Engine Optimisation (GEO) packages for web projects."
+    answer: "Custom websites, Android apps, and software for small businesses — plus full-stack web development contracts, technical leadership roles, Shopify system builds, and architecture consulting. On the technical side: Python FastAPI backends, SvelteKit or React frontends, Flutter Android apps, PostgreSQL databases, AWS deployments, and CI/CD pipelines. I also implement SEO and Generative Engine Optimisation (GEO) packages for web projects."
+  },
+  {
+    question: "How is pricing decided? Are there any hidden charges?",
+    answer: "Pricing is discussed openly before any work begins. You get a fixed quote based on agreed scope — no hidden charges, no surprise add-ons, and no recurring platform fees. If scope changes mid-project, the price change is discussed and agreed before the work happens, never after. The only ongoing costs are third-party essentials like your domain and hosting, registered in your own name."
+  },
+  {
+    question: "Do I have to pay monthly to keep my website or app running?",
+    answer: "No. The build is a one-time payment and you own everything — code, design, and accounts. There is no subscription to me or to any proprietary platform. Most projects run on free or low-cost hosting tiers (Netlify, Supabase), and where paid infrastructure is genuinely needed, it is in your account and disclosed before the project starts."
   },
   {
     question: "What does a typical engagement look like?",
