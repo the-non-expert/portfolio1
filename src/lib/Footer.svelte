@@ -11,6 +11,7 @@
   const caseStudyLinks = [
     { href: '/work/piipharma-loyalty', label: 'PiiPharma Loyalty' },
     { href: '/work/kiraya-app', label: 'Kiraya App' },
+    { href: '/work/badasha-ticketing', label: 'Badasha Ticketing' },
     { href: '/work/humanaissance', label: 'Humanaissance' },
     { href: '/work/toondemy-preschool', label: 'Toondemy Preschool' },
     { href: '/work/aarti-jewellers', label: 'Aarti Jewellers' },

@@ -19,6 +19,7 @@ import toondemyIcon from "$lib/Images/ToondemyLogo.png";
 import aartiIcon from "$lib/Images/AartiJewellersLogo.png";
 import piiPharmaIcon from "$lib/Images/PiiPharmaLogo.png";
 import kirayaIcon from "$lib/Images/KirayaLogo.png";
+import badashaIcon from "$lib/Images/BadashaLogo.png";
 const roxfordIcon = svelteIcon; // TODO: Replace with actual Roxford Healthcare logo
 
 export const workExperience = [
@@ -135,6 +136,64 @@ export const workExperience = [
         {
           question: 'Can Ayush build a custom Android app for my business?',
           answer: 'Yes — Ayush Jhunjhunwala builds custom Android apps end to end: product design, Flutter development, backend, and launch assets. Visit the contact page to discuss your idea and get an upfront scope and price.'
+        }
+      ]
+    }
+  },
+  {
+    id: 19,
+    role: "Full Stack Developer",
+    company: "Badasha Ticketing Platform (Contract)",
+    duration: "February 2026 - Present",
+    location: "Remote",
+    countryFlag: "🇮🇳",
+    logo: badashaIcon,
+    technologies: ["SvelteKit", "Svelte 5", "TypeScript", "Tailwind CSS", "FastAPI", "PostgreSQL", "Alembic"],
+    achievements: [
+      "Full ticketing platform for a touring live magic show",
+      "Interactive seat map with live seat selection and hold timer",
+      "Four-step checkout flow with 5-minute booking session",
+      "Admin wizard for shows, runs, and multi-city schedules",
+      "FastAPI + PostgreSQL backend with versioned Alembic migrations"
+    ],
+    description:
+      "Building a complete online ticket booking system for Badasha, a touring live magic show. Audiences browse shows and pick their exact seats on an interactive seat map, then book through a timed four-step checkout. The production team manages shows, runs, and multi-city schedules through an admin wizard, backed by a FastAPI and PostgreSQL backend.",
+    caseStudy: {
+      slug: 'badasha-ticketing',
+      myRole: 'Full-stack developer — frontend, backend, and data model',
+      brief: 'Since February 2026, Ayush Jhunjhunwala has been building a custom event ticketing website for Badasha, a touring magic and illusion show. Instead of paying per-ticket commission to a marketplace ticketing platform, the production gets its own online ticket booking system: an interactive seat map where the audience picks exact seats, a timed checkout flow, and an admin wizard for managing shows and multi-city tour schedules — all on a SvelteKit frontend with a FastAPI and PostgreSQL backend.',
+      features: [
+        'Interactive seat map — the audience selects exact seats, not just a quantity',
+        'Five-minute booking session timer that holds selected seats during checkout',
+        'Four-step checkout flow from seat selection to confirmation',
+        'Admin wizard for creating shows, runs, and multi-city tour schedules',
+        'Booking history and role-based access for audience and admin accounts',
+        'FastAPI + PostgreSQL backend with versioned Alembic schema migrations',
+        'Soft-delete data integrity — shows and bookings are archived, never destroyed'
+      ],
+      technicalHighlight: {
+        title: 'A Seat Map Built for a Touring Show',
+        body: 'Most ticketing tools assume one fixed venue. Badasha tours — the same production plays different cities on different dates. The platform models this as shows, runs, and time slots, so each city gets its own schedule while the seat map and checkout pipeline stay identical. During checkout, selected seats are held for five minutes with a visible session timer, preventing the classic double-booking race where two buyers grab the same seat. The data model enforces integrity end to end: every schema change ships as a versioned Alembic migration, and nothing is ever hard-deleted.'
+      },
+      outcome: 'The platform is in final backend integration ahead of public launch. For the production, the economics are the point: marketplace ticketing platforms take a commission on every ticket sold, while a custom-owned ticket booking system is a one-time build — the savings compound with every show on the tour.',
+      publishedDate: '2026-06-11',
+      relatedSlugs: ['piipharma-loyalty', 'sikhaid-ngo'],
+      faq: [
+        {
+          question: 'What is the Badasha ticketing platform?',
+          answer: 'A custom online ticket booking system built by Ayush Jhunjhunwala for Badasha, a touring live magic show. It includes an interactive seat map with live seat selection, a timed four-step checkout, booking history, and an admin wizard for managing shows and multi-city tour schedules.'
+        },
+        {
+          question: 'Why build a custom ticketing system instead of using a ticketing marketplace?',
+          answer: 'Marketplace ticketing platforms charge a commission on every ticket sold, forever. A custom event ticketing website is a one-time build that the production owns outright — no per-ticket fees, full control over branding and the booking experience, and direct ownership of customer data.'
+        },
+        {
+          question: 'How does the seat booking system prevent double bookings?',
+          answer: 'When a buyer selects seats, the system holds them for a five-minute booking session with a visible countdown timer. If checkout completes, the seats are confirmed; if the session expires, they are released automatically. This prevents two buyers from purchasing the same seat at the same time.'
+        },
+        {
+          question: 'How much does it cost to develop a ticket booking system?',
+          answer: 'It depends on scope — seat maps, payment integration, admin tooling, and multi-venue scheduling all affect the build. As with every project, Ayush Jhunjhunwala discusses scope and gives a fixed, upfront price before work begins, with no hidden charges and no recurring platform fees. Visit the contact page to discuss your event.'
         }
       ]
     }

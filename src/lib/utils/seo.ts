@@ -210,6 +210,20 @@ export const pageConfigs: Record<string, PageConfig> = {
     ogType: 'article',
     canonical: '/work/kiraya-app'
   },
+  'work/badasha-ticketing': {
+    title: 'Online Ticket Booking System with Seat Selection — Badasha Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala is building a custom event ticketing website for a touring magic show — interactive seat map, timed checkout, and multi-city tour scheduling with no per-ticket commission.',
+    keywords: [
+      'online ticket booking system',
+      'ticket booking app development',
+      'event ticketing website design',
+      'seat booking system',
+      'ticketing system development',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/badasha-ticketing'
+  },
   blog: {
     title: "Blog - In-depth Articles by Ayush Jhunjhunwala",
     description: "In-depth articles on software engineering, technical leadership, and scalable systems. Real-world experiences, practical insights, and production lessons.",
