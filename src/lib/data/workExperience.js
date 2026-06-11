@@ -17,9 +17,128 @@ import sikhaidIcon from "$lib/Images/sikhaidLogo.png";
 import humanaisssanceIcon from "$lib/Images/Humanaisance.png";
 import toondemyIcon from "$lib/Images/ToondemyLogo.png";
 import aartiIcon from "$lib/Images/AartiJewellersLogo.png";
+import piiPharmaIcon from "$lib/Images/PiiPharmaLogo.png";
+import kirayaIcon from "$lib/Images/KirayaLogo.png";
 const roxfordIcon = svelteIcon; // TODO: Replace with actual Roxford Healthcare logo
 
 export const workExperience = [
+  {
+    id: 17,
+    role: "Full Stack Developer",
+    company: "PiiPharma Loyalty Program (Contract)",
+    duration: "May 2026 - Present",
+    location: "India",
+    countryFlag: "🇮🇳",
+    logo: piiPharmaIcon,
+    technologies: ["SvelteKit", "TypeScript", "Tailwind CSS", "Supabase", "QR Scanning", "Web Workers", "Cashfree Payouts", "WhatsApp OTP"],
+    achievements: [
+      "QR code loyalty system replacing a manual WhatsApp + Excel workflow",
+      "In-browser QR coupon scanning with Web Worker decoding",
+      "OTP login via WhatsApp Business API with SMS fallback",
+      "Admin claim review dashboard with bulk UPI payout CSV export",
+      "Per-product coupon designer with live preview and duplicate-claim rejection"
+    ],
+    description:
+      "Building a QR code based retailer loyalty program for PiiPharma, a pharmaceutical company. Retailers scan QR-coded coupons from their phone browser — no app install — log in via WhatsApp OTP, and submit cashback claims. An admin dashboard reviews claims and exports Cashfree-compatible CSVs for bulk UPI payouts, replacing a fully manual WhatsApp-to-Excel-to-Cashfree workflow.",
+    url: "https://loyalty.piipharma.com",
+    caseStudy: {
+      slug: 'piipharma-loyalty',
+      myRole: 'Sole developer — product design, full-stack build, and rollout',
+      brief: 'Since May 2026, Ayush Jhunjhunwala has been building a QR code loyalty program for PiiPharma, an Indian pharmaceutical company. Their retailer cashback program previously ran entirely on WhatsApp messages, Excel sheets, and manual Cashfree uploads. The replacement is a mobile-first web portal where retailers scan QR-coded coupons, log in with a WhatsApp OTP, and submit claims — while an admin reviews each claim and exports a bulk UPI payout file in one click.',
+      features: [
+        'In-browser QR coupon scanning — works on low-end Android phones, no app install',
+        'Web Worker based QR decoding so scanning never blocks the camera feed',
+        'OTP login via WhatsApp Business API with SMS fallback',
+        'Automatic duplicate-claim rejection by coupon serial number',
+        'Admin dashboard: claim review queue with photo, serial, retailer, and product',
+        'Cashfree-compatible CSV export for bulk UPI cashback payouts',
+        'Per-product coupon designer with live preview for print-ready QR coupons'
+      ],
+      technicalHighlight: {
+        title: 'QR Scanning in the Browser, Built for Low-End Phones',
+        body: 'The retailers in this loyalty program are small pharmacy shops, often on budget Android phones. Instead of forcing an app download, Ayush Jhunjhunwala built the QR coupon scanner directly into the mobile web portal: the camera feed runs in the page while a dedicated Web Worker decodes QR frames off the main thread, keeping the scanner smooth even on weak hardware. Combined with serial-number deduplication, this turned a fraud-prone manual coupon process into a self-serve digital loyalty system with no installation barrier.'
+      },
+      outcome: 'The portal at loyalty.piipharma.com is replacing a fully manual WhatsApp → Excel → Cashfree workflow. Coupon claims that previously lived in chat threads now flow through a single review queue, and cashback payouts are exported in one click — with duplicate claims rejected automatically before they ever reach the admin.',
+      publishedDate: '2026-06-11',
+      relatedSlugs: ['kiraya-app', 'sikhaid-ngo'],
+      faq: [
+        {
+          question: 'What is a QR code loyalty program?',
+          answer: 'A QR code loyalty program lets a business reward customers or retailers through scannable QR codes instead of paper records. For PiiPharma, each coupon carries a unique QR code: retailers scan it from their phone browser, the claim is verified against duplicates, and approved cashback is paid out via UPI — no app install required.'
+        },
+        {
+          question: 'Can a QR code loyalty system work for small retailers on basic phones?',
+          answer: 'Yes — this system was specifically built for small pharmacy retailers on low-end Android phones. Scanning happens in the mobile browser with Web Worker decoding for smooth performance, and login uses WhatsApp OTP, which retailers already know how to use.'
+        },
+        {
+          question: 'How much does a custom loyalty program app cost?',
+          answer: 'A custom loyalty program is a one-time build with no per-month platform subscription — you own the code. Cost depends on scope (scanning, payouts, admin tooling). Ayush Jhunjhunwala discusses scope and pricing upfront before any work begins; visit the contact page to talk through your use case.'
+        },
+        {
+          question: 'How are loyalty payouts handled in this system?',
+          answer: 'Admins review claims in a dashboard and export a Cashfree-compatible CSV to trigger bulk UPI payouts to retailers. The system works with the company’s existing payment account — no new payment vendor or recurring platform fees were introduced.'
+        }
+      ]
+    }
+  },
+  {
+    id: 18,
+    role: "Android App Developer & Product Designer",
+    company: "Kiraya (Own Product)",
+    duration: "April 2026 - Present",
+    location: "India",
+    countryFlag: "🇮🇳",
+    logo: kirayaIcon,
+    technologies: ["Flutter", "Dart", "Supabase", "Android", "go_router", "Provider", "Deep Links"],
+    achievements: [
+      "Android rental management app for landlords and property managers",
+      "QR code property showcases — scan at the gate, view the flat instantly",
+      "Role-based experience: landlord portfolio tools and a tenant portal",
+      "Tenant invites, inquiry tracking, and property-wide notices",
+      "Full Supabase backend with auth, storage, and row-level security"
+    ],
+    description:
+      "Designing and building Kiraya, an Android-first rental management app made with Flutter. Landlords manage their property and flat portfolio, generate shareable showcase links and printable QR codes for vacant flats, and track tenant inquiries — while tenants get their own portal for notices and flat details.",
+    caseStudy: {
+      slug: 'kiraya-app',
+      myRole: 'Product owner, designer, and sole developer',
+      brief: 'Since April 2026, Ayush Jhunjhunwala has been building Kiraya, an Android rental management app for Indian landlords and property managers. The core insight: vacant flats are still advertised with paper signs and word of mouth. Kiraya gives every flat a shareable showcase link and a printable QR code — a renter scans the code at the property gate and instantly sees photos, rent, amenities, and a way to inquire.',
+      features: [
+        'Property and flat portfolio management — types, floors, rent, amenities, photos',
+        'Instant showcase links and printable QR codes for every vacant flat',
+        'Inquiry tracking so landlords never lose a prospective tenant',
+        'Tenant invites with a dedicated tenant portal for notices and flat details',
+        'Property-wide notices pushed from landlord to all tenants',
+        'Flutter + Supabase stack: auth, storage, and PostgreSQL with row-level security',
+        'Deep links so shared showcase links open directly in the app'
+      ],
+      technicalHighlight: {
+        title: 'QR Code Showcases for Physical Spaces',
+        body: 'Kiraya bridges the physical and digital rental market. Every flat gets an 8-character unique code, a shareable web link, and a generated QR code that landlords can print and stick at the property entrance. A prospective tenant scans the code and lands on the flat’s full showcase — photos, rent, size, amenities — and can inquire on the spot. Deep link handling routes app users straight to the right screen, while non-users still get the full showcase in the browser.'
+      },
+      outcome: 'Kiraya is in active development as an Android-first product, with the landlord portfolio tools, QR showcase generation, tenant invites, and notices flows built on a production Supabase backend. It doubles as a live demonstration of end-to-end Android app development — from product design and Flutter UI to backend schema and Play Store assets.',
+      publishedDate: '2026-06-11',
+      relatedSlugs: ['piipharma-loyalty', 'toondemy-preschool'],
+      faq: [
+        {
+          question: 'What is the Kiraya app?',
+          answer: 'Kiraya is an Android rental management app built with Flutter by Ayush Jhunjhunwala. Landlords manage their rental portfolio, generate QR code showcases for vacant flats, track tenant inquiries, and send notices — while tenants get their own portal.'
+        },
+        {
+          question: 'How much does Android app development cost in India?',
+          answer: 'Android app development cost depends on scope — screens, backend, integrations, and ongoing needs. As an independent developer, Ayush Jhunjhunwala builds Android apps as one-time engagements with upfront pricing discussion and no hidden charges or forced subscriptions: you own the code and the backend.'
+        },
+        {
+          question: 'Why Flutter for an Android-only app?',
+          answer: 'Flutter delivers native-feeling Android UI with fast iteration, and keeps the door open for iOS and web later from the same codebase. For Kiraya it pairs with Supabase for auth, storage, and a PostgreSQL database with row-level security — a full product stack with zero server maintenance.'
+        },
+        {
+          question: 'Can Ayush build a custom Android app for my business?',
+          answer: 'Yes — Ayush Jhunjhunwala builds custom Android apps end to end: product design, Flutter development, backend, and launch assets. Visit the contact page to discuss your idea and get an upfront scope and price.'
+        }
+      ]
+    }
+  },
   {
     id: 13,
     role: "Full Stack Developer & Context Engineer",

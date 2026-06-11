@@ -29,6 +29,8 @@ export async function GET() {
   const staticRoutes = [
     { path: '/',                        priority: '1.0', changefreq: 'monthly', lastmod: '2026-04-21' },
     { path: '/myworks',                 priority: '0.9', changefreq: 'monthly', lastmod: '2026-04-21' },
+    { path: '/work/piipharma-loyalty',  priority: '0.9', changefreq: 'monthly', lastmod: '2026-06-11' },
+    { path: '/work/kiraya-app',         priority: '0.9', changefreq: 'monthly', lastmod: '2026-06-11' },
     { path: '/work/toondemy-preschool',  priority: '0.9', changefreq: 'monthly', lastmod: '2026-05-04' },
     { path: '/work/om-therapeutics',     priority: '0.9', changefreq: 'monthly', lastmod: '2026-05-04' },
     { path: '/work/aarti-jewellers',     priority: '0.9', changefreq: 'monthly', lastmod: '2026-05-04' },

@@ -187,6 +187,34 @@ export const pageConfigs: Record<string, PageConfig> = {
     ogType: 'article',
     canonical: '/work/humanaissance'
   },
+  'work/piipharma-loyalty': {
+    title: 'QR Code Loyalty Program for Pharma Retailers — PiiPharma Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala is building a QR code loyalty system for PiiPharma — in-browser coupon scanning, WhatsApp OTP login, and bulk UPI cashback payouts replacing a manual workflow.',
+    keywords: [
+      'qr code loyalty program',
+      'qr code loyalty system',
+      'loyalty program app for small business',
+      'loyalty program for retail store',
+      'custom loyalty program developer India',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/piipharma-loyalty'
+  },
+  'work/kiraya-app': {
+    title: 'Kiraya — Android Rental Management App with QR Showcases — Flutter Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala designed and built Kiraya, an Android-first Flutter app where landlords manage rentals and print QR code showcases that renters scan at the property gate.',
+    keywords: [
+      'custom android app developers india',
+      'android app development cost in india',
+      'flutter app developer india',
+      'rental property management app',
+      'qr code property showcase',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/kiraya-app'
+  },
   blog: {
     title: "Blog - In-depth Articles by Ayush Jhunjhunwala",
     description: "In-depth articles on software engineering, technical leadership, and scalable systems. Real-world experiences, practical insights, and production lessons.",

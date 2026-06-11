@@ -1,0 +1,21 @@
+keyword,cluster,intent,target_page,autocomplete_validated,difficulty,baseline_impressions_90d,baseline_position,notes
+custom website development for small business,custom-web,commercial,/,yes,medium,0,none,autocomplete steers to cost queries — pair with cost content
+custom website development cost in india,pricing,commercial,/contact,yes,medium,0,none,strong cost intent; agencies rank; FAQ schema opportunity
+one time payment website,pricing,commercial,/,yes,medium,0,none,autocompletes to 'builder' — differentiate with custom-dev angle
+website without monthly fee,pricing,commercial,/contact,yes,medium,0,none,validated variant of 'no subscription' positioning
+website builder without monthly fee,pricing,commercial,/blog (comparison post),yes,medium,0,none,target via comparison/educational post not homepage
+custom software development for small businesses,custom-software,commercial,/myworks,yes,medium-hard,0,none,plural form is the validated phrase
+android app development cost in india,apps,commercial,/work/kiraya-app,yes,medium,0,none,case study added 2026-06-11 (PR pending)
+custom android app developers,apps,commercial,/work/kiraya-app,yes,hard,0,none,geo-variants dominate; use 'india' qualifier
+qr code loyalty program,loyalty,commercial,/work/piipharma-loyalty,yes,hard,0,none,SaaS-dominated head term; case study + how-to post
+qr code loyalty program free,loyalty,commercial,/blog (how-it-works post),yes,medium,0,none,high-volume variant; educational angle
+qr code loyalty system,loyalty,commercial,/work/piipharma-loyalty,yes,medium,0,none,validated; slightly less SaaS-crowded than 'program'
+loyalty program app for small business,loyalty,commercial,/work/piipharma-loyalty,yes,medium,0,none,validated exact phrase
+digital loyalty card for small business,loyalty,commercial,/blog (how-to post),yes,medium,0,none,validated; how-to content angle
+loyalty program for retail store,loyalty,commercial,/work/piipharma-loyalty,yes,medium,0,none,validated exact phrase
+freelance web developer india,brand-local,commercial,/,yes,hard,0,none,directory-dominated but core identity term
+preschool website design,industry,commercial,/work/toondemy-preschool,yes,medium,0,none,page already indexed; sharpen title to match
+jewellery website design,industry,commercial,/work/aarti-jewellers,yes,medium,0,none,page already indexed; add live-gold-price differentiator
+ngo website development,industry,commercial,/work/sikhaid-ngo,yes,medium,0,none,'company in india' variant validated
+ngo website development company in india,industry,commercial,/work/sikhaid-ngo,yes,medium,0,none,longer validated variant; winnable
+ayush jhunjhunwala,brand-local,navigational,/,yes,easy,30,5.5,only query with current impressions; goal: position 1-3
