@@ -24,7 +24,6 @@
   <!-- Primary Meta Tags -->
   <title>{metaTags.title}</title>
   <meta name="description" content={metaTags.description} />
-  <meta name="keywords" content={metaTags.keywords} />
   <link rel="canonical" href={seoConfig.canonical} />
   
   <!-- Open Graph / Facebook -->

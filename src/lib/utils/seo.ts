@@ -104,8 +104,8 @@ export const pageConfigs: Record<string, PageConfig> = {
     canonical: "/writing"
   },
   'work/toondemy-preschool': {
-    title: 'Preschool Website with SEO & GEO for Toondemy — SvelteKit Case Study | Ayush Jhunjhunwala',
-    description: 'How Ayush Jhunjhunwala built a trust-first preschool website with a full SEO and Generative Engine Optimisation strategy for Toondemy Preschool, India.',
+    title: 'Preschool Website Design with SEO & GEO — Toondemy Case Study | Ayush Jhunjhunwala',
+    description: 'A preschool website design case study: how Ayush Jhunjhunwala built a trust-first site with a full SEO and Generative Engine Optimisation strategy for Toondemy Preschool, India.',
     keywords: [
       'preschool website developer India',
       'local business website SEO GEO',
@@ -130,8 +130,8 @@ export const pageConfigs: Record<string, PageConfig> = {
     canonical: '/work/om-therapeutics'
   },
   'work/aarti-jewellers': {
-    title: 'Live Gold Price Website for Aarti Jewellers — SvelteKit Case Study | Ayush Jhunjhunwala',
-    description: 'How Ayush Jhunjhunwala built a bilingual Hindi-English frontend with a live gold and silver price API for a jewellery shop in Cuttack — a 2-month SvelteKit contract.',
+    title: 'Jewellery Website Design with Live Gold Price — Aarti Jewellers Case Study | Ayush Jhunjhunwala',
+    description: 'A jewellery website design case study: bilingual Hindi-English frontend with a live gold and silver price API for a shop in Cuttack — a 2-month SvelteKit contract by Ayush Jhunjhunwala.',
     keywords: [
       'jewellery website developer India',
       'bilingual website developer Hindi English',
@@ -143,8 +143,8 @@ export const pageConfigs: Record<string, PageConfig> = {
     canonical: '/work/aarti-jewellers'
   },
   'work/sikhaid-ngo': {
-    title: 'Donation Tracking Platform for SikhAid NGO — SvelteKit + Razorpay Case Study | Ayush Jhunjhunwala',
-    description: 'How Ayush Jhunjhunwala built a full-stack SvelteKit platform with a custom Razorpay webhook payment-tracking algorithm for an Indian NGO — a 3-month contract.',
+    title: 'NGO Website Development in India with Donation Tracking — SikhAid Case Study | Ayush Jhunjhunwala',
+    description: 'An NGO website development case study from India: full-stack SvelteKit platform with a custom Razorpay webhook payment-tracking algorithm, built by Ayush Jhunjhunwala on a 3-month contract.',
     keywords: [
       'NGO website developer India',
       'Razorpay webhook integration developer',
