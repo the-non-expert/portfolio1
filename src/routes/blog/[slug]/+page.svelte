@@ -22,7 +22,8 @@
   overrides={{
     title: `${blog.title} - Ayush Jhunjhunwala`,
     description: blog.excerpt,
-    canonical: `/blog/${blog.slug}`
+    canonical: `/blog/${blog.slug}`,
+    ogType: 'article'
   }}
 />
 
@@ -127,5 +128,11 @@
   :global(.prose li) { @apply mb-2 list-disc text-ink; }
   :global(.prose strong) { @apply font-semibold text-ink; }
   :global(.prose code) { @apply bg-surface px-2 py-0.5 rounded text-sm text-ink; }
+  :global(.prose em) { @apply italic; }
+  :global(.prose a) { @apply text-accent underline underline-offset-2 hover:text-accent-hover; }
+  :global(.prose table) { @apply w-full mb-6 border-collapse text-sm font-sans; }
+  :global(.prose thead) { @apply bg-surface; }
+  :global(.prose th) { @apply border border-stroke px-4 py-3 text-left font-semibold text-ink align-top; }
+  :global(.prose td) { @apply border border-stroke px-4 py-3 text-ink align-top leading-relaxed; }
   .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 </style>

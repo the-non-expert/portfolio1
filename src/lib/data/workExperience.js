@@ -515,7 +515,7 @@ export const workExperience = [
     ],
     description:
       "Designed and developed a comprehensive web platform for showcasing pharmaceutical products online. Served as the sole developer managing end-to-end development from frontend UI/UX to backend integration and database management with Firestore.",
-    url: "https://www.roxfordhealthcare.com",
+    // No url: site is being shut down (company sold) — case study only, no live link
     caseStudy: {
       slug: 'roxford-healthcare',
       myRole: 'Sole developer on this project',

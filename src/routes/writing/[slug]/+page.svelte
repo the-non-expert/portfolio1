@@ -18,7 +18,8 @@
   overrides={{
     title: `${writing.title} - Writing by Ayush Jhunjhunwala`,
     description: writing.excerpt,
-    canonical: `/writing/${writing.slug}`
+    canonical: `/writing/${writing.slug}`,
+    ogType: 'article'
   }}
 />
 
