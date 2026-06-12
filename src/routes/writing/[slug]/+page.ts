@@ -5,9 +5,11 @@ export const prerender = true;
 
 export async function entries() {
   const modules = import.meta.glob('/src/content/writing/*.md', { eager: true }) as Record<string, any>;
-  return Object.entries(modules).map(([path, mod]) => ({
-    slug: mod.metadata?.slug || path.split('/').pop()?.replace('.md', '') || ''
-  }));
+  return Object.entries(modules)
+    .filter(([, mod]) => mod.metadata?.published !== false)
+    .map(([path, mod]) => ({
+      slug: mod.metadata?.slug || path.split('/').pop()?.replace('.md', '') || ''
+    }));
 }
 
 export async function load({ params }: { params: { slug: string } }) {
