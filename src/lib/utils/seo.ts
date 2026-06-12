@@ -8,23 +8,19 @@ import type { SiteConfig, PageConfig, SEOConfig } from '../types';
 // Site-wide SEO configuration
 export const siteConfig: SiteConfig = {
   name: "Ayush Jhunjhunwala Portfolio",
-  title: "Ayush Jhunjhunwala - Full-Stack Developer & Tech Enthusiast | Python, SvelteKit, AWS",
-  description: "Full-stack developer and interim COO specializing in Python FastAPI, SvelteKit, and AWS. Building scalable systems with proven team leadership.",
+  title: "Ayush Jhunjhunwala — Custom Websites, Apps & Software | One-Time Payment, No Subscriptions",
+  description: "Custom websites, Android apps, and software for small businesses. Upfront pricing, one-time payment, no subscriptions or hidden charges — you own the code.",
   url: "https://ayushjhunjhunwala.com",
   author: "Ayush Jhunjhunwala",
-  image: "/images/Ayushjhunjhunwala.png",
+  image: "/images/og-card.png",
   twitterHandle: "@ayush_jhunjhunwala",
   keywords: [
-    "Full Stack Developer Python FastAPI",
-    "SvelteKit Python Developer India",
-    "Tech Lead Full Stack Developer",
-    "AWS CI CD Python Developer",
-    "PostgreSQL Python API Developer",
-    "Full Stack Developer Leadership Experience",
-    "Python FastAPI SvelteKit Expert",
-    "Interim COO Developer",
-    "Full Stack Tech Enthusiast",
-    "Python AWS Developer Cuttack",
+    "custom website development for small business",
+    "custom software development for small businesses",
+    "one time payment website",
+    "website without monthly fee",
+    "custom android app developers india",
+    "freelance web developer india",
     "Ayush Jhunjhunwala"
   ]
 };
@@ -32,46 +28,45 @@ export const siteConfig: SiteConfig = {
 // Page-specific SEO configurations
 export const pageConfigs: Record<string, PageConfig> = {
   home: {
-    title: "Ayush Jhunjhunwala — Full-Stack Developer | SvelteKit · FastAPI · AWS",
-    description: "Tech leader and full-stack developer building scalable Python FastAPI backends, responsive SvelteKit frontends, and AWS-deployed systems.",
+    title: "Custom Websites & Apps — One-Time Payment, No Subscriptions | Ayush Jhunjhunwala",
+    description: "Custom website and app development for small businesses. Pricing discussed upfront before any work begins, no monthly fees or hidden charges — you own 100% of the code.",
     keywords: [
-      "Full Stack Developer Python FastAPI",
-      "Tech Lead Full Stack Developer",
-      "Python FastAPI SvelteKit Developer",
-      "AWS CI CD Python Developer",
-      "Interim COO Developer",
-      "Full Stack Tech Enthusiast India",
-      "Python PostgreSQL Developer Cuttack"
+      "custom website development for small business",
+      "one time payment website",
+      "website without monthly fee",
+      "custom software development for small businesses",
+      "freelance web developer india",
+      "custom android app developers india",
+      "Ayush Jhunjhunwala"
     ],
     ogType: "website",
     canonical: "/"
   },
   works: {
-    title: "Works - Ayush Jhunjhunwala",
-    description: "Production-grade projects featuring Python FastAPI APIs, SvelteKit frontends, PostgreSQL, and AWS CI/CD deployments with team leadership.",
+    title: "Works — Custom Websites, Apps & Software for Small Businesses | Ayush Jhunjhunwala",
+    description: "Real client projects: custom websites, Android apps, QR loyalty systems, and donation platforms — each delivered as a one-time build the client fully owns.",
     keywords: [
-      "Python FastAPI Projects",
-      "SvelteKit Full Stack Projects", 
-      "AWS CI CD Portfolio",
-      "PostgreSQL Python Projects",
-      "Tech Lead Developer Portfolio",
-      "Full Stack System Architecture",
-      "Production Grade Web Applications"
+      "custom software development for small businesses",
+      "custom website development for small business",
+      "qr code loyalty system",
+      "custom android app developers india",
+      "ngo website development",
+      "jewellery website design",
+      "preschool website design"
     ],
     ogType: "website",
     canonical: "/myworks"
   },
   contact: {
-    title: "Hire Me - Ayush Jhunjhunwala",
-    description: "Available for full-stack development and technical leadership. Expert in Python FastAPI, SvelteKit, AWS, and team management. Interim COO experience.",
+    title: "Hire Me — Upfront Pricing, No Hidden Charges | Ayush Jhunjhunwala",
+    description: "Get a clear, upfront price for your custom website or app before any work begins. One-time payment, no subscriptions, no hidden charges — typical reply within 24 hours.",
     keywords: [
-      "Hire Full Stack Tech Enthusiast",
-      "Python FastAPI Developer for Hire",
-      "SvelteKit Backend Developer",
-      "AWS CI CD Developer",
-      "Technical Leadership Consultant",
-      "Full Stack Developer with COO Experience",
-      "Python PostgreSQL Developer India"
+      "custom website development cost in india",
+      "website without monthly fee",
+      "one time payment website",
+      "android app development cost in india",
+      "hire freelance web developer india",
+      "custom software development for small businesses"
     ],
     ogType: "website",
     canonical: "/contact"
@@ -109,8 +104,8 @@ export const pageConfigs: Record<string, PageConfig> = {
     canonical: "/writing"
   },
   'work/toondemy-preschool': {
-    title: 'Preschool Website with SEO & GEO for Toondemy — SvelteKit Case Study | Ayush Jhunjhunwala',
-    description: 'How Ayush Jhunjhunwala built a trust-first preschool website with a full SEO and Generative Engine Optimisation strategy for Toondemy Preschool, India.',
+    title: 'Preschool Website Design with SEO & GEO — Toondemy Case Study | Ayush Jhunjhunwala',
+    description: 'A preschool website design case study: how Ayush Jhunjhunwala built a trust-first site with a full SEO and Generative Engine Optimisation strategy for Toondemy Preschool, India.',
     keywords: [
       'preschool website developer India',
       'local business website SEO GEO',
@@ -135,8 +130,8 @@ export const pageConfigs: Record<string, PageConfig> = {
     canonical: '/work/om-therapeutics'
   },
   'work/aarti-jewellers': {
-    title: 'Live Gold Price Website for Aarti Jewellers — SvelteKit Case Study | Ayush Jhunjhunwala',
-    description: 'How Ayush Jhunjhunwala built a bilingual Hindi-English frontend with a live gold and silver price API for a jewellery shop in Cuttack — a 2-month SvelteKit contract.',
+    title: 'Jewellery Website Design with Live Gold Price — Aarti Jewellers Case Study | Ayush Jhunjhunwala',
+    description: 'A jewellery website design case study: bilingual Hindi-English frontend with a live gold and silver price API for a shop in Cuttack — a 2-month SvelteKit contract by Ayush Jhunjhunwala.',
     keywords: [
       'jewellery website developer India',
       'bilingual website developer Hindi English',
@@ -148,8 +143,8 @@ export const pageConfigs: Record<string, PageConfig> = {
     canonical: '/work/aarti-jewellers'
   },
   'work/sikhaid-ngo': {
-    title: 'Donation Tracking Platform for SikhAid NGO — SvelteKit + Razorpay Case Study | Ayush Jhunjhunwala',
-    description: 'How Ayush Jhunjhunwala built a full-stack SvelteKit platform with a custom Razorpay webhook payment-tracking algorithm for an Indian NGO — a 3-month contract.',
+    title: 'NGO Website Development in India with Donation Tracking — SikhAid Case Study | Ayush Jhunjhunwala',
+    description: 'An NGO website development case study from India: full-stack SvelteKit platform with a custom Razorpay webhook payment-tracking algorithm, built by Ayush Jhunjhunwala on a 3-month contract.',
     keywords: [
       'NGO website developer India',
       'Razorpay webhook integration developer',
@@ -186,6 +181,48 @@ export const pageConfigs: Record<string, PageConfig> = {
     ],
     ogType: 'article',
     canonical: '/work/humanaissance'
+  },
+  'work/piipharma-loyalty': {
+    title: 'QR Code Loyalty Program for Pharma Retailers — PiiPharma Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala is building a QR code loyalty system for PiiPharma — in-browser coupon scanning, WhatsApp OTP login, and bulk UPI cashback payouts replacing a manual workflow.',
+    keywords: [
+      'qr code loyalty program',
+      'qr code loyalty system',
+      'loyalty program app for small business',
+      'loyalty program for retail store',
+      'custom loyalty program developer India',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/piipharma-loyalty'
+  },
+  'work/kiraya-app': {
+    title: 'Kiraya — Android Rental Management App with QR Showcases — Flutter Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala designed and built Kiraya, an Android-first Flutter app where landlords manage rentals and print QR code showcases that renters scan at the property gate.',
+    keywords: [
+      'custom android app developers india',
+      'android app development cost in india',
+      'flutter app developer india',
+      'rental property management app',
+      'qr code property showcase',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/kiraya-app'
+  },
+  'work/badasha-ticketing': {
+    title: 'Online Ticket Booking System with Seat Selection — Badasha Case Study | Ayush Jhunjhunwala',
+    description: 'How Ayush Jhunjhunwala is building a custom event ticketing website for a touring magic show — interactive seat map, timed checkout, and multi-city tour scheduling with no per-ticket commission.',
+    keywords: [
+      'online ticket booking system',
+      'ticket booking app development',
+      'event ticketing website design',
+      'seat booking system',
+      'ticketing system development',
+      'Ayush Jhunjhunwala case study'
+    ],
+    ogType: 'article',
+    canonical: '/work/badasha-ticketing'
   },
   blog: {
     title: "Blog - In-depth Articles by Ayush Jhunjhunwala",
