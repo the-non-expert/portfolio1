@@ -22,7 +22,8 @@
   overrides={{
     title: `${blog.title} - Ayush Jhunjhunwala`,
     description: blog.excerpt,
-    canonical: `/blog/${blog.slug}`
+    canonical: `/blog/${blog.slug}`,
+    ogType: 'article'
   }}
 />
 
