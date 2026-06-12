@@ -1,0 +1,78 @@
+name: Publish scheduled posts
+
+# Flips `published: false` -> `published: true` on any blog/writing post whose
+# frontmatter date has arrived, then pushes — which triggers the Netlify deploy.
+# Write posts ahead of time with a future date and published: false; this
+# workflow publishes them on schedule.
+#
+# NOTE: requires "Allow GitHub Actions to bypass branch protection" on main
+# (Settings > Rules), or a PAT with push access stored as PUBLISH_TOKEN.
+
+on:
+  schedule:
+    - cron: '37 4 * * *'   # daily 04:37 UTC = 10:07 IST
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-scheduled-posts
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PUBLISH_TOKEN || secrets.GITHUB_TOKEN }}
+
+      - name: Flip due posts to published
+        id: flip
+        run: |
+          python3 - <<'EOF'
+          import re, glob, datetime, os
+
+          now = datetime.datetime.now(datetime.timezone.utc)
+          flipped = []
+
+          for path in glob.glob('src/content/*/*.md'):
+              with open(path) as f:
+                  text = f.read()
+              m = re.match(r'^---\n(.*?)\n---\n', text, re.S)
+              if not m:
+                  continue
+              fm = m.group(1)
+              if not re.search(r'^published:\s*false\s*$', fm, re.M):
+                  continue
+              dm = re.search(r'^date:\s*(\S+)\s*$', fm, re.M)
+              if not dm:
+                  continue
+              raw = dm.group(1).strip('"\'')
+              try:
+                  due = datetime.datetime.fromisoformat(raw.replace('Z', '+00:00'))
+              except ValueError:
+                  print(f'SKIP {path}: unparseable date {raw!r}')
+                  continue
+              if due.tzinfo is None:
+                  due = due.replace(tzinfo=datetime.timezone.utc)
+              if due <= now:
+                  new_fm = re.sub(r'^published:\s*false\s*$', 'published: true', fm, flags=re.M)
+                  with open(path, 'w') as f:
+                      f.write(text.replace(fm, new_fm, 1))
+                  flipped.append(path)
+                  print(f'PUBLISH {path} (due {due.isoformat()})')
+
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
+              out.write(f"flipped={len(flipped)}\n")
+          EOF
+
+      - name: Commit and push
+        if: steps.flip.outputs.flipped != '0'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content
+          git commit -m "chore: publish scheduled post(s)"
+          git push

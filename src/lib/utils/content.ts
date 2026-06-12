@@ -41,7 +41,7 @@ export async function loadBlogPosts(): Promise<BlogCollection> {
         date: module.metadata.date,
         readingTime: module.metadata.readingTime || '5 min read',
         category: module.metadata.category || 'Technology',
-        featuredImage: module.metadata.featuredImage || '/blog-images/default.jpg',
+        featuredImage: module.metadata.featuredImage || '/images/og-card.png',
         published: module.metadata.published !== false
       } as Blog;
     });
@@ -112,7 +112,7 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
           date: module.metadata.date,
           readingTime: module.metadata.readingTime || '5 min read',
           category: module.metadata.category || 'Technology',
-          featuredImage: module.metadata.featuredImage || '/blog-images/default.jpg'
+          featuredImage: module.metadata.featuredImage || '/images/og-card.png'
         } as Blog;
       }
     }

@@ -100,8 +100,8 @@
           {#each otherPosts as post}
             <article class="group">
               <a href="/blog/{post.slug}" class="block">
-                <div class="aspect-video bg-surface rounded-xl flex items-center justify-center border border-stroke mb-3">
-                  <span class="text-xs text-muted uppercase tracking-widest">Image</span>
+                <div class="aspect-video bg-surface rounded-xl overflow-hidden border border-stroke mb-3">
+                  <img src={post.featuredImage} alt={post.title} class="w-full h-full object-cover" loading="lazy" />
                 </div>
                 <span class="px-2 py-0.5 bg-bg text-muted border border-stroke text-xs rounded mb-2 inline-block">
                   {post.category}
