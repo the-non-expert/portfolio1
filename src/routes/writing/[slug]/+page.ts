@@ -15,7 +15,7 @@ export async function entries() {
 export async function load({ params }: { params: { slug: string } }) {
   const writing = await getWritingBySlug(params.slug);
 
-  if (!writing) {
+  if (!writing || writing.published === false) {
     throw error(404, 'Writing not found');
   }
 

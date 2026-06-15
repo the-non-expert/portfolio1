@@ -18,7 +18,7 @@ export async function load({ params }: { params: { slug: string } }) {
     loadBlogPosts()
   ]);
 
-  if (!blog) {
+  if (!blog || blog.published === false) {
     throw error(404, 'Blog post not found');
   }
 
