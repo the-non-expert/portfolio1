@@ -30,3 +30,8 @@ vite.config.ts.timestamp-*
 
 # Superpowers brainstorming session files
 .superpowers/
+
+# Local dev tooling / logs
+.devlauncher-logs/
+.playwright-mcp/
+dev.toml

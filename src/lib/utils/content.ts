@@ -112,7 +112,8 @@ export async function getBlogBySlug(slug: string): Promise<Blog | null> {
           date: module.metadata.date,
           readingTime: module.metadata.readingTime || '5 min read',
           category: module.metadata.category || 'Technology',
-          featuredImage: module.metadata.featuredImage || '/images/og-card.png'
+          featuredImage: module.metadata.featuredImage || '/images/og-card.png',
+          published: module.metadata.published !== false
         } as Blog;
       }
     }
@@ -141,7 +142,8 @@ export async function getWritingBySlug(slug: string): Promise<Writing | null> {
           slug: slug,
           date: module.metadata.date,
           excerpt: module.metadata.excerpt,
-          content: module.default
+          content: module.default,
+          published: module.metadata.published !== false
         } as Writing;
       }
     }
