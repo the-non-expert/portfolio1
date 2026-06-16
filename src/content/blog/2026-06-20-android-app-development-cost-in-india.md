@@ -4,7 +4,10 @@ slug: android-app-development-cost-in-india
 excerpt: "Android app quotes range from ₹20,000 to several lakhs, and most
   articles won't tell you why. Here are my actual brackets, what each tier
   includes, and what really moves the price — with a real app as the example."
-date: 2026-06-20T10:00:00.000+05:30
+# PARKED: do not publish until the Kiraya app is approved on Google Play.
+# Far-future date keeps the scheduler from auto-publishing; set the real
+# date (and the scheduler will release it) once Kiraya launches.
+date: 2099-01-01T10:00:00.000+05:30
 readingTime: 7 min read
 category: Pricing
 featuredImage: /images/og-card.png
