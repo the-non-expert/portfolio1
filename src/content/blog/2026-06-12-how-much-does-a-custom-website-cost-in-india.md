@@ -7,7 +7,7 @@ excerpt: Most agencies answer this question with "it depends, contact us." Here
 date: 2026-06-12T10:00:00.000+05:30
 readingTime: 7 min read
 category: Pricing
-featuredImage: /images/og-card.png
+featuredImage: /images/og/how-much-does-a-custom-website-cost-in-india.png
 published: true
 ---
 If you've searched for custom website development cost in India, you've probably hit the same wall everywhere: *"It depends on your requirements. Contact us for a quote."*

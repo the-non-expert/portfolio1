@@ -7,7 +7,7 @@ excerpt: "One Razorpay account, donations pouring in from a website, a YouTuber'
 date: 2026-06-19T10:00:00.000+05:30
 readingTime: 7 min read
 category: Engineering
-featuredImage: /images/og-card.png
+featuredImage: /images/og/razorpay-webhook-track-payments-by-source.png
 published: true
 ---
 Here's a problem that sounds simple until you hit it: a single Razorpay account is collecting donations, but the money is arriving from several different sources at once — the main website, a separate fundraiser a YouTuber is running for the same cause, and direct payment links shared in WhatsApp groups. Razorpay sees one stream of payments. The organisation needs to know **how much came from each source**, so they can report back to each campaign and the YouTuber can see the impact of their drive.

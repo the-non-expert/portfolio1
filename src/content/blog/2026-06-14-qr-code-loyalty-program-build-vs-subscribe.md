@@ -7,7 +7,7 @@ excerpt: Loyalty SaaS platforms charge every month, forever. Free tools own
 date: 2026-06-14T10:00:00.000+05:30
 readingTime: 6 min read
 category: Pricing
-featuredImage: /images/og-card.png
+featuredImage: /images/og/qr-code-loyalty-program-build-vs-subscribe.png
 published: true
 ---
 A QR code loyalty program is simple in concept: your customer or retailer scans a code, the system records the visit or purchase, and rewards accumulate automatically — no paper punch cards, no Excel sheets, no WhatsApp messages to reconcile at month-end.
