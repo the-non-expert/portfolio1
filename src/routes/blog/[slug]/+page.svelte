@@ -23,7 +23,8 @@
     title: `${blog.title} - Ayush Jhunjhunwala`,
     description: blog.excerpt,
     canonical: `/blog/${blog.slug}`,
-    ogType: 'article'
+    ogType: 'article',
+    ogImage: blog.featuredImage ? `https://ayushjhunjhunwala.com${blog.featuredImage}` : undefined
   }}
 />
 
