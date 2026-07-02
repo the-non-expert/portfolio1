@@ -199,6 +199,36 @@ const posts = [
     titleLines: ['Website builder', 'without monthly fees.', 'Wix, Squarespace, or custom?'],
     hook: 'you pay forever. or once.',
   },
+  {
+    slug: 'ngo-website-development-cost-in-india',
+    category: 'Pricing',
+    titleLines: ['NGO websites in India:', 'what they cost, what', 'donors actually expect.'],
+    hook: 'donors give to proof. not brochures.',
+  },
+  {
+    slug: 'whatsapp-otp-vs-sms-otp-cost-india',
+    category: 'Engineering',
+    titleLines: ['WhatsApp OTP vs SMS OTP', 'in India — and the DLT', 'approval nobody explains.'],
+    hook: 'real costs. real paperwork.',
+  },
+  {
+    slug: 'razorpay-payment-links-vs-gateway-integration',
+    category: 'Engineering',
+    titleLines: ['Razorpay payment links', 'vs full integration.', 'Which do you need?'],
+    hook: 'sometimes a link is enough.',
+  },
+  {
+    slug: 'website-costs-after-one-time-payment',
+    category: 'Pricing',
+    titleLines: ['You paid once for', 'your website. What’s', 'still monthly?'],
+    hook: 'two real costs. the rest is padding.',
+  },
+  {
+    slug: 'business-runs-on-whatsapp-and-excel',
+    category: 'Pricing',
+    titleLines: ['Your business runs on', 'WhatsApp and Excel.', 'Here’s when that breaks.'],
+    hook: 'fix the break point. keep the rest.',
+  },
 ];
 
 for (const post of posts) {
