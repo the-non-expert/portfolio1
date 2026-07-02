@@ -21,21 +21,26 @@ Prices below are indicative as of mid-2026 — always check current rate cards, 
 
 | | WhatsApp OTP | SMS OTP |
 |---|---|---|
-| Per-message cost | ~₹0.11–0.13 per authentication message | ~₹0.15–0.25 per SMS via Indian aggregators |
+| Rate-card price | ₹0.115–0.145 per authentication message (Meta) | ~₹0.15–0.25 per SMS via Indian aggregators |
+| What you actually pay | **~₹0.30–0.50+ per OTP** at small-business volumes, once BSP fees land (below) | Close to the rate card — aggregators charge per SMS, no platform rent |
 | One-time setup cost | ₹0 in fees, but see below | ~₹5,900 DLT entity registration (per operator portal) |
 | Setup friction | Meta business verification, WhatsApp Business API access, template approval by Meta | DLT registration, header + template approval |
 | Delivery | Needs data connection; instant when online | Works on any phone, any network, no data |
 | User trust | Message arrives in a chat app from a business number | Arrives in the inbox where every bank OTP already lives |
 
-Read that per-message row again: **WhatsApp is actually cheaper per message.** So why did I switch to SMS?
+That second row is the one every pricing page hides, and it's why I switched. **Meta's rate card is the brochure price, not the landed price.** You can't buy from Meta at retail as a small business — you go through a Business Solution Provider (BSP), and the BSP layer is where the real money is:
 
-**First, the hidden costs.** WhatsApp's per-message price is only the start. Getting production API access means Meta business verification (documents, waiting, sometimes rejection loops), and most teams end up going through a Business Solution Provider who adds markup or a monthly platform fee. The advertised rate is not the landed rate.
+- **A monthly platform fee** — ₹999 to ₹4,000+/month depending on the provider — that you pay whether you send one OTP or fifty thousand. At 2,000 OTPs a month, a ₹999 platform fee alone adds ₹0.50 to every single message *before* Meta's charge starts.
+- **A per-message markup** of 10–30% on top of Meta's rate.
+- **18% GST** on all of it.
+
+At enterprise volumes the platform fee amortises to nothing and WhatsApp genuinely wins on price. At small-business volumes — which is where most of us live — the "₹0.115 per message" channel quietly costs three to four times that. Add Meta business verification (documents, waiting, sometimes rejection loops) just to get access, and the cheap channel stops looking cheap.
 
 **Second, the audience reality.** My users were shop retailers on low-end Androids with patchy data. An SMS OTP arrives even when WhatsApp is waiting for a connection. For login — the front door of the whole system — "arrives always" beats "cheaper when it arrives."
 
 **Third, the OTP habit.** Every bank, every UPI app, every government service in India delivers OTPs by SMS. Users have a decade of trained behaviour: code arrives in inbox, type it in. Don't spend your onboarding teaching a new habit at the exact moment you need zero friction.
 
-WhatsApp OTP wins in different situations: if your users are data-connected smartphone natives, if you're already using WhatsApp for order updates (one channel, one relationship), or at high volumes where the per-message gap compounds.
+WhatsApp OTP wins in different situations: if your users are data-connected smartphone natives, if you're already paying a BSP for order updates and marketing anyway (the platform fee is sunk, so OTPs ride at Meta's rate), or at volumes high enough that the monthly fee amortises to nothing.
 
 ## DLT registration: the government approval step, in plain language
 
@@ -85,7 +90,7 @@ This is also a compact example of what [custom software work actually looks like
 
 ### Is WhatsApp OTP cheaper than SMS OTP in India?
 
-Per message, usually yes (~₹0.11–0.13 vs ~₹0.15–0.25). But WhatsApp needs Meta business verification and usually a solution provider with markup, and delivery depends on the user having data. For login flows aimed at ordinary Indian users, SMS is the more reliable default.
+On Meta's rate card, yes (₹0.115–0.145 vs ~₹0.15–0.25 per SMS). In practice, usually no: you buy WhatsApp through a BSP whose monthly platform fee and markup push the landed cost to ₹0.30–0.50+ per OTP at small-business volumes, while SMS aggregators charge close to their rate card with no platform rent. WhatsApp only wins on price at volumes high enough to amortise the platform fee.
 
 ### What is DLT registration and is it mandatory?
 
