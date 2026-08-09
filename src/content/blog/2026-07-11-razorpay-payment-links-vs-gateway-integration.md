@@ -8,7 +8,7 @@ date: 2026-07-11T10:00:00.000+05:30
 readingTime: 7 min read
 category: Engineering
 featuredImage: /images/og/razorpay-payment-links-vs-gateway-integration.png
-published: false
+published: true
 ---
 Somebody signs up for Razorpay, discovers payment links, and asks the obvious question: *"I can just create a link in the dashboard and WhatsApp it to my customer. Why would I ever pay a developer to 'integrate' anything?"*
 
