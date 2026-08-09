@@ -9,7 +9,7 @@ date: 2026-07-15T10:00:00.000+05:30
 readingTime: 7 min read
 category: Pricing
 featuredImage: /images/og/website-costs-after-one-time-payment.png
-published: false
+published: true
 ---
 When I tell business owners my pricing is [one-time — no subscription, no monthly fee](/blog/how-much-does-a-custom-website-cost-in-india) — I can see the silent question forming: *"Okay… but what will I* actually *pay every month? There's always something."*
 
