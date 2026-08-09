@@ -9,7 +9,7 @@ date: 2026-07-04T10:00:00.000+05:30
 readingTime: 7 min read
 category: Pricing
 featuredImage: /images/og/ngo-website-development-cost-in-india.png
-published: false
+published: true
 ---
 Most NGO websites in India are built like brochures: a mission statement, some photos, a bank account number at the bottom. Then the team wonders why online donations never really started.
 
