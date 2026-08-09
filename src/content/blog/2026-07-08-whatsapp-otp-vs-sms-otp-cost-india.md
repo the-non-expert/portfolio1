@@ -9,7 +9,7 @@ date: 2026-07-08T10:00:00.000+05:30
 readingTime: 8 min read
 category: Engineering
 featuredImage: /images/og/whatsapp-otp-vs-sms-otp-cost-india.png
-published: false
+published: true
 ---
 Every app and portal in India eventually needs the same thing: a user types their phone number, gets a code, and they're in. No passwords — this audience doesn't do passwords.
 
