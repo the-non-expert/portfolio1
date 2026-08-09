@@ -9,7 +9,7 @@ date: 2026-07-18T10:00:00.000+05:30
 readingTime: 8 min read
 category: Pricing
 featuredImage: /images/og/business-runs-on-whatsapp-and-excel.png
-published: false
+published: true
 ---
 Let me describe your operations. Orders arrive as WhatsApp messages. Somebody copies them into an Excel sheet — or a notebook, with Excel coming later. Payments land as screenshots that someone matches to entries by hand. Reports mean scrolling. Finding last month's transaction means asking the one person who remembers.
 
