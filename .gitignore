@@ -35,3 +35,6 @@ vite.config.ts.timestamp-*
 .devlauncher-logs/
 .playwright-mcp/
 dev.toml
+
+# Local Netlify folder
+.netlify
