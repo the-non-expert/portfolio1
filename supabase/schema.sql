@@ -24,3 +24,6 @@ create policy "allow anon insert"
   for insert
   to anon
   with check (true);
+
+-- CRM schema (clients, projects, entries, comments, admins) lives in its
+-- own file: supabase/crm_schema.sql — run that separately in the SQL editor.

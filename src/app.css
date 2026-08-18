@@ -4,28 +4,61 @@
 
 /* Light mode (default) */
 :root {
-  --color-bg:           #F2F1EE;
-  --color-surface:      #E6E4DF;
-  --color-stroke:       #D4D1CA;
-  --color-ink:          #1C1B19;
-  --color-muted:        #66635E;
-  --color-accent:       #C13B2A;
-  --color-accent-hover: #9E2E1E;
+  --color-bg:            #F2F1EE;
+  --color-surface:       #E6E4DF;
+  --color-stroke:        #D4D1CA;
+  --color-stroke-strong: #C3BFB5;
+  --color-ink:           #1C1B19;
+  --color-muted:         #66635E;
+  --color-accent:        #C13B2A;
+  --color-accent-hover:  #9E2E1E;
+  --color-accent-soft:   #F6E1DC;
+  --color-good:          #4E6B4F;
+  --color-good-soft:     #E3E9DE;
+  --color-warn:          #8A5716;
+  --color-warn-soft:     #F2E7D5;
+  --shadow-pop:          0 10px 30px -12px rgba(28, 27, 25, 0.28);
 }
 
 /* Dark mode */
 .dark {
-  --color-bg:           #141413;
-  --color-surface:      #1C1C1A;
-  --color-stroke:       #242320;
-  --color-ink:          #E2E0DC;
-  --color-muted:        #807C76;
-  --color-accent:       #D95440;
-  --color-accent-hover: #E8664E;
+  --color-bg:            #141413;
+  --color-surface:       #1C1C1A;
+  --color-stroke:        #242320;
+  --color-stroke-strong: #35342F;
+  --color-ink:           #E2E0DC;
+  --color-muted:         #807C76;
+  --color-accent:        #D95440;
+  --color-accent-hover:  #E8664E;
+  --color-accent-soft:   #3A211B;
+  --color-good:          #92AC86;
+  --color-good-soft:     #232C20;
+  --color-warn:          #D0A15C;
+  --color-warn-soft:     #302719;
+  --shadow-pop:          0 14px 34px -12px rgba(0, 0, 0, 0.60);
 }
 
 body {
   background-color: var(--color-bg);
   color: var(--color-ink);
   font-family: 'Lato', system-ui, sans-serif;
+}
+
+/* CRM: a client-facing work tool wants raw contrast for fast scanning,
+   not the portfolio's warm editorial atmosphere. Scoped to .crm-theme so
+   the rest of the site is untouched. Dark mode restates the normal dark
+   tokens (same values as .dark above) so it still wins when both classes
+   are on the page — .dark .crm-theme has higher specificity than
+   .crm-theme alone. */
+.crm-theme {
+  --color-bg:            #FFFFFF;
+  --color-surface:       #F7F6F4;
+  --color-stroke:        #E3E1DB;
+  --color-stroke-strong: #CFCCC4;
+}
+.dark .crm-theme {
+  --color-bg:            #141413;
+  --color-surface:       #1C1C1A;
+  --color-stroke:        #242320;
+  --color-stroke-strong: #35342F;
 }

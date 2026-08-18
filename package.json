@@ -25,6 +25,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@supabase/ssr": "^0.12.4",
 		"@supabase/supabase-js": "^2.104.0",
 		"resend": "^6.12.2"
 	}
