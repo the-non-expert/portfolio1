@@ -13,5 +13,6 @@ Allow: /lib/ToolsLogo/
 Allow: /lib/MyRecentWorkImages/
 Disallow: /_app/
 Disallow: /api/
+Disallow: /crm
 
 Sitemap: https://ayushjhunjhunwala.com/sitemap.xml

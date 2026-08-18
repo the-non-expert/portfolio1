@@ -11,13 +11,28 @@ export default {
       colors: {
         bg:      'var(--color-bg)',
         surface: 'var(--color-surface)',
-        stroke:  'var(--color-stroke)',
+        stroke: {
+          DEFAULT: 'var(--color-stroke)',
+          strong:  'var(--color-stroke-strong)',
+        },
         ink:     'var(--color-ink)',
         muted:   'var(--color-muted)',
         accent: {
           DEFAULT: 'var(--color-accent)',
           hover:   'var(--color-accent-hover)',
+          soft:    'var(--color-accent-soft)',
         },
+        good: {
+          DEFAULT: 'var(--color-good)',
+          soft:    'var(--color-good-soft)',
+        },
+        warn: {
+          DEFAULT: 'var(--color-warn)',
+          soft:    'var(--color-warn-soft)',
+        },
+      },
+      boxShadow: {
+        pop: 'var(--shadow-pop)',
       },
     },
   },
