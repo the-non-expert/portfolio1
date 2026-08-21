@@ -4,6 +4,7 @@
   import { ENTRY_TYPES, ENTRY_TYPE_LABELS, formatDate, formatCurrency, canEditEntry, loggedByLabel } from "$lib/utils/crmDisplay";
   import Drawer from "./Drawer.svelte";
   import Highlight from "./Highlight.svelte";
+  import Spinner from "./Spinner.svelte";
 
   type Comment = { id: string; author_type: "admin" | "client"; body: string; created_at: string };
   type Entry = {
@@ -40,6 +41,8 @@
   $: restrictedEdit = (entry.author_type ?? "admin") === "client";
 
   let editing = false;
+  let savingEdit = false;
+  let sendingComment = false;
   let editType = "";
   let editTitle = "";
   let editBody = "";
@@ -119,8 +122,10 @@
       method="POST"
       action="?/updateEntry"
       use:enhance={() => {
+        savingEdit = true;
         return async ({ update }) => {
           await update();
+          savingEdit = false;
           editing = false;
         };
       }}
@@ -234,10 +239,15 @@
       {/if}
 
       <div class="flex items-center gap-3 pt-2">
-        <button type="submit" class="bg-ink text-bg px-5 py-2 rounded-full text-xs font-medium hover:bg-accent transition-colors duration-300">
+        <button
+          type="submit"
+          disabled={savingEdit}
+          class="bg-ink text-bg px-5 py-2 rounded-full text-xs font-medium hover:bg-accent transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        >
+          {#if savingEdit}<Spinner class="w-3.5 h-3.5" />{/if}
           Save
         </button>
-        <button type="button" on:click={cancelEdit} class="text-xs text-muted hover:text-ink">Cancel</button>
+        <button type="button" on:click={cancelEdit} disabled={savingEdit} class="text-xs text-muted hover:text-ink disabled:opacity-60">Cancel</button>
       </div>
     </form>
   {:else}
@@ -271,7 +281,18 @@
       </div>
     {/if}
 
-    <form method="POST" action="?/comment" use:enhance class="mt-4 pt-4 border-t border-stroke flex flex-col gap-2">
+    <form
+      method="POST"
+      action="?/comment"
+      use:enhance={() => {
+        sendingComment = true;
+        return async ({ update }) => {
+          await update();
+          sendingComment = false;
+        };
+      }}
+      class="mt-4 pt-4 border-t border-stroke flex flex-col gap-2"
+    >
       <input type="hidden" name="entry_id" value={entry.id} />
       <textarea
         name="body"
@@ -282,8 +303,10 @@
       ></textarea>
       <button
         type="submit"
-        class="self-end bg-ink text-bg px-5 py-2 rounded-full text-xs font-medium hover:bg-accent transition-colors duration-300"
+        disabled={sendingComment}
+        class="self-end bg-ink text-bg px-5 py-2 rounded-full text-xs font-medium hover:bg-accent transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
+        {#if sendingComment}<Spinner class="w-3.5 h-3.5" />{/if}
         {viewerType === "admin" ? "Reply" : "Send"}
       </button>
     </form>

@@ -1,9 +1,11 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
+  import Spinner from "$lib/crm/Spinner.svelte";
   import type { ActionData } from "./$types";
 
   export let form: ActionData;
 
+  let submitting = false;
   let copied = "";
   function copy(text: string, field: string) {
     navigator.clipboard.writeText(text);
@@ -73,7 +75,17 @@
         </div>
       {/if}
 
-      <form method="POST" use:enhance class="space-y-5">
+      <form
+        method="POST"
+        use:enhance={() => {
+          submitting = true;
+          return async ({ update }) => {
+            await update();
+            submitting = false;
+          };
+        }}
+        class="space-y-5"
+      >
         <div class="flex flex-col gap-1.5">
           <label for="full_name" class="text-sm font-medium text-ink">Client name</label>
           <input
@@ -162,8 +174,10 @@
 
         <button
           type="submit"
-          class="w-full bg-ink text-bg px-6 py-3 rounded-full text-sm font-medium hover:bg-accent transition-colors duration-300"
+          disabled={submitting}
+          class="w-full bg-ink text-bg px-6 py-3 rounded-full text-sm font-medium hover:bg-accent transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         >
+          {#if submitting}<Spinner class="w-4 h-4" />{/if}
           Create client
         </button>
       </form>
