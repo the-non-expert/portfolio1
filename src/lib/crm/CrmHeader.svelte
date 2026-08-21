@@ -2,6 +2,7 @@
   import { page } from "$app/stores";
   import ProjectSwitcher from "./ProjectSwitcher.svelte";
   import ThemeToggle from "./ThemeToggle.svelte";
+  import Spinner from "./Spinner.svelte";
 
   export let isAdmin: boolean;
   export let email: string | undefined;
@@ -12,6 +13,8 @@
     archived: boolean;
     clientName?: string;
   }>;
+
+  let loggingOut = false;
 
   $: isDashboard = $page.url.pathname === "/crm/admin";
   $: isClients = $page.url.pathname.startsWith("/crm/admin/clients");
@@ -36,8 +39,13 @@
       <span class="hidden lg:block text-xs text-muted truncate max-w-[12rem]">{email}</span>
     {/if}
     <ThemeToggle />
-    <form method="POST" action="/crm/logout">
-      <button type="submit" class="text-sm text-muted hover:text-accent transition-colors duration-200 whitespace-nowrap">
+    <form method="POST" action="/crm/logout" on:submit={() => (loggingOut = true)}>
+      <button
+        type="submit"
+        disabled={loggingOut}
+        class="text-sm text-muted hover:text-accent transition-colors duration-200 whitespace-nowrap disabled:opacity-60 flex items-center gap-1.5"
+      >
+        {#if loggingOut}<Spinner class="w-3.5 h-3.5" />{/if}
         Log out
       </button>
     </form>

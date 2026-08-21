@@ -1,9 +1,11 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
   import Drawer from "./Drawer.svelte";
+  import Spinner from "./Spinner.svelte";
 
   export let open = false;
 
+  let submitting = false;
   const today = new Date().toISOString().slice(0, 10);
 </script>
 
@@ -21,8 +23,10 @@
       method="POST"
       action="?/logMeeting"
       use:enhance={() => {
+        submitting = true;
         return async ({ update }) => {
           await update();
+          submitting = false;
           open = false;
         };
       }}
@@ -64,8 +68,10 @@
 
       <button
         type="submit"
-        class="bg-ink text-bg px-6 py-3 rounded-full text-sm font-medium hover:bg-accent transition-colors duration-300"
+        disabled={submitting}
+        class="bg-ink text-bg px-6 py-3 rounded-full text-sm font-medium hover:bg-accent transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
+        {#if submitting}<Spinner class="w-4 h-4" />{/if}
         Log meeting
       </button>
     </form>
