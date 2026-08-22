@@ -21,7 +21,7 @@
   $: isMeetings = $page.url.pathname.startsWith("/crm/admin/meetings");
 </script>
 
-<div class="border-b border-stroke-strong bg-surface">
+<div class="print:hidden border-b border-stroke-strong bg-surface">
   <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 h-14 flex items-center gap-2 sm:gap-3">
     <a href={isAdmin ? "/crm/admin" : "/crm"} class="shrink-0">
       <img src="/images/Ayushjhunjhunwala.png" alt="Ayush Jhunjhunwala" class="h-6 sm:h-7 w-auto" />
@@ -53,7 +53,7 @@
 </div>
 
 {#if isAdmin}
-  <div class="border-b border-stroke bg-surface">
+  <div class="print:hidden border-b border-stroke bg-surface">
     <div class="max-w-5xl mx-auto px-3 sm:px-4 md:px-6 h-11 flex items-center gap-4 sm:gap-6">
       <a
         href="/crm/admin"

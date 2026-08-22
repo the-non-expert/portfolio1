@@ -14,12 +14,18 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 
 	const { data: projects } = await query;
 
+	const { count: pendingInvoiceCount } = await locals.supabase
+		.from('invoices')
+		.select('id', { count: 'exact', head: true })
+		.eq('status', 'pending');
+
 	return {
 		filter,
 		projects: (projects ?? []).map((p) => ({
 			...p,
 			client: one(p.clients),
 			archived: p.archived_at !== null
-		}))
+		})),
+		pendingInvoiceCount: pendingInvoiceCount ?? 0
 	};
 };

@@ -15,6 +15,12 @@
       <div class="flex items-center gap-3 flex-wrap">
         <LogMeetingForm />
         <AddEntryForm billingType={data.project.billing_type} rate={data.project.rate} />
+        <a
+          href={`/crm/admin/projects/${data.project.slug}/invoices`}
+          class="shrink-0 border border-stroke-strong rounded-full px-4 py-1.5 text-sm font-medium text-ink hover:border-accent hover:text-accent transition-colors whitespace-nowrap"
+        >
+          Invoices
+        </a>
         <span class="text-sm text-muted uppercase tracking-widest">{data.project.status}</span>
       </div>
     </div>

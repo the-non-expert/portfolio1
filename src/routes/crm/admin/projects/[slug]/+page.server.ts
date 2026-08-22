@@ -18,7 +18,9 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 
 	const { data: entries } = await locals.supabase
 		.from('entries')
-		.select('id, entry_type, title, body, entry_date, due_date, status, visible_to_client, hours, author_type')
+		.select(
+			'id, entry_type, title, body, entry_date, due_date, status, visible_to_client, hours, amount, is_period, period_end, author_type'
+		)
 		.eq('project_id', project.id)
 		.order('entry_date', { ascending: false })
 		.order('created_at', { ascending: false })
@@ -53,12 +55,19 @@ export const actions: Actions = {
 		const visibleToClient = data.get('visible_to_client') === 'on';
 		const hoursRaw = (data.get('hours') as string)?.trim();
 		const hours = hoursRaw ? Number(hoursRaw) : null;
+		const amountRaw = (data.get('amount') as string)?.trim();
+		const amount = amountRaw ? Number(amountRaw) : null;
+		const isPeriod = data.get('is_period') === 'on';
+		const periodEnd = (data.get('period_end') as string) || null;
 
 		if (!title || !ENTRY_TYPES.includes(entryType)) {
 			return fail(400, { error: 'Pick a type and give the entry a title.' });
 		}
 		if (hoursRaw && (hours === null || Number.isNaN(hours) || hours < 0)) {
 			return fail(400, { error: 'Hours must be a positive number.' });
+		}
+		if (amountRaw && (amount === null || Number.isNaN(amount) || amount < 0)) {
+			return fail(400, { error: 'Amount must be a positive number.' });
 		}
 
 		const { data: projectRow } = await locals.supabase
@@ -79,7 +88,10 @@ export const actions: Actions = {
 			due_date: dueDate || null,
 			status: status || null,
 			visible_to_client: visibleToClient,
-			hours
+			hours,
+			amount,
+			is_period: isPeriod,
+			period_end: isPeriod ? periodEnd : null
 		});
 
 		if (insertError) {
@@ -155,12 +167,19 @@ export const actions: Actions = {
 		const visibleToClient = data.get('visible_to_client') === 'on';
 		const hoursRaw = (data.get('hours') as string)?.trim();
 		const hours = hoursRaw ? Number(hoursRaw) : null;
+		const amountRaw = (data.get('amount') as string)?.trim();
+		const amount = amountRaw ? Number(amountRaw) : null;
+		const isPeriod = data.get('is_period') === 'on';
+		const periodEnd = (data.get('period_end') as string) || null;
 
 		if (!entryId || !title || !ENTRY_TYPES.includes(entryType)) {
 			return fail(400, { error: 'Pick a type and give the entry a title.' });
 		}
 		if (hoursRaw && (hours === null || Number.isNaN(hours) || hours < 0)) {
 			return fail(400, { error: 'Hours must be a positive number.' });
+		}
+		if (amountRaw && (amount === null || Number.isNaN(amount) || amount < 0)) {
+			return fail(400, { error: 'Amount must be a positive number.' });
 		}
 
 		// Editing never emails the client — re-notifying on every typo fix
@@ -180,7 +199,10 @@ export const actions: Actions = {
 				due_date: dueDate || null,
 				status: status || null,
 				visible_to_client: visibleToClient,
-				hours
+				hours,
+				amount,
+				is_period: isPeriod,
+				period_end: isPeriod ? periodEnd : null
 			})
 			.eq('id', entryId)
 			.eq('author_type', 'admin')

@@ -14,6 +14,9 @@
     status: string | null;
     visible_to_client?: boolean;
     hours?: number | null;
+    amount?: number | null;
+    is_period?: boolean | null;
+    period_end?: string | null;
     comments: Comment[];
   };
 
@@ -27,6 +30,7 @@
 
   let searchQuery = "";
   let selectedTypes = new Set<string>();
+  let periodOnly = false;
   let openEntryId: string | null = null;
 
   function toggleType(type: string) {
@@ -38,6 +42,7 @@
 
   $: filtered = entries.filter((e) => {
     if (selectedTypes.size && !selectedTypes.has(e.entry_type)) return false;
+    if (periodOnly && !e.is_period) return false;
     if (searchQuery.trim()) {
       const q = searchQuery.trim().toLowerCase();
       const haystack = `${e.title} ${e.body ?? ""}`.toLowerCase();
@@ -51,7 +56,7 @@
     (e) => (e.entry_type === "action_item" || e.entry_type === "deadline") && e.status !== "done"
   ).length;
   $: internalCount = filtered.filter((e) => e.visible_to_client === false).length;
-  $: hasActiveFilter = Boolean(searchQuery.trim()) || selectedTypes.size > 0;
+  $: hasActiveFilter = Boolean(searchQuery.trim()) || selectedTypes.size > 0 || periodOnly;
 
   $: openIndex = openEntryId ? filtered.findIndex((e) => e.id === openEntryId) : -1;
   $: openEntry = openIndex >= 0 ? filtered[openIndex] : null;
@@ -73,7 +78,7 @@
   <p class="text-base text-muted">{emptyMessage}</p>
 {:else}
   <div class="sticky top-0 z-20 bg-bg pt-1 pb-4 flex flex-col sm:flex-row sm:items-center gap-3">
-    <div class="relative flex-1">
+    <div class="relative w-full sm:w-52 shrink-0">
       <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
         <circle cx="11" cy="11" r="7" />
         <path stroke-linecap="round" d="M21 21l-4.35-4.35" />
@@ -95,6 +100,13 @@
           {ENTRY_TYPE_LABELS[type]}
         </button>
       {/each}
+      <button
+        type="button"
+        on:click={() => (periodOnly = !periodOnly)}
+        class="text-sm px-2.5 py-1 rounded-full border transition-colors {periodOnly ? 'bg-ink text-bg border-ink' : 'border-stroke-strong text-muted hover:text-ink'}"
+      >
+        Period
+      </button>
     </div>
   </div>
 

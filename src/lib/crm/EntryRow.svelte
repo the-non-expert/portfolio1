@@ -14,6 +14,9 @@
     status: string | null;
     visible_to_client?: boolean;
     hours?: number | null;
+    amount?: number | null;
+    is_period?: boolean | null;
+    period_end?: string | null;
     author_type?: string | null;
     comments: Comment[];
   };
@@ -27,7 +30,11 @@
 
   const dispatch = createEventDispatcher();
 
-  $: hoursNote = entry.hours ? `${entry.hours}h${rate ? ` · ${formatCurrency(entry.hours * rate)}` : ""}` : "";
+  $: hoursNote = entry.hours
+    ? `${entry.hours}h${rate ? ` · ${formatCurrency(entry.hours * rate)}` : ""}`
+    : entry.amount
+      ? formatCurrency(entry.amount)
+      : "";
   $: firstLine = entry.body?.split("\n")[0] ?? "";
   $: preview = firstLine.length > 90 ? firstLine.slice(0, 90) + "…" : firstLine;
   $: dueChip = dueChipFor(entry);
@@ -69,6 +76,11 @@
     {#if entry.entry_type === "meeting_note"}
       <span class="rounded px-1.5 py-0.5 uppercase tracking-widest bg-accent-soft text-accent">
         {(entry.author_type ?? "admin") === "client" ? "Client meeting" : "Meeting"}
+      </span>
+    {/if}
+    {#if entry.is_period}
+      <span class="rounded px-1.5 py-0.5 uppercase tracking-widest bg-surface text-muted border border-stroke-strong">
+        Period
       </span>
     {/if}
     {#if canEdit && entry.visible_to_client === false}
