@@ -10,9 +10,12 @@
 
   let submitting = false;
   let entryType = "meeting_note";
+  let isPeriod = false;
   $: showDueDate = entryType === "deadline" || entryType === "action_item";
   $: showStatus = entryType === "action_item";
   $: showHours = entryType === "action_item" && billingType === "hourly";
+  $: showAmount = entryType === "action_item" && billingType === "flat";
+  $: showPeriodToggle = entryType === "action_item";
 
   const today = new Date().toISOString().slice(0, 10);
 </script>
@@ -67,7 +70,7 @@
       </div>
 
       <div class="flex flex-col gap-1.5">
-        <label for="entry_date" class="text-sm font-medium text-ink">Date</label>
+        <label for="entry_date" class="text-sm font-medium text-ink">{isPeriod ? "From" : "Date"}</label>
         <input
           id="entry_date"
           name="entry_date"
@@ -76,6 +79,27 @@
           class="bg-bg border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-accent transition-colors"
         />
       </div>
+
+      {#if showPeriodToggle}
+        <label class="flex items-center gap-2 text-sm text-ink">
+          <input type="checkbox" name="is_period" bind:checked={isPeriod} class="accent-accent" />
+          This covers a period, not a single date
+        </label>
+
+        {#if isPeriod}
+          <div class="flex flex-col gap-1.5">
+            <label for="period_end" class="text-sm font-medium text-ink">
+              Through <span class="text-muted font-normal">(optional — leave blank if still ongoing)</span>
+            </label>
+            <input
+              id="period_end"
+              name="period_end"
+              type="date"
+              class="bg-bg border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-accent transition-colors"
+            />
+          </div>
+        {/if}
+      {/if}
 
       <div class="flex flex-col gap-1.5">
         <label for="body" class="text-sm font-medium text-ink">Notes <span class="text-muted font-normal">(optional)</span></label>
@@ -124,6 +148,20 @@
             type="number"
             min="0"
             step="0.25"
+            class="bg-bg border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-accent transition-colors"
+          />
+        </div>
+      {/if}
+
+      {#if showAmount}
+        <div class="flex flex-col gap-1.5">
+          <label for="amount" class="text-sm font-medium text-ink">Amount (₹) <span class="text-muted font-normal">(for invoicing)</span></label>
+          <input
+            id="amount"
+            name="amount"
+            type="number"
+            min="0"
+            step="0.01"
             class="bg-bg border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-accent transition-colors"
           />
         </div>

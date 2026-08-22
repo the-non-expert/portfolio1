@@ -17,6 +17,9 @@
     status: string | null;
     visible_to_client?: boolean;
     hours?: number | null;
+    amount?: number | null;
+    is_period?: boolean | null;
+    period_end?: string | null;
     author_type?: string | null;
     comments: Comment[];
   };
@@ -51,10 +54,15 @@
   let editStatus = "";
   let editVisible = true;
   let editHours = "";
+  let editAmount = "";
+  let editIsPeriod = false;
+  let editPeriodEnd = "";
 
   $: showDueDate = editType === "deadline" || editType === "action_item";
   $: showStatus = editType === "action_item";
   $: showHours = editType === "action_item" && billingType === "hourly";
+  $: showAmount = editType === "action_item" && billingType === "flat";
+  $: showPeriodToggle = editType === "action_item";
 
   function startEdit() {
     editType = entry.entry_type;
@@ -65,6 +73,9 @@
     editStatus = entry.status ?? "";
     editVisible = entry.visible_to_client !== false;
     editHours = entry.hours != null ? String(entry.hours) : "";
+    editAmount = entry.amount != null ? String(entry.amount) : "";
+    editIsPeriod = entry.is_period === true;
+    editPeriodEnd = entry.period_end ?? "";
     editing = true;
   }
   function cancelEdit() {
@@ -176,7 +187,7 @@
       </div>
 
       <div class="flex flex-col gap-1.5">
-        <label for="edit_entry_date" class="text-sm font-medium text-ink">Date</label>
+        <label for="edit_entry_date" class="text-sm font-medium text-ink">{editIsPeriod ? "From" : "Date"}</label>
         <input
           id="edit_entry_date"
           name="entry_date"
@@ -185,6 +196,28 @@
           class="bg-bg border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-accent transition-colors"
         />
       </div>
+
+      {#if !restrictedEdit && showPeriodToggle}
+        <label class="flex items-center gap-2 text-sm text-ink">
+          <input type="checkbox" name="is_period" bind:checked={editIsPeriod} class="accent-accent" />
+          This covers a period, not a single date
+        </label>
+
+        {#if editIsPeriod}
+          <div class="flex flex-col gap-1.5">
+            <label for="edit_period_end" class="text-sm font-medium text-ink">
+              Through <span class="text-muted font-normal">(optional — leave blank if still ongoing)</span>
+            </label>
+            <input
+              id="edit_period_end"
+              name="period_end"
+              type="date"
+              bind:value={editPeriodEnd}
+              class="bg-bg border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-accent transition-colors"
+            />
+          </div>
+        {/if}
+      {/if}
 
       {#if !restrictedEdit && showDueDate}
         <div class="flex flex-col gap-1.5">
@@ -231,6 +264,21 @@
         </div>
       {/if}
 
+      {#if !restrictedEdit && showAmount}
+        <div class="flex flex-col gap-1.5">
+          <label for="edit_amount" class="text-sm font-medium text-ink">Amount (₹) <span class="text-muted font-normal">(for invoicing)</span></label>
+          <input
+            id="edit_amount"
+            name="amount"
+            type="number"
+            min="0"
+            step="0.01"
+            bind:value={editAmount}
+            class="bg-bg border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-accent transition-colors"
+          />
+        </div>
+      {/if}
+
       {#if !restrictedEdit}
         <label class="flex items-center gap-2 text-sm text-ink">
           <input type="checkbox" name="visible_to_client" bind:checked={editVisible} class="accent-accent" />
@@ -256,10 +304,15 @@
     </h2>
 
     <p class="mt-1 text-sm text-muted">
-      {formatDate(entry.entry_date)}
+      {#if entry.is_period}
+        {formatDate(entry.entry_date)} &rarr; {entry.period_end ? formatDate(entry.period_end) : "ongoing"}
+      {:else}
+        {formatDate(entry.entry_date)}
+      {/if}
       {#if entry.due_date}&middot; Due {formatDate(entry.due_date)}{/if}
       {#if entry.status}&middot; {entry.status === "done" ? "Done" : "Open"}{/if}
       {#if entry.hours}&middot; {entry.hours}h{rate ? ` · ${formatCurrency(entry.hours * rate)}` : ""}{/if}
+      {#if entry.amount}&middot; {formatCurrency(entry.amount)}{/if}
       {#if entry.entry_type === "meeting_note"}&middot; {loggedByLabel(entry, viewerType)}{/if}
       {#if canEdit && entry.visible_to_client === false}&middot; <span class="text-warn">Internal</span>{/if}
     </p>

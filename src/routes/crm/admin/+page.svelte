@@ -8,7 +8,12 @@
   <div class="flex items-center justify-between gap-4 mb-8 flex-wrap">
     <div>
       <h1 class="font-display text-2xl font-semibold text-ink mb-1">Dashboard</h1>
-      <p class="text-sm text-muted">Every project on the books.</p>
+      <p class="text-sm text-muted">
+        Every project on the books.
+        {#if data.pendingInvoiceCount > 0}
+          &middot; <span class="text-warn">{data.pendingInvoiceCount} invoice{data.pendingInvoiceCount === 1 ? "" : "s"} pending</span>
+        {/if}
+      </p>
     </div>
     <div class="flex items-center gap-3 text-xs">
       <a href="?filter=active" class={data.filter === "active" ? "text-ink" : "text-muted hover:text-ink"}>Active</a>
