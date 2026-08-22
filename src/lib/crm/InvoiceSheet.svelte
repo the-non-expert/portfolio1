@@ -33,12 +33,16 @@
   export let showRate = true;
   export let payee: Payee;
   export let miscSectionLabel: string | null = null;
+  export let payeeOverride: string | null = null;
 
   // The per-row Rate column reads as noise once every line shares one
   // number — it's mentioned once below the table instead, and only when
   // every item actually agrees on it (a mixed-rate invoice just omits it,
   // rather than showing something misleading).
   $: billToLines = billTo.split("\n").filter(Boolean);
+  // Older invoices predate the editable "Payable to" field — fall back to
+  // the env-var default rather than requiring a backfill.
+  $: payeeLines = (payeeOverride?.trim() || `${payee.name}\n${payee.address}`).split("\n").filter(Boolean);
   $: ratedItems = items.filter((i) => i.rate != null);
   $: showRateSummary =
     showRate &&
@@ -132,8 +136,9 @@
     </div>
     <div>
       <p class="font-semibold uppercase text-xs tracking-wide text-[#666]">Payable to:</p>
-      <p class="font-semibold leading-snug">{payee.name}</p>
-      <p class="leading-snug">{payee.address}</p>
+      {#each payeeLines as line, i}
+        <p class="{i === 0 ? 'font-semibold' : ''} leading-snug">{line}</p>
+      {/each}
     </div>
     <div class="sm:text-right">
       <p class="font-semibold uppercase text-xs tracking-wide text-[#666]">Date</p>

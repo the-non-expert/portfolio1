@@ -14,6 +14,7 @@
   let issueDate = data.todayDate;
   let dueDate = data.defaultDueDate;
   let billTo = data.defaultBillTo;
+  let payeeOverride = data.defaultPayeeOverride;
   let notes = "";
   let invoiceNumberInput = "";
   let noInvoiceNumber = false;
@@ -188,6 +189,23 @@
         <p class="text-xs text-muted">Saved to this client for next time.</p>
       </div>
 
+      <div class="flex flex-col gap-1.5">
+        <label for="payee_override" class="text-sm font-medium text-ink">Payable to</label>
+        <textarea
+          id="payee_override"
+          name="payee_override"
+          rows="2"
+          bind:value={payeeOverride}
+          placeholder={"Your name\nAddress (optional)"}
+          class="bg-bg border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors resize-none"
+          required
+        ></textarea>
+        <p class="text-xs text-muted">
+          Shown on the invoice instead of your default name/address — clear the address line if this client
+          shouldn't see it. Saved to this client for next time.
+        </p>
+      </div>
+
       <div>
         <div class="flex items-center justify-between mb-3">
           <h2 class="text-sm font-medium text-ink">Billable work</h2>
@@ -325,6 +343,7 @@
           notes={notes || null}
           {showRate}
           miscSectionLabel={miscSectionLabel || null}
+          {payeeOverride}
           payee={data.payee}
         />
       </div>

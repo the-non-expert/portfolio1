@@ -16,7 +16,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 	const { data: invoice } = await locals.supabase
 		.from('invoices')
 		.select(
-			'id, invoice_number, issue_date, due_date, status, paid_at, bill_to, subtotal, total, notes, show_rate, misc_section_label, project_id'
+			'id, invoice_number, issue_date, due_date, status, paid_at, bill_to, payee_override, subtotal, total, notes, show_rate, misc_section_label, project_id'
 		)
 		.eq('id', params.invoiceId)
 		.maybeSingle();

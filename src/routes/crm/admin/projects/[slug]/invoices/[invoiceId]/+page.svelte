@@ -121,6 +121,7 @@
       notes={data.invoice.notes}
       showRate={data.invoice.show_rate}
       miscSectionLabel={data.invoice.misc_section_label}
+      payeeOverride={data.invoice.payee_override}
       payee={data.payee}
     />
   </div>

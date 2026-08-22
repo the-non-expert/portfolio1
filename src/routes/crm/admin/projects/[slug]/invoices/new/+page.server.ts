@@ -29,7 +29,7 @@ const payee = {
 export const load: PageServerLoad = async ({ locals, params }) => {
 	const { data: projectRow } = await locals.supabase
 		.from('projects')
-		.select('id, name, slug, billing_type, rate, clients(id, full_name, company, invoice_bill_to)')
+		.select('id, name, slug, billing_type, rate, clients(id, full_name, company, invoice_bill_to, invoice_payee_default)')
 		.eq('slug', params.slug)
 		.maybeSingle();
 
@@ -91,6 +91,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		todayDate: today.toISOString().slice(0, 10),
 		defaultDueDate: due.toISOString().slice(0, 10),
 		defaultBillTo: project.client?.invoice_bill_to || project.client?.company || project.client?.full_name || '',
+		defaultPayeeOverride: project.client?.invoice_payee_default || `${payee.name}\n${payee.address}`,
 		nextInvoiceNumber: (lastInvoice?.invoice_number ?? 10) + 1,
 		payee
 	};
@@ -102,7 +103,7 @@ export const actions: Actions = {
 
 		const { data: projectRow } = await locals.supabase
 			.from('projects')
-			.select('id, name, slug, billing_type, rate, clients(id, invoice_bill_to)')
+			.select('id, name, slug, billing_type, rate, clients(id, invoice_bill_to, invoice_payee_default)')
 			.eq('slug', params.slug)
 			.maybeSingle();
 
@@ -112,12 +113,14 @@ export const actions: Actions = {
 		const issueDate = (data.get('issue_date') as string) || new Date().toISOString().slice(0, 10);
 		const dueDate = (data.get('due_date') as string) || null;
 		const billTo = (data.get('bill_to') as string)?.trim();
+		const payeeOverride = (data.get('payee_override') as string)?.trim();
 		const notes = (data.get('notes') as string)?.trim() || null;
 		const showRate = data.get('show_rate') === 'on';
 		const noInvoiceNumber = data.get('no_invoice_number') === 'on';
 		const invoiceNumberRaw = (data.get('invoice_number') as string)?.trim();
 
 		if (!billTo) return fail(400, { error: 'Add a "bill to" name and address.' });
+		if (!payeeOverride) return fail(400, { error: 'Add a "payable to" name (address is optional).' });
 
 		let invoiceNumber: number | null = null;
 		if (!noInvoiceNumber) {
@@ -226,6 +229,7 @@ export const actions: Actions = {
 				issue_date: issueDate,
 				due_date: dueDate,
 				bill_to: billTo,
+				payee_override: payeeOverride,
 				subtotal,
 				total: subtotal,
 				notes,
@@ -249,8 +253,13 @@ export const actions: Actions = {
 
 		if (itemsError) return fail(500, { error: 'Invoice created, but the line items failed to save.' });
 
-		if (client?.id && billTo !== client.invoice_bill_to) {
-			await locals.supabase.from('clients').update({ invoice_bill_to: billTo }).eq('id', client.id);
+		if (client?.id) {
+			const clientUpdates: Record<string, string> = {};
+			if (billTo !== client.invoice_bill_to) clientUpdates.invoice_bill_to = billTo;
+			if (payeeOverride !== client.invoice_payee_default) clientUpdates.invoice_payee_default = payeeOverride;
+			if (Object.keys(clientUpdates).length) {
+				await locals.supabase.from('clients').update(clientUpdates).eq('id', client.id);
+			}
 		}
 
 		throw redirect(303, `/crm/admin/projects/${params.slug}/invoices/${invoiceRow.id}`);
