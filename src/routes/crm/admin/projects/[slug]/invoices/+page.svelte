@@ -14,6 +14,14 @@
     if (status === "void") return "bg-stroke text-muted";
     return "bg-warn-soft text-warn";
   }
+
+  // Both sides of a negotiation always live in this same project-scoped
+  // list, so the "negotiated from" / "superseded by" relationship is a
+  // lookup into data.invoices rather than a separate query.
+  $: byId = new Map(data.invoices.map((inv) => [inv.id, inv]));
+  $: supersededBy = new Map(
+    data.invoices.filter((inv) => inv.negotiated_from_id).map((inv) => [inv.negotiated_from_id as string, inv])
+  );
 </script>
 
 <main class="max-w-5xl mx-auto px-4 md:px-6 py-12">
@@ -54,6 +62,12 @@
             <p class="text-sm text-muted mt-0.5">
               {formatDate(invoice.issue_date)}
               {#if invoice.due_date}&middot; due {formatDate(invoice.due_date)}{/if}
+              {#if invoice.negotiated_from_id && byId.get(invoice.negotiated_from_id)}
+                &middot; negotiated from #{byId.get(invoice.negotiated_from_id)?.invoice_number}
+              {/if}
+              {#if supersededBy.get(invoice.id)}
+                &middot; superseded by #{supersededBy.get(invoice.id)?.invoice_number}
+              {/if}
             </p>
           </a>
           <div class="flex items-center gap-3 shrink-0">
@@ -67,6 +81,14 @@
             >
               Redownload
             </a>
+            {#if invoice.status !== "void"}
+              <a
+                href={`/crm/admin/projects/${data.project.slug}/invoices/${invoice.id}/negotiate`}
+                class="text-xs text-muted hover:text-ink px-2 py-1 rounded-lg hover:bg-bg whitespace-nowrap"
+              >
+                Negotiate
+              </a>
+            {/if}
             {#if invoice.status !== "void"}
               <form
                 method="POST"

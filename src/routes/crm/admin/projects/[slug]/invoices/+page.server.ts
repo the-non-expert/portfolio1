@@ -14,7 +14,7 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 
 	const { data: invoices } = await locals.supabase
 		.from('invoices')
-		.select('id, invoice_number, issue_date, due_date, status, total, paid_at')
+		.select('id, invoice_number, issue_date, due_date, status, total, paid_at, negotiated_from_id')
 		.eq('project_id', project.id)
 		.order('invoice_number', { ascending: false });
 

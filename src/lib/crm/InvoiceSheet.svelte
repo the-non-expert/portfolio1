@@ -34,6 +34,8 @@
   export let payee: Payee;
   export let miscSectionLabel: string | null = null;
   export let payeeOverride: string | null = null;
+  export let supersedesInvoiceNumber: number | null = null;
+  export let showDates = true;
 
   // The per-row Rate column reads as noise once every line shares one
   // number — it's mentioned once below the table instead, and only when
@@ -123,7 +125,12 @@
   class="invoice-sheet max-w-3xl mx-auto bg-white text-[#1a1a1a] px-10 py-10 sm:px-12 sm:py-12 shadow-[0_10px_30px_-12px_rgba(0,0,0,0.15)] print:shadow-none print:max-w-none print:px-0 print:py-0"
 >
   <div class="print:break-inside-avoid flex items-start justify-between gap-6">
-    <h1 class="text-3xl font-bold tracking-tight">{invoiceNumber ? `INVOICE #${invoiceNumber}` : "INVOICE"}</h1>
+    <div>
+      <h1 class="text-3xl font-bold tracking-tight">{invoiceNumber ? `INVOICE #${invoiceNumber}` : "INVOICE"}</h1>
+      {#if supersedesInvoiceNumber}
+        <p class="text-xs text-[#777] mt-1">Revised invoice — supersedes Invoice #{supersedesInvoiceNumber}</p>
+      {/if}
+    </div>
     <img src="/images/crm-invoice/logo.png" alt="Ayush Jhunjhunwala" class="h-10 w-auto" />
   </div>
 
@@ -143,7 +150,7 @@
     <div class="sm:text-right">
       <p class="font-semibold uppercase text-xs tracking-wide text-[#666]">Date</p>
       <p>{issueDate ? formatDate(issueDate) : ""}</p>
-      {#if billingPeriodStart}
+      {#if showDates && billingPeriodStart}
         <p class="text-xs text-[#777] mt-2">
           Billing period<br />
           {billingPeriodStart === billingPeriodEnd
@@ -159,59 +166,73 @@
     <thead>
       <tr class="border-b border-[#ddd] text-xs uppercase tracking-wide text-[#777]">
         <th class="text-left font-medium py-2">Description</th>
-        <th class="text-center font-medium py-2 w-16">Date</th>
+        {#if showDates}
+          <th class="text-center font-medium py-2 w-16">Date</th>
+        {/if}
         <th class="text-center font-medium py-2 w-14">Hours</th>
         <th class="text-right font-medium py-2 w-24">Total</th>
       </tr>
     </thead>
-    {#each groupedItems as group (group.key)}
+    {#if !showDates}
       <tbody class="print:break-inside-avoid">
-        {#if groupedItems.length > 1}
-          <tr>
-            <td colspan="4" class="pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-[#666]">{group.label}</td>
-          </tr>
-        {/if}
-        {#each group.items as item}
+        {#each items as item}
           <tr class="border-b border-[#eee]">
             <td class="py-2.5 pr-2">{item.description}</td>
-            <td class="py-2.5 text-center tabular-nums text-[#777] text-xs">{item.displayDate}</td>
             <td class="py-2.5 text-center tabular-nums">{item.hours ?? ""}</td>
             <td class="py-2.5 text-right tabular-nums">{formatCurrency(item.amount)}</td>
           </tr>
         {/each}
-        {#if groupedItems.length > 1}
-          <tr>
-            <td colspan="3" class="pt-1.5 pb-3 text-right text-xs text-[#777]">Subtotal</td>
-            <td class="pt-1.5 pb-3 text-right text-xs text-[#777] tabular-nums">{formatCurrency(group.subtotal)}</td>
-          </tr>
-        {/if}
       </tbody>
-    {/each}
-    {#if rangeDisplayItems.length > 0}
-      <tbody class="print:break-inside-avoid">
-        <tr>
-          <td colspan="4" class="pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-[#666]">
-            {miscSectionLabel || "Miscellaneous"}
-          </td>
-        </tr>
-        {#each rangeDisplayItems as item}
-          <tr class="border-b border-[#eee]">
-            <td class="py-2.5 pr-2">
-              {item.description}
-              <span class="block text-[11px] text-[#999] mt-0.5">{item.rangeLabel}</span>
+    {:else}
+      {#each groupedItems as group (group.key)}
+        <tbody class="print:break-inside-avoid">
+          {#if groupedItems.length > 1}
+            <tr>
+              <td colspan="4" class="pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-[#666]">{group.label}</td>
+            </tr>
+          {/if}
+          {#each group.items as item}
+            <tr class="border-b border-[#eee]">
+              <td class="py-2.5 pr-2">{item.description}</td>
+              <td class="py-2.5 text-center tabular-nums text-[#777] text-xs">{item.displayDate}</td>
+              <td class="py-2.5 text-center tabular-nums">{item.hours ?? ""}</td>
+              <td class="py-2.5 text-right tabular-nums">{formatCurrency(item.amount)}</td>
+            </tr>
+          {/each}
+          {#if groupedItems.length > 1}
+            <tr>
+              <td colspan="3" class="pt-1.5 pb-3 text-right text-xs text-[#777]">Subtotal</td>
+              <td class="pt-1.5 pb-3 text-right text-xs text-[#777] tabular-nums">{formatCurrency(group.subtotal)}</td>
+            </tr>
+          {/if}
+        </tbody>
+      {/each}
+      {#if rangeDisplayItems.length > 0}
+        <tbody class="print:break-inside-avoid">
+          <tr>
+            <td colspan="4" class="pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-[#666]">
+              {miscSectionLabel || "Miscellaneous"}
             </td>
-            <td class="py-2.5 text-center tabular-nums text-[#777] text-xs">—</td>
-            <td class="py-2.5 text-center tabular-nums">{item.hours ?? ""}</td>
-            <td class="py-2.5 text-right tabular-nums">{formatCurrency(item.amount)}</td>
           </tr>
-        {/each}
-        {#if groupedItems.length > 0}
-          <tr>
-            <td colspan="3" class="pt-1.5 pb-3 text-right text-xs text-[#777]">Subtotal</td>
-            <td class="pt-1.5 pb-3 text-right text-xs text-[#777] tabular-nums">{formatCurrency(rangeSubtotal)}</td>
-          </tr>
-        {/if}
-      </tbody>
+          {#each rangeDisplayItems as item}
+            <tr class="border-b border-[#eee]">
+              <td class="py-2.5 pr-2">
+                {item.description}
+                <span class="block text-[11px] text-[#999] mt-0.5">{item.rangeLabel}</span>
+              </td>
+              <td class="py-2.5 text-center tabular-nums text-[#777] text-xs">—</td>
+              <td class="py-2.5 text-center tabular-nums">{item.hours ?? ""}</td>
+              <td class="py-2.5 text-right tabular-nums">{formatCurrency(item.amount)}</td>
+            </tr>
+          {/each}
+          {#if groupedItems.length > 0}
+            <tr>
+              <td colspan="3" class="pt-1.5 pb-3 text-right text-xs text-[#777]">Subtotal</td>
+              <td class="pt-1.5 pb-3 text-right text-xs text-[#777] tabular-nums">{formatCurrency(rangeSubtotal)}</td>
+            </tr>
+          {/if}
+        </tbody>
+      {/if}
     {/if}
   </table>
 
