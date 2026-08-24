@@ -116,6 +116,7 @@ export const actions: Actions = {
 		const payeeOverride = (data.get('payee_override') as string)?.trim();
 		const notes = (data.get('notes') as string)?.trim() || null;
 		const showRate = data.get('show_rate') === 'on';
+		const showDates = data.get('show_dates') === 'on';
 		const noInvoiceNumber = data.get('no_invoice_number') === 'on';
 		const invoiceNumberRaw = (data.get('invoice_number') as string)?.trim();
 
@@ -234,6 +235,7 @@ export const actions: Actions = {
 				total: subtotal,
 				notes,
 				show_rate: showRate,
+				show_dates: showDates,
 				misc_section_label: miscSectionLabel
 			})
 			.select('id')

@@ -16,12 +16,29 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 	const { data: invoice } = await locals.supabase
 		.from('invoices')
 		.select(
-			'id, invoice_number, issue_date, due_date, status, paid_at, bill_to, payee_override, subtotal, total, notes, show_rate, misc_section_label, project_id'
+			'id, invoice_number, issue_date, due_date, status, paid_at, bill_to, payee_override, subtotal, total, notes, show_rate, show_dates, misc_section_label, project_id, negotiated_from_id'
 		)
 		.eq('id', params.invoiceId)
 		.maybeSingle();
 
 	if (!invoice) throw error(404, 'Invoice not found');
+
+	// Both sides of a negotiation link — the original this invoice
+	// supersedes (printed on the PDF), and any later invoice that has
+	// superseded this one (admin-only, shown as a banner).
+	const { data: supersedes } = invoice.negotiated_from_id
+		? await locals.supabase
+				.from('invoices')
+				.select('invoice_number')
+				.eq('id', invoice.negotiated_from_id)
+				.maybeSingle()
+		: { data: null };
+
+	const { data: supersededBy } = await locals.supabase
+		.from('invoices')
+		.select('id, invoice_number')
+		.eq('negotiated_from_id', invoice.id)
+		.maybeSingle();
 
 	const { data: itemRows } = await locals.supabase
 		.from('invoice_items')
@@ -46,6 +63,8 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		invoice,
 		items,
 		project,
+		supersedesInvoiceNumber: supersedes?.invoice_number ?? null,
+		supersededBy,
 		payee: {
 			name: INVOICE_PAYEE_NAME,
 			address: INVOICE_PAYEE_ADDRESS,

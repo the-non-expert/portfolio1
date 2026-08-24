@@ -22,9 +22,11 @@
 
 <svelte:head>
   <title>{data.invoice.invoice_number ? `Invoice #${data.invoice.invoice_number}` : "Invoice"}</title>
-  <!-- Defining any @page margin box (here, @bottom-center) suppresses
-       Chrome's own default print header/footer entirely on its own — no
-       need to stay under an undocumented margin threshold for that anymore.
+  <!-- Defining an @page margin box suppresses Chrome's own default content
+       for THAT box only — it doesn't clear every box at once. Chrome's
+       default date/title header lives in @top-left/@top-right, a separate
+       pair from @bottom-center (used below for the page-number footer), so
+       both top boxes need their own explicit empty override too.
        counter(page)/counter(pages) are the browser's own real pagination
        count, computed from whatever actually rendered — accurate by
        construction, not something we have to track ourselves. Multi-page
@@ -35,6 +37,13 @@
     @page {
       size: A4;
       margin: 12mm 12mm 16mm 12mm;
+
+      @top-left {
+        content: "";
+      }
+      @top-right {
+        content: "";
+      }
 
       @bottom-center {
         content: "Page " counter(page) " of " counter(pages);
@@ -56,6 +65,12 @@
         {invoiceStatusLabel(data.invoice.status)}
       </span>
       {#if data.invoice.status !== "void"}
+        <a
+          href={`/crm/admin/projects/${data.project?.slug}/invoices/${data.invoice.id}/negotiate`}
+          class="text-sm text-[#555] hover:text-[#1a1a1a] border border-[#ccc] rounded-full px-3 py-1.5"
+        >
+          Negotiate
+        </a>
         <form
           method="POST"
           action="?/markStatus"
@@ -109,6 +124,20 @@
     </div>
   {/if}
 
+  {#if data.supersededBy}
+    <div class="print:hidden max-w-3xl mx-auto px-4 md:px-6 mt-4">
+      <div class="px-4 py-3 rounded-xl border border-[#eee] bg-[#fafafa] text-sm text-[#555]">
+        Superseded by negotiated
+        <a
+          href={`/crm/admin/projects/${data.project?.slug}/invoices/${data.supersededBy.id}`}
+          class="text-[#1a1a1a] underline hover:no-underline"
+        >
+          Invoice #{data.supersededBy.invoice_number}
+        </a>.
+      </div>
+    </div>
+  {/if}
+
   <div class="my-8 print:my-0">
     <InvoiceSheet
       invoiceNumber={data.invoice.invoice_number}
@@ -120,9 +149,11 @@
       total={data.invoice.total}
       notes={data.invoice.notes}
       showRate={data.invoice.show_rate}
+      showDates={data.invoice.show_dates}
       miscSectionLabel={data.invoice.misc_section_label}
       payeeOverride={data.invoice.payee_override}
       payee={data.payee}
+      supersedesInvoiceNumber={data.supersedesInvoiceNumber}
     />
   </div>
 </div>

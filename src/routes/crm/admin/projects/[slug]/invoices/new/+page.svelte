@@ -20,6 +20,9 @@
   let noInvoiceNumber = false;
   let showRate = true;
   let miscSectionLabel = "";
+  // Picker-only preference — just declutters this checklist while
+  // selecting items, has no bearing on what prints on the invoice itself.
+  let showDates = true;
 
   let items = data.billable.map((entry) => ({
     ...entry,
@@ -37,9 +40,8 @@
     customLines = customLines.filter((_, i) => i !== index);
   }
 
-  $: subtotal =
-    items.filter((i) => i.checked).reduce((sum, i) => sum + (Number(i.amount) || 0), 0) +
-    customLines.reduce((sum, c) => sum + (Number(c.amount) || 0), 0);
+  $: billableSelectedTotal = items.filter((i) => i.checked).reduce((sum, i) => sum + (Number(i.amount) || 0), 0);
+  $: subtotal = billableSelectedTotal + customLines.reduce((sum, c) => sum + (Number(c.amount) || 0), 0);
 
   $: allChecked = items.length > 0 && items.every((i) => i.checked);
 
@@ -175,6 +177,11 @@
         Show hourly rate on the invoice
       </label>
 
+      <label class="flex items-center gap-2 text-sm text-ink">
+        <input type="checkbox" name="show_dates" bind:checked={showDates} class="accent-accent" />
+        Show dates on the invoice
+      </label>
+
       <div class="flex flex-col gap-1.5">
         <label for="bill_to" class="text-sm font-medium text-ink">Bill to</label>
         <textarea
@@ -209,11 +216,19 @@
       <div>
         <div class="flex items-center justify-between mb-3">
           <h2 class="text-sm font-medium text-ink">Billable work</h2>
-          {#if items.length > 0}
-            <button type="button" on:click={toggleAll} class="text-xs text-accent hover:text-accent-hover">
-              {allChecked ? "Deselect all" : "Select all"}
-            </button>
-          {/if}
+          <div class="flex items-center gap-3">
+            {#if billableSelectedTotal > 0}
+              <span class="text-xs text-muted tabular-nums">{formatCurrency(billableSelectedTotal)} selected</span>
+            {/if}
+            {#if items.length > 0}
+              <button type="button" on:click={() => (showDates = !showDates)} class="text-xs text-muted hover:text-ink">
+                {showDates ? "Hide dates" : "Show dates"}
+              </button>
+              <button type="button" on:click={toggleAll} class="text-xs text-accent hover:text-accent-hover">
+                {allChecked ? "Deselect all" : "Select all"}
+              </button>
+            {/if}
+          </div>
         </div>
         {#if items.length === 0}
           <p class="text-sm text-muted">
@@ -227,14 +242,18 @@
                 <input type="checkbox" name="entry_id" value={item.id} bind:checked={item.checked} class="accent-accent shrink-0" />
                 <span class="min-w-0 flex-1">
                   <span class="block text-sm text-ink truncate">{item.title}</span>
-                  <span class="block text-xs text-muted">
-                    {#if item.is_period}
-                      {formatDate(item.entry_date)} &rarr; {item.period_end ? formatDate(item.period_end) : "ongoing"}
-                    {:else}
-                      {formatDate(item.entry_date)}
-                    {/if}
-                    {#if item.alreadyBilled > 0}&middot; {formatCurrency(item.alreadyBilled)} already invoiced, {formatCurrency(item.remaining)} left{/if}
-                  </span>
+                  {#if showDates || item.alreadyBilled > 0}
+                    <span class="block text-xs text-muted">
+                      {#if showDates}
+                        {#if item.is_period}
+                          {formatDate(item.entry_date)} &rarr; {item.period_end ? formatDate(item.period_end) : "ongoing"}
+                        {:else}
+                          {formatDate(item.entry_date)}
+                        {/if}
+                      {/if}
+                      {#if item.alreadyBilled > 0}{showDates ? " · " : ""}{formatCurrency(item.alreadyBilled)} already invoiced, {formatCurrency(item.remaining)} left{/if}
+                    </span>
+                  {/if}
                 </span>
                 <span class="shrink-0 flex items-center gap-1 text-sm">
                   <span class="text-muted">₹</span>
@@ -342,6 +361,7 @@
           total={subtotal}
           notes={notes || null}
           {showRate}
+          {showDates}
           miscSectionLabel={miscSectionLabel || null}
           {payeeOverride}
           payee={data.payee}
