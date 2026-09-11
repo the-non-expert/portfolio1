@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { ENTRY_TYPES, ENTRY_TYPE_LABELS, formatDate, formatDayLabel, groupByDay } from "$lib/utils/crmDisplay";
+  import { ENTRY_TYPES, ENTRY_TYPE_LABELS, formatCurrency, formatDate, formatDayLabel, groupByDay } from "$lib/utils/crmDisplay";
   import EntryRow from "./EntryRow.svelte";
   import EntryModal from "./EntryModal.svelte";
 
@@ -19,6 +19,13 @@
     period_end?: string | null;
     comments: Comment[];
   };
+  type PaidMarker = {
+    invoiceNumber: number | null;
+    total: number;
+    coverDate: string;
+    paidAt: string | null;
+    href?: string;
+  };
 
   export let entries: Entry[];
   export let canEdit: boolean;
@@ -27,6 +34,7 @@
   export let emptyMessage: string;
   export let billingType: "hourly" | "flat" | null = null;
   export let rate: number | null = null;
+  export let paidMarkers: PaidMarker[] = [];
 
   let searchQuery = "";
   let selectedTypes = new Set<string>();
@@ -52,6 +60,33 @@
   });
 
   $: groups = groupByDay(filtered);
+
+  // Merges day-groups with paid-invoice markers into one descending-date
+  // list. A marker's sort key sits just below its coverDate's own group (so
+  // the day it settles renders above the line, as paid) but above any older
+  // group — placement is purely date-driven, so it still lands correctly
+  // even when a search/type filter removes the group at that exact date.
+  type TimelineRow =
+    | { kind: "group"; key: string; sortKey: number; group: { date: string; entries: Entry[] } }
+    | { kind: "marker"; key: string; sortKey: number; marker: PaidMarker };
+  $: timelineRows = (() => {
+    const rows: TimelineRow[] = [
+      ...groups.map((group) => ({
+        kind: "group" as const,
+        key: `g-${group.date}`,
+        sortKey: new Date(group.date).getTime() * 2 + 1,
+        group
+      })),
+      ...paidMarkers.map((marker) => ({
+        kind: "marker" as const,
+        key: `m-${marker.invoiceNumber ?? "x"}-${marker.coverDate}`,
+        sortKey: new Date(marker.coverDate).getTime() * 2,
+        marker
+      }))
+    ];
+    rows.sort((a, b) => b.sortKey - a.sortKey);
+    return rows;
+  })();
   $: openCount = filtered.filter(
     (e) => (e.entry_type === "action_item" || e.entry_type === "deadline") && e.status !== "done"
   ).length;
@@ -122,23 +157,41 @@
     {/if}
 
     <div class="max-w-3xl">
-      {#each groups as group (group.date)}
-        <div class="sticky top-[104px] sm:top-[64px] z-10 bg-bg flex items-baseline gap-3 py-2">
-          <span class="font-display text-base text-ink">{formatDayLabel(group.date)}</span>
-          <span class="h-px flex-1 bg-stroke"></span>
-          <span class="text-sm text-muted tabular-nums">{group.entries.length}</span>
-        </div>
-        {#each group.entries as entry (entry.id)}
-          <EntryRow
-            {entry}
-            {canEdit}
-            {viewerType}
-            {searchQuery}
-            {rate}
-            isOpen={entry.id === openEntryId}
-            on:open={() => (openEntryId = entry.id)}
-          />
-        {/each}
+      {#each timelineRows as row (row.key)}
+        {#if row.kind === "marker"}
+          <div class="flex items-center gap-3 py-3">
+            <span class="h-px flex-1 bg-good/30"></span>
+            <svelte:element
+              this={row.marker.href ? "a" : "span"}
+              href={row.marker.href}
+              class="inline-flex items-center gap-1.5 text-sm text-good font-medium px-3 py-1 rounded-full bg-good-soft whitespace-nowrap transition-colors {row.marker.href ? 'hover:bg-good hover:text-bg cursor-pointer' : ''}"
+            >
+              <svg class="w-3.5 h-3.5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+              {row.marker.invoiceNumber ? `Invoice #${row.marker.invoiceNumber}` : "Invoice"} paid &middot; {formatCurrency(row.marker.total)}
+              settled through {formatDate(row.marker.coverDate)}
+            </svelte:element>
+            <span class="h-px flex-1 bg-good/30"></span>
+          </div>
+        {:else}
+          <div class="sticky top-[104px] sm:top-[64px] z-10 bg-bg flex items-baseline gap-3 py-2">
+            <span class="font-display text-base text-ink">{formatDayLabel(row.group.date)}</span>
+            <span class="h-px flex-1 bg-stroke"></span>
+            <span class="text-sm text-muted tabular-nums">{row.group.entries.length}</span>
+          </div>
+          {#each row.group.entries as entry (entry.id)}
+            <EntryRow
+              {entry}
+              {canEdit}
+              {viewerType}
+              {searchQuery}
+              {rate}
+              isOpen={entry.id === openEntryId}
+              on:open={() => (openEntryId = entry.id)}
+            />
+          {/each}
+        {/if}
       {/each}
 
       <div class="flex items-center gap-3 py-2">

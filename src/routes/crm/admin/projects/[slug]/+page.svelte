@@ -6,6 +6,11 @@
 
   export let data: PageData;
   export let form: ActionData;
+
+  $: paidMarkers = data.paidMarkers.map((m) => ({
+    ...m,
+    href: `/crm/admin/projects/${data.project.slug}/invoices/${m.id}`
+  }));
 </script>
 
 <main class="max-w-5xl mx-auto px-4 md:px-6 py-12">
@@ -44,5 +49,6 @@
     emptyMessage="No entries yet."
     billingType={data.project.billing_type}
     rate={data.project.rate}
+    {paidMarkers}
   />
 </main>
