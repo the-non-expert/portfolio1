@@ -40,7 +40,43 @@ export const load: PageServerLoad = async ({ locals, params }) => {
 		comments: (comments ?? []).filter((c) => c.entry_id === entry.id)
 	}));
 
-	return { project, entries: entriesWithComments };
+	// Paid-invoice markers for the timeline: for each paid (non-void) invoice,
+	// find the latest date among the entries it billed — that's the point in
+	// the timeline where "paid up to here" belongs. Falls back to the
+	// invoice's issue date if none of its lines carry a date (e.g. an
+	// all-custom invoice).
+	const { data: paidInvoices } = await locals.supabase
+		.from('invoices')
+		.select('id, invoice_number, total, issue_date, paid_at')
+		.eq('project_id', project.id)
+		.eq('status', 'paid');
+
+	const paidInvoiceIds = (paidInvoices ?? []).map((inv) => inv.id);
+	const { data: paidItems } = paidInvoiceIds.length
+		? await locals.supabase
+				.from('invoice_items')
+				.select('invoice_id, item_date, period_end')
+				.in('invoice_id', paidInvoiceIds)
+		: { data: [] };
+
+	const paidMarkers = (paidInvoices ?? [])
+		.map((invoice) => {
+			const items = (paidItems ?? []).filter((item) => item.invoice_id === invoice.id);
+			const dates = items
+				.map((item) => item.period_end ?? item.item_date)
+				.filter((d): d is string => Boolean(d));
+			const coverDate = dates.length ? dates.sort().at(-1)! : invoice.issue_date;
+			return {
+				id: invoice.id,
+				invoiceNumber: invoice.invoice_number,
+				total: invoice.total,
+				coverDate,
+				paidAt: invoice.paid_at
+			};
+		})
+		.sort((a, b) => b.coverDate.localeCompare(a.coverDate));
+
+	return { project, entries: entriesWithComments, paidMarkers };
 };
 
 export const actions: Actions = {
