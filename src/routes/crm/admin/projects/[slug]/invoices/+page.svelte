@@ -1,7 +1,6 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
   import { formatCurrency, formatDate } from "$lib/utils/crmDisplay";
-  import { invoiceStatusLabel } from "$lib/utils/crmInvoice";
   import type { ActionData, PageData } from "./$types";
 
   export let data: PageData;
@@ -52,7 +51,7 @@
   {#if data.invoices.length === 0}
     <p class="text-base text-muted">No invoices yet.</p>
   {:else}
-    <div class="space-y-3 max-w-3xl">
+    <div class="space-y-3">
       {#each data.invoices as invoice (invoice.id)}
         <div class="bg-surface border border-stroke rounded-xl px-6 py-4 flex items-center justify-between gap-4 flex-wrap">
           <a href={`/crm/admin/projects/${data.project.slug}/invoices/${invoice.id}`} class="min-w-0">
@@ -72,46 +71,44 @@
           </a>
           <div class="flex items-center gap-3 shrink-0">
             <span class="text-base text-ink tabular-nums">{formatCurrency(invoice.total)}</span>
-            <span class="text-xs uppercase tracking-widest rounded-full px-2.5 py-1 {statusClass(invoice.status)}">
-              {invoiceStatusLabel(invoice.status)}
-            </span>
-            <a
-              href={`/crm/admin/projects/${data.project.slug}/invoices/${invoice.id}`}
-              class="text-xs text-muted hover:text-ink px-2 py-1 rounded-lg hover:bg-bg whitespace-nowrap border border-stroke-strong"
+            <form
+              method="POST"
+              action="?/markStatus"
+              use:enhance={() => {
+                togglingId = invoice.id;
+                return async ({ update }) => {
+                  await update();
+                  togglingId = null;
+                };
+              }}
             >
-              Redownload
-            </a>
+              <input type="hidden" name="invoice_id" value={invoice.id} />
+              <select
+                name="status"
+                value={invoice.status}
+                disabled={togglingId === invoice.id}
+                on:change={(e) => e.currentTarget.form?.requestSubmit()}
+                class="text-xs uppercase tracking-widest rounded-full pl-2.5 pr-1.5 py-1 border-none cursor-pointer focus:outline-none focus:ring-2 focus:ring-accent disabled:opacity-60 disabled:cursor-not-allowed {statusClass(invoice.status)}"
+              >
+                <option value="pending">Pending</option>
+                <option value="paid">Paid</option>
+                <option value="void">Void</option>
+              </select>
+            </form>
             {#if invoice.status !== "void"}
               <a
                 href={`/crm/admin/projects/${data.project.slug}/invoices/${invoice.id}/negotiate`}
-                class="text-xs text-muted hover:text-ink px-2 py-1 rounded-lg hover:bg-bg whitespace-nowrap"
+                class="text-xs text-muted hover:text-ink px-2 py-1 rounded-lg hover:bg-bg whitespace-nowrap border border-stroke-strong"
               >
                 Negotiate
               </a>
             {/if}
-            {#if invoice.status !== "void"}
-              <form
-                method="POST"
-                action="?/markStatus"
-                use:enhance={() => {
-                  togglingId = invoice.id;
-                  return async ({ update }) => {
-                    await update();
-                    togglingId = null;
-                  };
-                }}
-              >
-                <input type="hidden" name="invoice_id" value={invoice.id} />
-                <input type="hidden" name="status" value={invoice.status === "paid" ? "pending" : "paid"} />
-                <button
-                  type="submit"
-                  disabled={togglingId === invoice.id}
-                  class="text-xs text-muted hover:text-ink px-2 py-1 rounded-lg hover:bg-bg whitespace-nowrap disabled:opacity-60"
-                >
-                  Mark {invoice.status === "paid" ? "pending" : "paid"}
-                </button>
-              </form>
-            {/if}
+            <a
+              href={`/crm/admin/projects/${data.project.slug}/invoices/${invoice.id}/edit`}
+              class="text-xs text-muted hover:text-ink px-2 py-1 rounded-lg hover:bg-bg whitespace-nowrap border border-stroke-strong"
+            >
+              Edit
+            </a>
           </div>
         </div>
       {/each}

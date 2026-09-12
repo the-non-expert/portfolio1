@@ -64,6 +64,12 @@
       <span class="text-xs uppercase tracking-widest rounded-full px-2.5 py-1 {statusClass(data.invoice.status)}">
         {invoiceStatusLabel(data.invoice.status)}
       </span>
+      <a
+        href={`/crm/admin/projects/${data.project?.slug}/invoices/${data.invoice.id}/edit`}
+        class="text-sm text-[#555] hover:text-[#1a1a1a] border border-[#ccc] rounded-full px-3 py-1.5"
+      >
+        Edit
+      </a>
       {#if data.invoice.status !== "void"}
         <a
           href={`/crm/admin/projects/${data.project?.slug}/invoices/${data.invoice.id}/negotiate`}
