@@ -11,27 +11,30 @@
   let submitting = false;
   let mode: "edit" | "preview" = "edit";
 
-  let issueDate = data.todayDate;
-  let dueDate = data.defaultDueDate;
-  let billTo = data.defaultBillTo;
-  let payeeOverride = data.defaultPayeeOverride;
-  let notes = "";
-  let invoiceNumberInput = "";
-  let noInvoiceNumber = false;
-  let showRate = true;
-  let miscSectionLabel = "";
-  // Picker-only preference — just declutters this checklist while
-  // selecting items, has no bearing on what prints on the invoice itself.
-  let showDates = true;
+  let issueDate = data.invoice.issue_date;
+  let dueDate = data.invoice.due_date ?? "";
+  let billTo = data.invoice.bill_to;
+  let payeeOverride = data.invoice.payee_override ?? "";
+  let notes = data.invoice.notes ?? "";
+  let showRate = data.invoice.show_rate;
+  let miscSectionLabel = data.invoice.misc_section_label ?? "";
+  let showDates = data.invoice.show_dates;
 
+  // Entries already on this invoice come in pre-checked with their current
+  // amount; everything else defaults to its full remaining value, unchecked.
   let items = data.billable.map((entry) => ({
     ...entry,
-    checked: false,
-    amount: String(entry.remaining)
+    checked: entry.currentAmount != null,
+    amount: String(entry.currentAmount ?? entry.remaining)
   }));
 
   type CustomLine = { description: string; amount: string; date: string; dateTo: string };
-  let customLines: CustomLine[] = [];
+  let customLines: CustomLine[] = data.customItems.map((item) => ({
+    description: item.description,
+    amount: String(item.amount),
+    date: item.item_date ?? "",
+    dateTo: item.period_end ?? ""
+  }));
 
   function addCustomLine() {
     customLines = [...customLines, { description: "", amount: "", date: "", dateTo: "" }];
@@ -51,7 +54,7 @@
   }
 
   // Mirrors the server's own line-building logic so the preview is exactly
-  // what gets created — a partial line back-derives hours from the amount
+  // what gets saved — a partial line back-derives hours from the amount
   // actually billed, rather than copying the entry's full hours.
   $: isHourly = data.project.billing_type === "hourly" && Number(data.project.rate) > 0;
   $: previewItems = [
@@ -75,21 +78,22 @@
         periodEnd: c.dateTo || null
       }))
   ];
-  $: previewInvoiceNumber = noInvoiceNumber
-    ? null
-    : invoiceNumberInput.trim()
-      ? Number(invoiceNumberInput)
-      : data.nextInvoiceNumber;
   $: hasPeriodItems = previewItems.some((i) => i.isPeriod);
 </script>
 
 <main class="max-w-5xl mx-auto px-4 md:px-6 pt-12 pb-24">
   <div class="mb-8">
-    <a href={`/crm/admin/projects/${data.project.slug}/invoices`} class="text-sm text-muted hover:text-ink">
-      &larr; Invoices
+    <a href={`/crm/admin/projects/${data.project.slug}/invoices/${data.invoice.id}`} class="text-sm text-muted hover:text-ink">
+      &larr; Invoice
     </a>
-    <h1 class="font-display text-2xl md:text-3xl font-semibold text-ink mt-2">New invoice</h1>
+    <h1 class="font-display text-2xl md:text-3xl font-semibold text-ink mt-2">
+      Edit {data.invoice.invoice_number ? `invoice #${data.invoice.invoice_number}` : "invoice"}
+    </h1>
     <p class="text-base text-muted mt-1">{data.project.name} &middot; {data.project.client?.full_name}</p>
+    <p class="text-xs text-muted mt-1">
+      Saves in place — no new invoice number, no change to what's already been sent. For a price change the client
+      has agreed to, use Negotiate instead.
+    </p>
   </div>
 
   {#if form?.error}
@@ -116,9 +120,9 @@
   </div>
 
   <form
-    id="invoice-new-form"
+    id="invoice-edit-form"
     method="POST"
-    action="?/createInvoice"
+    action="?/updateInvoice"
     use:enhance={() => {
       submitting = true;
       return async ({ update }) => {
@@ -131,7 +135,7 @@
     <!-- Fields stay mounted (just visually hidden) in Preview mode so every
          value keeps submitting regardless of which tab is active. -->
     <div class={mode === "edit" ? "space-y-8" : "hidden"}>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div class="flex flex-col gap-1.5">
           <label for="issue_date" class="text-sm font-medium text-ink">Issue date</label>
           <input
@@ -151,25 +155,6 @@
             bind:value={dueDate}
             class="bg-bg border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink focus:outline-none focus:border-accent transition-colors"
           />
-        </div>
-        <div class="flex flex-col gap-1.5">
-          <label for="invoice_number" class="text-sm font-medium text-ink">Invoice number</label>
-          <div class="flex items-center gap-2">
-            <input
-              id="invoice_number"
-              name="invoice_number"
-              type="text"
-              inputmode="numeric"
-              bind:value={invoiceNumberInput}
-              disabled={noInvoiceNumber}
-              placeholder={String(data.nextInvoiceNumber)}
-              class="w-full bg-bg border border-stroke rounded-xl px-4 py-2.5 text-sm text-ink placeholder:text-muted focus:outline-none focus:border-accent transition-colors disabled:opacity-50"
-            />
-          </div>
-          <label class="flex items-center gap-1.5 text-xs text-muted mt-0.5">
-            <input type="checkbox" name="no_invoice_number" bind:checked={noInvoiceNumber} class="accent-accent" />
-            No number
-          </label>
         </div>
       </div>
 
@@ -233,8 +218,8 @@
         </div>
         {#if items.length === 0}
           <p class="text-sm text-muted">
-            Nothing left to invoice on this project — every logged action item is already fully covered by a prior invoice.
-            Add a custom line below if you need one anyway.
+            Nothing left to invoice on this project — every logged action item is already fully covered by this or a
+            prior invoice. Add a custom line below if you need one anyway.
           </p>
         {:else}
           <div class="border border-stroke rounded-xl divide-y divide-stroke overflow-hidden">
@@ -252,7 +237,7 @@
                           {formatDate(item.entry_date)}
                         {/if}
                       {/if}
-                      {#if item.alreadyBilled > 0}{showDates ? " · " : ""}{formatCurrency(item.alreadyBilled)} already invoiced, {formatCurrency(item.remaining)} left{/if}
+                      {#if item.alreadyBilled > 0}{showDates ? " · " : ""}{formatCurrency(item.alreadyBilled)} on other invoices, {formatCurrency(item.remaining)} left{/if}
                     </span>
                   {/if}
                 </span>
@@ -353,9 +338,9 @@
     {#if mode === "preview"}
       <div class="-mx-4 md:-mx-6">
         <InvoiceSheet
-          invoiceNumber={previewInvoiceNumber}
+          invoiceNumber={data.invoice.invoice_number}
           {issueDate}
-          {dueDate}
+          dueDate={dueDate || null}
           {billTo}
           items={previewItems}
           {subtotal}
@@ -375,8 +360,8 @@
 <!-- Fixed rather than inside the form's own flow — a long checklist of
      billable entries means the real submit point can be a full scroll away,
      so the save action (and a live subtotal) stays pinned to the viewport.
-     `form="invoice-new-form"` lets this button submit that form from outside
-     its DOM subtree, no JS wiring required. -->
+     `form="invoice-edit-form"` lets this button submit that form from
+     outside its DOM subtree, no JS wiring required. -->
 <div class="fixed bottom-0 inset-x-0 z-20 bg-bg border-t border-stroke print:hidden">
   <div class="max-w-3xl mx-auto px-4 md:px-6 py-3 flex items-center justify-between gap-4">
     <span class="text-sm text-muted">
@@ -384,19 +369,19 @@
     </span>
     <div class="flex items-center gap-2">
       <a
-        href={`/crm/admin/projects/${data.project.slug}/invoices`}
+        href={`/crm/admin/projects/${data.project.slug}/invoices/${data.invoice.id}`}
         class="text-sm text-muted hover:text-ink px-4 py-2.5"
       >
         Cancel
       </a>
       <button
         type="submit"
-        form="invoice-new-form"
+        form="invoice-edit-form"
         disabled={submitting}
         class="bg-ink text-bg px-6 py-2.5 rounded-full text-sm font-medium hover:bg-accent transition-colors duration-300 disabled:opacity-60 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {#if submitting}<Spinner class="w-4 h-4" />{/if}
-        Create invoice
+        Save changes
       </button>
     </div>
   </div>
