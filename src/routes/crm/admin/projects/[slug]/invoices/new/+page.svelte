@@ -339,7 +339,7 @@
       {/if}
 
       <div class="flex flex-col gap-1.5">
-        <label for="notes" class="text-sm font-medium text-ink">Notes <span class="text-muted font-normal">(optional, internal)</span></label>
+        <label for="notes" class="text-sm font-medium text-ink">Notes <span class="text-muted font-normal">(optional, printed on the invoice)</span></label>
         <textarea
           id="notes"
           name="notes"

@@ -52,6 +52,11 @@
     ratedItems.length === items.length &&
     ratedItems.every((i) => i.rate === ratedItems[0].rate);
   $: totalHours = items.reduce((sum, i) => sum + (i.hours ?? 0), 0);
+  // A flat-fee invoice has no hours on any line — an all-blank Hours
+  // column just reads as missing data, so it only prints when some line
+  // actually carries hours. Colspans follow the live column count.
+  $: showHours = items.some((i) => i.hours != null);
+  $: columnCount = 2 + (showDates ? 1 : 0) + (showHours ? 1 : 0);
 
   // A single formatter, called with different Intl options, on purpose —
   // this dev build silently drops the return value of whichever of two
@@ -169,7 +174,9 @@
         {#if showDates}
           <th class="text-center font-medium py-2 w-16">Date</th>
         {/if}
-        <th class="text-center font-medium py-2 w-14">Hours</th>
+        {#if showHours}
+          <th class="text-center font-medium py-2 w-14">Hours</th>
+        {/if}
         <th class="text-right font-medium py-2 w-24">Total</th>
       </tr>
     </thead>
@@ -178,7 +185,9 @@
         {#each items as item}
           <tr class="border-b border-[#eee]">
             <td class="py-2.5 pr-2">{item.description}</td>
-            <td class="py-2.5 text-center tabular-nums">{item.hours ?? ""}</td>
+            {#if showHours}
+              <td class="py-2.5 text-center tabular-nums">{item.hours ?? ""}</td>
+            {/if}
             <td class="py-2.5 text-right tabular-nums">{formatCurrency(item.amount)}</td>
           </tr>
         {/each}
@@ -188,20 +197,22 @@
         <tbody class="print:break-inside-avoid">
           {#if groupedItems.length > 1}
             <tr>
-              <td colspan="4" class="pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-[#666]">{group.label}</td>
+              <td colspan={columnCount} class="pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-[#666]">{group.label}</td>
             </tr>
           {/if}
           {#each group.items as item}
             <tr class="border-b border-[#eee]">
               <td class="py-2.5 pr-2">{item.description}</td>
               <td class="py-2.5 text-center tabular-nums text-[#777] text-xs">{item.displayDate}</td>
-              <td class="py-2.5 text-center tabular-nums">{item.hours ?? ""}</td>
+              {#if showHours}
+                <td class="py-2.5 text-center tabular-nums">{item.hours ?? ""}</td>
+              {/if}
               <td class="py-2.5 text-right tabular-nums">{formatCurrency(item.amount)}</td>
             </tr>
           {/each}
           {#if groupedItems.length > 1}
             <tr>
-              <td colspan="3" class="pt-1.5 pb-3 text-right text-xs text-[#777]">Subtotal</td>
+              <td colspan={columnCount - 1} class="pt-1.5 pb-3 text-right text-xs text-[#777]">Subtotal</td>
               <td class="pt-1.5 pb-3 text-right text-xs text-[#777] tabular-nums">{formatCurrency(group.subtotal)}</td>
             </tr>
           {/if}
@@ -210,7 +221,7 @@
       {#if rangeDisplayItems.length > 0}
         <tbody class="print:break-inside-avoid">
           <tr>
-            <td colspan="4" class="pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-[#666]">
+            <td colspan={columnCount} class="pt-4 pb-1 text-xs font-semibold uppercase tracking-wide text-[#666]">
               {miscSectionLabel || "Miscellaneous"}
             </td>
           </tr>
@@ -221,13 +232,15 @@
                 <span class="block text-[11px] text-[#999] mt-0.5">{item.rangeLabel}</span>
               </td>
               <td class="py-2.5 text-center tabular-nums text-[#777] text-xs">—</td>
-              <td class="py-2.5 text-center tabular-nums">{item.hours ?? ""}</td>
+              {#if showHours}
+                <td class="py-2.5 text-center tabular-nums">{item.hours ?? ""}</td>
+              {/if}
               <td class="py-2.5 text-right tabular-nums">{formatCurrency(item.amount)}</td>
             </tr>
           {/each}
           {#if groupedItems.length > 0}
             <tr>
-              <td colspan="3" class="pt-1.5 pb-3 text-right text-xs text-[#777]">Subtotal</td>
+              <td colspan={columnCount - 1} class="pt-1.5 pb-3 text-right text-xs text-[#777]">Subtotal</td>
               <td class="pt-1.5 pb-3 text-right text-xs text-[#777] tabular-nums">{formatCurrency(rangeSubtotal)}</td>
             </tr>
           {/if}
